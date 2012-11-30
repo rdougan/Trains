@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Categories/NSTextCheckingResult+ExtendedURL.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cat/NSTextCheckingResult(ExtendedURL)</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSTextCheckingResult+ExtendedURL.h</DeclaredIn>
+			
+			<NodeRef refid="7"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSTextCheckingResult(ExtendedURL)/setExtendedURL:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSTextCheckingResult+ExtendedURL.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly) NSURL *extendedURL</Declaration>
+			
+			
+			<Anchor>//api/name/extendedURL</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfp/NSTextCheckingResult(ExtendedURL)/extendedURL</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSTextCheckingResult+ExtendedURL.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly) NSURL *extendedURL</Declaration>
+			
+			
+			<Anchor>//api/name/extendedURL</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

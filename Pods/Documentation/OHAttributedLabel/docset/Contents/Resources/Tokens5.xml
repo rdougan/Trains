@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Categories/NSAttributedString+OHCommodityConstructors.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cat/NSAttributedString(OHCommodityConstructors)</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSAttributedString+Attributes.h</DeclaredIn>
+			
+			<NodeRef refid="5"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSAttributedString(OHCommodityConstructors)/attributedStringWithString:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSAttributedString+Attributes.h</DeclaredIn>			
+			
+			<Declaration>+ (id)attributedStringWithString:(NSString *)string</Declaration>
+			
+			
+			<Anchor>//api/name/attributedStringWithString:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSAttributedString(OHCommodityConstructors)/attributedStringWithAttributedString:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSAttributedString+Attributes.h</DeclaredIn>			
+			
+			<Declaration>+ (id)attributedStringWithAttributedString:(NSAttributedString *)attrStr</Declaration>
+			
+			
+			<Anchor>//api/name/attributedStringWithAttributedString:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSAttributedString(OHCommodityConstructors)/sizeConstrainedToSize:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSAttributedString+Attributes.h</DeclaredIn>			
+			
+			<Declaration>- (CGSize)sizeConstrainedToSize:(CGSize)maxSize</Declaration>
+			
+			
+			<Anchor>//api/name/sizeConstrainedToSize:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSAttributedString(OHCommodityConstructors)/sizeConstrainedToSize:fitRange:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSAttributedString+Attributes.h</DeclaredIn>			
+			
+			<Declaration>- (CGSize)sizeConstrainedToSize:(CGSize)maxSize fitRange:(NSRange *)fitRange</Declaration>
+			
+			
+			<Anchor>//api/name/sizeConstrainedToSize:fitRange:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSAttributedString(OHCommodityConstructors)/fontAtIndex:effectiveRange:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSAttributedString+Attributes.h</DeclaredIn>			
+			
+			<Declaration>- (CTFontRef)fontAtIndex:(NSUInteger)index effectiveRange:(NSRangePointer)aRange</Declaration>
+			
+			
+			<Anchor>//api/name/fontAtIndex:effectiveRange:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSAttributedString(OHCommodityConstructors)/textColorAtIndex:effectiveRange:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSAttributedString+Attributes.h</DeclaredIn>			
+			
+			<Declaration>- (UIColor *)textColorAtIndex:(NSUInteger)index effectiveRange:(NSRangePointer)aRange</Declaration>
+			
+			
+			<Anchor>//api/name/textColorAtIndex:effectiveRange:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSAttributedString(OHCommodityConstructors)/textIsUnderlinedAtIndex:effectiveRange:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSAttributedString+Attributes.h</DeclaredIn>			
+			
+			<Declaration>- (BOOL)textIsUnderlinedAtIndex:(NSUInteger)index effectiveRange:(NSRangePointer)aRange</Declaration>
+			
+			
+			<Anchor>//api/name/textIsUnderlinedAtIndex:effectiveRange:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSAttributedString(OHCommodityConstructors)/textUnderlineStyleAtIndex:effectiveRange:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSAttributedString+Attributes.h</DeclaredIn>			
+			
+			<Declaration>- (int32_t)textUnderlineStyleAtIndex:(NSUInteger)index effectiveRange:(NSRangePointer)aRange</Declaration>
+			
+			
+			<Anchor>//api/name/textUnderlineStyleAtIndex:effectiveRange:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSAttributedString(OHCommodityConstructors)/textIsBoldAtIndex:effectiveRange:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSAttributedString+Attributes.h</DeclaredIn>			
+			
+			<Declaration>- (BOOL)textIsBoldAtIndex:(NSUInteger)index effectiveRange:(NSRangePointer)aRange</Declaration>
+			
+			
+			<Anchor>//api/name/textIsBoldAtIndex:effectiveRange:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSAttributedString(OHCommodityConstructors)/textAlignmentAtIndex:effectiveRange:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSAttributedString+Attributes.h</DeclaredIn>			
+			
+			<Declaration>- (CTTextAlignment)textAlignmentAtIndex:(NSUInteger)index effectiveRange:(NSRangePointer)aRange</Declaration>
+			
+			
+			<Anchor>//api/name/textAlignmentAtIndex:effectiveRange:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSAttributedString(OHCommodityConstructors)/lineBreakModeAtIndex:effectiveRange:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSAttributedString+Attributes.h</DeclaredIn>			
+			
+			<Declaration>- (CTLineBreakMode)lineBreakModeAtIndex:(NSUInteger)index effectiveRange:(NSRangePointer)aRange</Declaration>
+			
+			
+			<Anchor>//api/name/lineBreakModeAtIndex:effectiveRange:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSAttributedString(OHCommodityConstructors)/linkAtIndex:effectiveRange:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSAttributedString+Attributes.h</DeclaredIn>			
+			
+			<Declaration>- (NSURL *)linkAtIndex:(NSUInteger)index effectiveRange:(NSRangePointer)aRange</Declaration>
+			
+			
+			<Anchor>//api/name/linkAtIndex:effectiveRange:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

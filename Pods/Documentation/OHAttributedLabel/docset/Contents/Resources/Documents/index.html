@@ -1,0 +1,203 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>OHAttributedLabel 3.2.1 Reference</title>
+		<link rel="stylesheet" type="text/css" href="css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="css/stylesPrint.css" />
+		<meta name="generator" content="appledoc 2.0.5 (build 789)" />
+	</head>
+	<body>
+		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="index.html">OHAttributedLabel 3.2.1 </a></h1>
+				<a id="developerHome" href="index.html">AliSoftware</a>
+			</div>
+			
+			<div id="title" role="banner">
+				<h1 class="hideInXcode">OHAttributedLabel 3.2.1 Reference</h1>
+			</div>
+			<ul id="headerButtons" role="toolbar"></ul>
+		</header>
+		<article>
+			<div id="overview_contents" role="main">
+				<div class="main-navigation navigation-top">
+					<a href="hierarchy.html">Next</a>
+				</div>
+				<div id="header">
+					<div class="section-header">
+						<h1 class="title title-header">OHAttributedLabel 3.2.1 Reference</h1>
+					</div>		
+				</div>
+				<div id="container">
+					
+					<div class="section section-overview index-overview">
+						
+						
+						<h1>About these classes</h1>
+
+<h3><a href="Classes/OHAttributedLabel.html">OHAttributedLabel</a></h3>
+
+<p>This class allows you to use a <code>UILabel</code> with <code>NSAttributedString</code>s, in order to <strong>display styled text</strong> with mixed style (mixed fonts, color, size, &hellip;) in a unique label. It is a subclass of <code>UILabel</code>, which adds an <code>attributedText</code> property. Use this property, instead of the <code>text</code> property, to set and get the <code>NSAttributedString</code> to display.</p>
+
+<p>This class <strong>also support hyperlinks and URLs</strong>. It can <strong>automatically detect links</strong> in your text, color them and make them touchable; you can also <strong>add &ldquo;custom links&rdquo; in your text</strong> by attaching an URL to a range of your text and thus make it touchable, and even then catch the event of a touch on a link to act as you wish to.</p>
+
+<h3>NSAttributedString and NSTextChecking additions</h3>
+
+<p>In addition to this <a href="Classes/OHAttributedLabel.html"><code>OHAttributedLabel</code></a> class, you will also find a category of <code>NS(Mutable)AttributedString</code> to ease creation and manipulation of common attributes of <code>NSAttributedString</code> (to easily change the font, style, color, &hellip; of a range of the string). See the header file <code>NSAttributedString+Attributes.h</code> for a list of those comodity methods.</p>
+
+<p>There is also a category for <code>NSTextCheckingResult</code> that adds the <code>extendedURL</code> property. This property returns the same value as the <code>URL</code> value for standard link cases, and return a formatted Maps URL for <code>NSTextCheckingTypeAddress</code> link types, that will open Google Maps in iOS version before 6.0 and the Apple&rsquo;s Maps application in iOS 6.0 and later.</p>
+
+<h3>OHASMarkupParsers and simple markup to build your attributed strings easily</h3>
+
+<p>The library also comes with very simple tag parsers to help you build <code>NSAttributedStrings</code> easily using very simple tags.</p>
+
+<ul>
+<li>the class <code>OHASBasicHTMLParser</code> can parse simple HTML tags like <code>&lt;b&gt;</code> and <code>&lt;u&gt;</code> to make bold and underlined text, change the font color using <code>&lt;font color='…'&gt;</code>, etc</li>
+<li><p>the class <a href="Classes/OHASBasicMarkupParser.html"><code>OHASBasicMarkupParser</code></a> can parse simple markup like <code>*bold text*</code>, <code>_underlined text_</code> and change the font color using markup like <code>{red|some red text}</code> or <code>{#ff6600|Yeah}</code>.</p>
+
+<pre><code>  // Example 1: parse HTML in attributed string
+  basicMarkupLabel.attributedText = [OHASBasicHTMLParser attributedStringByProcessingMarkupInAttributedString:basicMarkupLabel.attributedText];
+
+  // Example 2: parse basic markup in string
+  NSAttributedString* as = [OHASBasicMarkupParser attributedStringByProcessingMarkupInString:@"Hello *you*!"];
+
+  // Example 3: //process markup in-place in a mutable attributed string
+  NSMutableAttributedString* mas = [NSMutableAttributedString attributedStringWithString:@"Hello *you*!"];
+  [OHASBasicMarkupParser processMarkupInAttributedString:mas];
+</code></pre></li>
+</ul>
+
+
+<p><em>Note that <code>OHASBasicHTMLParser</code> is intended to be a very simple tool only to help you build attributed string easier: this is not intended to be a real and complete HTML interpreter, and will never be. For improvements of this feature, like adding other tags or markup languages, refer to <a href="http://github.com/AliSoftware/OHAttributedLabel/issues/88">issue #88</a>)</em></p>
+
+<h3>UIAppearance support</h3>
+
+<p>The <a href="Classes/OHAttributedLabel.html"><code>OHAttributedLabel</code></a> class support the <code>UIAppearance</code> proxy API (available since iOS5). See selectors and properties marked using the <code>UI_APPEARANCE_SELECTOR</code> in the header.</p>
+
+<p>This means that if you are targetting iOS5, you can customize all of your <a href="Classes/OHAttributedLabel.html"><code>OHAttributedLabel</code></a> links color and underline style to fit your application design, only in one call at the beginning of your application, instead of having to customize these for each instance.</p>
+
+<p>For example, your could implement this in your <code>application:didFinishLoadingWithOptions:</code> delegate method to make <strong>all</strong> your <a href="Classes/OHAttributedLabel.html"><code>OHAttributedLabel</code></a> instances in your <strong>whole app</strong> display links in green and without underline instead of the default underlined blue:</p>
+
+<pre><code>- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    [ [OHAttributedLabel appearance] setLinkColor:[UIColor colorWithRed:0.0 green:0.4 blue:0.0 alpha:1.0] ];
+    [ [OHAttributedLabel appearance] setLinkUnderlineStyle:kCTUnderlineStyleNone ];
+    return YES;
+}
+</code></pre>
+
+<hr />
+
+<h1>How to use in your project</h1>
+
+<p>There are two possible methods to include these classes in your project:</p>
+
+<ol>
+<li><p>Using <a href="http://cocoapods.org">Cocoapods</a>:</p>
+
+<ul>
+<li>add <code>pod "OHAttributedLabel"</code> to your Podfile</li>
+</ul>
+</li>
+<li><p>Manually:</p>
+
+<ul>
+<li>Include the <code></code>OHAttributedLabel<code>.xcodeproj</code> project in your Xcode4 workspace</li>
+<li>Add the <code>libOHAttributedLabel.a</code> library <strong>and the <code>CoreText.framework</code></strong> to your &ldquo;Link binary with libraries&rdquo; Build Phase.</li>
+<li>Add the relative path to the <a href="Classes/OHAttributedLabel.html">OHAttributedLabel</a> headers in your &ldquo;User Header Search Path&rdquo; Build Setting</li>
+<li>Add the <code>-ObjC</code> flag in the &ldquo;Other Linker Flags&rdquo; Build Setting if not present already</li>
+</ul>
+</li>
+</ol>
+
+
+<p>Then in your application code, when you want to make use of <a href="Classes/OHAttributedLabel.html">OHAttributedLabel</a> methods, import the headers as usual: <code>#import "OHAttributedLabel.h"</code> or <code>#import "NSAttributedString+Attributes.h"</code> etc.</p>
+
+<p>For more details and import/linking troubleshooting, please see the <a href="https://github.com/AliSoftware/OHAttributedLabel/wiki/How-to-use">dedicated page</a> and issue #90.</p>
+
+<h1>Sample code &amp; Other documentation</h1>
+
+<p>There is no explicit docset or documentation of the class yet sorry (never had time to write one), but</p>
+
+<ul>
+<li>The method names should be self-explanatory (hopefully) as I respect the standard ObjC naming conventions.</li>
+<li>There are doxygen/javadoc-like documentation in the headers that should also help you describe the methods</li>
+<li>The provided example (&ldquo;AttributedLabel Example.xcworkspace&rdquo;) should also demonstrate quite every typical usages — including justifying the text, dynamically changing the style/attributes of a range of text, adding custom links, make special links with a custom behavior (like catching @mention and #hashtags), and customizing the appearance/color of links.</li>
+</ul>
+
+
+<h1>ChangeLog — Revisions History</h1>
+
+<p>The <a href="[http://github.com/AliSoftware/OHAttributedLabel/wiki/Revisions-History"><em>ChangeLog</em></a>](http://github.com/AliSoftware/OHAttributedLabel/wiki/Revisions-History)) is maintained as a <a href="http://github.com/AliSoftware/OHAttributedLabel/wiki/Revisions-History">wiki page accessible here</a>.</p>
+
+<h1>Projects that use this class</h1>
+
+<p>Here is a non-exhaustive list of <a href="http://github.com/AliSoftware/OHAttributedLabel/wiki/They-use-this-class">the projects that use this class</a> (for those who told me about it)
+Feel free to contact me if you use this class so we can cross-reference our projects and quote your app in this dedicated wiki page!</p>
+						
+						
+					</div>
+					
+                        
+                    
+					
+					
+					<div class="index-column">
+						<h2 class="index-title">Class References</h2>
+						<ul>
+							
+							<li><a href="Classes/OHASBasicHTMLParser.html">OHASBasicHTMLParser</a></li>
+							
+							<li><a href="Classes/OHASBasicMarkupParser.html">OHASBasicMarkupParser</a></li>
+							
+							<li><a href="Classes/OHASMarkupParserBase.html">OHASMarkupParserBase</a></li>
+							
+							<li><a href="Classes/OHAttributedLabel.html">OHAttributedLabel</a></li>
+							
+						</ul>
+					</div>
+					
+					
+						
+					<div class="index-column">
+						
+						<h2 class="index-title">Protocol References</h2>
+						<ul>
+							
+							<li><a href="Protocols/OHAttributedLabelDelegate.html">OHAttributedLabelDelegate</a></li>
+							
+						</ul>
+						
+						
+						<h2 class="index-title">Category References</h2>
+						<ul>
+							
+							<li><a href="Categories/NSAttributedString+OHCommodityConstructors.html">NSAttributedString(OHCommodityConstructors)</a></li>
+							
+							<li><a href="Categories/NSMutableAttributedString+OHCommodityStyleModifiers.html">NSMutableAttributedString(OHCommodityStyleModifiers)</a></li>
+							
+							<li><a href="Categories/NSTextCheckingResult+ExtendedURL.html">NSTextCheckingResult(ExtendedURL)</a></li>
+							
+						</ul>
+						
+					</div>
+					
+				</div>
+				<div class="main-navigation navigation-bottom">
+					<a href="hierarchy.html">Next</a>
+				</div>
+				<div id="footer">
+					<hr />
+					<div class="footer-copyright">
+						<p><span class="copyright">&copy; 2012 AliSoftware. All rights reserved. (Last updated: 2012-11-30)</span><br />
+						
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 789)</a>.</span></p>
+						
+	
+					</div>
+				</div>
+			</div>
+		</article>		
+	</body>
+</html>

@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/OHAttributedLabel.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/OHAttributedLabel</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>OHAttributedLabel.h</DeclaredIn>
+			
+			<NodeRef refid="4"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/OHAttributedLabel/setAttributedText:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>OHAttributedLabel.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, copy) NSAttributedString *attributedText</Declaration>
+			
+			
+			<Anchor>//api/name/attributedText</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/OHAttributedLabel/attributedText</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>OHAttributedLabel.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, copy) NSAttributedString *attributedText</Declaration>
+			
+			
+			<Anchor>//api/name/attributedText</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/OHAttributedLabel/resetAttributedText</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>OHAttributedLabel.h</DeclaredIn>			
+			
+			<Declaration>- (void)resetAttributedText</Declaration>
+			
+			
+			<Anchor>//api/name/resetAttributedText</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/OHAttributedLabel/setNeedsRecomputeLinksInText</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>OHAttributedLabel.h</DeclaredIn>			
+			
+			<Declaration>- (void)setNeedsRecomputeLinksInText</Declaration>
+			
+			
+			<Anchor>//api/name/setNeedsRecomputeLinksInText</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/OHAttributedLabel/setAutomaticallyAddLinksForType:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>OHAttributedLabel.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) NSTextCheckingTypes automaticallyAddLinksForType</Declaration>
+			
+			
+			<Anchor>//api/name/automaticallyAddLinksForType</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/OHAttributedLabel/automaticallyAddLinksForType</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>OHAttributedLabel.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) NSTextCheckingTypes automaticallyAddLinksForType</Declaration>
+			
+			
+			<Anchor>//api/name/automaticallyAddLinksForType</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/OHAttributedLabel/setLinksDataDetector:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>OHAttributedLabel.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly) NSDataDetector *linksDataDetector</Declaration>
+			
+			
+			<Anchor>//api/name/linksDataDetector</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/OHAttributedLabel/linksDataDetector</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>OHAttributedLabel.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly) NSDataDetector *linksDataDetector</Declaration>
+			
+			
+			<Anchor>//api/name/linksDataDetector</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/OHAttributedLabel/setUI_APPEARANCE_SELECTOR:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>OHAttributedLabel.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) UIColor *UI_APPEARANCE_SELECTOR</Declaration>
+			
+			
+			<Anchor>//api/name/UI_APPEARANCE_SELECTOR</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/OHAttributedLabel/UI_APPEARANCE_SELECTOR</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>OHAttributedLabel.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) UIColor *UI_APPEARANCE_SELECTOR</Declaration>
+			
+			
+			<Anchor>//api/name/UI_APPEARANCE_SELECTOR</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/OHAttributedLabel/setUnderlineLinks:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>OHAttributedLabel.h</DeclaredIn>			
+			
+			<Declaration>- (void)setUnderlineLinks:(BOOL)underlineLinks</Declaration>
+			
+			
+			<Anchor>//api/name/setUnderlineLinks:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/OHAttributedLabel/addCustomLink:inRange:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>OHAttributedLabel.h</DeclaredIn>			
+			
+			<Declaration>- (void)addCustomLink:(NSURL *)linkUrl inRange:(NSRange)range</Declaration>
+			
+			
+			<Anchor>//api/name/addCustomLink:inRange:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/OHAttributedLabel/removeAllCustomLinks</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>OHAttributedLabel.h</DeclaredIn>			
+			
+			<Declaration>- (void)removeAllCustomLinks</Declaration>
+			
+			
+			<Anchor>//api/name/removeAllCustomLinks</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/OHAttributedLabel/setOnlyCatchTouchesOnLinks:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>OHAttributedLabel.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) BOOL onlyCatchTouchesOnLinks</Declaration>
+			
+			
+			<Anchor>//api/name/onlyCatchTouchesOnLinks</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/OHAttributedLabel/onlyCatchTouchesOnLinks</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>OHAttributedLabel.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) BOOL onlyCatchTouchesOnLinks</Declaration>
+			
+			
+			<Anchor>//api/name/onlyCatchTouchesOnLinks</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/OHAttributedLabel/setDelegate:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>OHAttributedLabel.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) IBOutlet id&lt;OHAttributedLabelDelegate&gt; delegate</Declaration>
+			
+			
+			<Anchor>//api/name/delegate</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/OHAttributedLabel/delegate</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>OHAttributedLabel.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) IBOutlet id&lt;OHAttributedLabelDelegate&gt; delegate</Declaration>
+			
+			
+			<Anchor>//api/name/delegate</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/OHAttributedLabel/setCenterVertically:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>OHAttributedLabel.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) BOOL centerVertically</Declaration>
+			
+			
+			<Anchor>//api/name/centerVertically</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/OHAttributedLabel/centerVertically</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>OHAttributedLabel.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) BOOL centerVertically</Declaration>
+			
+			
+			<Anchor>//api/name/centerVertically</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/OHAttributedLabel/setExtendBottomToFit:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>OHAttributedLabel.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) BOOL extendBottomToFit</Declaration>
+			
+			
+			<Anchor>//api/name/extendBottomToFit</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/OHAttributedLabel/extendBottomToFit</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>OHAttributedLabel.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) BOOL extendBottomToFit</Declaration>
+			
+			
+			<Anchor>//api/name/extendBottomToFit</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

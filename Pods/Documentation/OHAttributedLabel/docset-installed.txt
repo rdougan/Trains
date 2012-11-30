@@ -1,0 +1,4 @@
+Documentation set was installed to Xcode!
+
+Path: /Users/Robert/Library/Developer/Shared/Documentation/DocSets/org.cocoapods.OHAttributedLabel-3.2.1.docset
+Time: 2012-11-30 00:02:52 +0000

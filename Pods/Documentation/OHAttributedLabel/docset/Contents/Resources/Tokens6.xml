@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Categories/NSMutableAttributedString+OHCommodityStyleModifiers.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cat/NSMutableAttributedString(OHCommodityStyleModifiers)</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSAttributedString+Attributes.h</DeclaredIn>
+			
+			<NodeRef refid="6"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSMutableAttributedString(OHCommodityStyleModifiers)/setFont:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSAttributedString+Attributes.h</DeclaredIn>			
+			
+			<Declaration>- (void)setFont:(UIFont *)font</Declaration>
+			
+			
+			<Anchor>//api/name/setFont:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSMutableAttributedString(OHCommodityStyleModifiers)/setFont:range:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSAttributedString+Attributes.h</DeclaredIn>			
+			
+			<Declaration>- (void)setFont:(UIFont *)font range:(NSRange)range</Declaration>
+			
+			
+			<Anchor>//api/name/setFont:range:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSMutableAttributedString(OHCommodityStyleModifiers)/setFontName:size:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSAttributedString+Attributes.h</DeclaredIn>			
+			
+			<Declaration>- (void)setFontName:(NSString *)fontName size:(CGFloat)size</Declaration>
+			
+			
+			<Anchor>//api/name/setFontName:size:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSMutableAttributedString(OHCommodityStyleModifiers)/setFontName:size:range:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSAttributedString+Attributes.h</DeclaredIn>			
+			
+			<Declaration>- (void)setFontName:(NSString *)fontName size:(CGFloat)size range:(NSRange)range</Declaration>
+			
+			
+			<Anchor>//api/name/setFontName:size:range:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSMutableAttributedString(OHCommodityStyleModifiers)/setFontFamily:size:bold:italic:range:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSAttributedString+Attributes.h</DeclaredIn>			
+			
+			<Declaration>- (void)setFontFamily:(NSString *)fontFamily size:(CGFloat)size bold:(BOOL)isBold italic:(BOOL)isItalic range:(NSRange)range</Declaration>
+			
+			
+			<Anchor>//api/name/setFontFamily:size:bold:italic:range:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSMutableAttributedString(OHCommodityStyleModifiers)/setTextColor:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSAttributedString+Attributes.h</DeclaredIn>			
+			
+			<Declaration>- (void)setTextColor:(UIColor *)color</Declaration>
+			
+			
+			<Anchor>//api/name/setTextColor:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSMutableAttributedString(OHCommodityStyleModifiers)/setTextColor:range:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSAttributedString+Attributes.h</DeclaredIn>			
+			
+			<Declaration>- (void)setTextColor:(UIColor *)color range:(NSRange)range</Declaration>
+			
+			
+			<Anchor>//api/name/setTextColor:range:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSMutableAttributedString(OHCommodityStyleModifiers)/setTextIsUnderlined:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSAttributedString+Attributes.h</DeclaredIn>			
+			
+			<Declaration>- (void)setTextIsUnderlined:(BOOL)underlined</Declaration>
+			
+			
+			<Anchor>//api/name/setTextIsUnderlined:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSMutableAttributedString(OHCommodityStyleModifiers)/setTextIsUnderlined:range:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSAttributedString+Attributes.h</DeclaredIn>			
+			
+			<Declaration>- (void)setTextIsUnderlined:(BOOL)underlined range:(NSRange)range</Declaration>
+			
+			
+			<Anchor>//api/name/setTextIsUnderlined:range:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSMutableAttributedString(OHCommodityStyleModifiers)/setTextUnderlineStyle:range:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSAttributedString+Attributes.h</DeclaredIn>			
+			
+			<Declaration>- (void)setTextUnderlineStyle:(int32_t)style range:(NSRange)range</Declaration>
+			
+			
+			<Anchor>//api/name/setTextUnderlineStyle:range:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSMutableAttributedString(OHCommodityStyleModifiers)/setTextBold:range:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSAttributedString+Attributes.h</DeclaredIn>			
+			
+			<Declaration>- (void)setTextBold:(BOOL)isBold range:(NSRange)range</Declaration>
+			
+			
+			<Anchor>//api/name/setTextBold:range:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSMutableAttributedString(OHCommodityStyleModifiers)/setTextAlignment:lineBreakMode:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSAttributedString+Attributes.h</DeclaredIn>			
+			
+			<Declaration>- (void)setTextAlignment:(CTTextAlignment)alignment lineBreakMode:(CTLineBreakMode)lineBreakMode</Declaration>
+			
+			
+			<Anchor>//api/name/setTextAlignment:lineBreakMode:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSMutableAttributedString(OHCommodityStyleModifiers)/setTextAlignment:lineBreakMode:range:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSAttributedString+Attributes.h</DeclaredIn>			
+			
+			<Declaration>- (void)setTextAlignment:(CTTextAlignment)alignment lineBreakMode:(CTLineBreakMode)lineBreakMode range:(NSRange)range</Declaration>
+			
+			
+			<Anchor>//api/name/setTextAlignment:lineBreakMode:range:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSMutableAttributedString(OHCommodityStyleModifiers)/setLink:range:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSAttributedString+Attributes.h</DeclaredIn>			
+			
+			<Declaration>- (void)setLink:(NSURL *)link range:(NSRange)range</Declaration>
+			
+			
+			<Anchor>//api/name/setLink:range:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

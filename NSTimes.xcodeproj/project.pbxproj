@@ -1,0 +1,497 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		050DA6D2475443A3BE46D495 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B90153A3CCB549AEB6A16635 /* libPods.a */; };
+		E102D8891668D56300F1B09B /* TrainsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E102D8881668D56300F1B09B /* TrainsTableViewCell.m */; };
+		E102D88C1668D59000F1B09B /* TrainsTableViewCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = E102D88B1668D59000F1B09B /* TrainsTableViewCellView.m */; };
+		E109E2EE1668F80A00642514 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = E109E2ED1668F80A00642514 /* Icon.png */; };
+		E109E2F01668F83000642514 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E109E2EF1668F83000642514 /* Icon@2x.png */; };
+		E1BA46DB1668FA7000845855 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1BA46DA1668FA7000845855 /* Crashlytics.framework */; };
+		E1C618B71669362E00EAF58F /* TrainsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1C618B51669362E00EAF58F /* TrainsViewController.xib */; };
+		E1C618C21669388700EAF58F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1C618C41669388700EAF58F /* Localizable.strings */; };
+		E1F1022F16680D6E00087248 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1F1022E16680D6E00087248 /* UIKit.framework */; };
+		E1F1023116680D6E00087248 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1F1023016680D6E00087248 /* Foundation.framework */; };
+		E1F1023316680D6E00087248 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1F1023216680D6E00087248 /* CoreGraphics.framework */; };
+		E1F1023916680D6E00087248 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1F1023716680D6E00087248 /* InfoPlist.strings */; };
+		E1F1023B16680D6E00087248 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F1023A16680D6E00087248 /* main.m */; };
+		E1F1023F16680D6E00087248 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F1023E16680D6E00087248 /* AppDelegate.m */; };
+		E1F1024116680D6E00087248 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = E1F1024016680D6E00087248 /* Default.png */; };
+		E1F1024316680D6E00087248 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E1F1024216680D6E00087248 /* Default@2x.png */; };
+		E1F1024516680D6E00087248 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E1F1024416680D6E00087248 /* Default-568h@2x.png */; };
+		E1F1024816680D6E00087248 /* TrainsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F1024716680D6E00087248 /* TrainsViewController.m */; };
+		E1F1026016680DE800087248 /* NSRailConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F1025F16680DE800087248 /* NSRailConnection.m */; };
+		E1F1029816680E9600087248 /* TFHpple.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F1027B16680E9600087248 /* TFHpple.m */; };
+		E1F1029916680E9600087248 /* TFHppleElement.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F1027D16680E9600087248 /* TFHppleElement.m */; };
+		E1F1029F16680E9600087248 /* XPathQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F1028616680E9600087248 /* XPathQuery.m */; };
+		E1F102A716680F0D00087248 /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E1F102A616680F0D00087248 /* libxml2.2.dylib */; };
+		E1F102B1166812EA00087248 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1F102B0166812EA00087248 /* SystemConfiguration.framework */; };
+		E1F102BB1668152C00087248 /* Train.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F102BA1668152C00087248 /* Train.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		220AE08F5E39469EBEC26401 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		B90153A3CCB549AEB6A16635 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		E102D8871668D56300F1B09B /* TrainsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrainsTableViewCell.h; sourceTree = "<group>"; };
+		E102D8881668D56300F1B09B /* TrainsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainsTableViewCell.m; sourceTree = "<group>"; };
+		E102D88A1668D59000F1B09B /* TrainsTableViewCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrainsTableViewCellView.h; sourceTree = "<group>"; };
+		E102D88B1668D59000F1B09B /* TrainsTableViewCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainsTableViewCellView.m; sourceTree = "<group>"; };
+		E109E2ED1668F80A00642514 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = ../Icon.png; sourceTree = "<group>"; };
+		E109E2EF1668F83000642514 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "../Icon@2x.png"; sourceTree = "<group>"; };
+		E1BA46DA1668FA7000845855 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		E1C618B61669362E00EAF58F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/TrainsViewController.xib; sourceTree = "<group>"; };
+		E1C618C31669388700EAF58F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E1C618C51669389300EAF58F /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/TrainsViewController.xib; sourceTree = "<group>"; };
+		E1C618C61669389300EAF58F /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		E1C618C71669389300EAF58F /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E1F1022A16680D6E00087248 /* Trains.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Trains.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E1F1022E16680D6E00087248 /* UIKit.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		E1F1023016680D6E00087248 /* Foundation.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		E1F1023216680D6E00087248 /* CoreGraphics.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		E1F1023616680D6E00087248 /* NSTimes-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NSTimes-Info.plist"; sourceTree = "<group>"; };
+		E1F1023816680D6E00087248 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		E1F1023A16680D6E00087248 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		E1F1023C16680D6E00087248 /* NSTimes-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSTimes-Prefix.pch"; sourceTree = "<group>"; };
+		E1F1023D16680D6E00087248 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		E1F1023E16680D6E00087248 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		E1F1024016680D6E00087248 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		E1F1024216680D6E00087248 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		E1F1024416680D6E00087248 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		E1F1024616680D6E00087248 /* TrainsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TrainsViewController.h; sourceTree = "<group>"; };
+		E1F1024716680D6E00087248 /* TrainsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TrainsViewController.m; sourceTree = "<group>"; };
+		E1F1025E16680DE800087248 /* NSRailConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSRailConnection.h; sourceTree = "<group>"; };
+		E1F1025F16680DE800087248 /* NSRailConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSRailConnection.m; sourceTree = "<group>"; };
+		E1F1027A16680E9600087248 /* TFHpple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFHpple.h; sourceTree = "<group>"; };
+		E1F1027B16680E9600087248 /* TFHpple.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFHpple.m; sourceTree = "<group>"; };
+		E1F1027C16680E9600087248 /* TFHppleElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFHppleElement.h; sourceTree = "<group>"; };
+		E1F1027D16680E9600087248 /* TFHppleElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFHppleElement.m; sourceTree = "<group>"; };
+		E1F1028516680E9600087248 /* XPathQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XPathQuery.h; sourceTree = "<group>"; };
+		E1F1028616680E9600087248 /* XPathQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XPathQuery.m; sourceTree = "<group>"; };
+		E1F102A616680F0D00087248 /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
+		E1F102B0166812EA00087248 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		E1F102B91668152C00087248 /* Train.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Train.h; sourceTree = "<group>"; };
+		E1F102BA1668152C00087248 /* Train.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Train.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E1F1022716680D6E00087248 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E1F102B1166812EA00087248 /* SystemConfiguration.framework in Frameworks */,
+				E1F102A716680F0D00087248 /* libxml2.2.dylib in Frameworks */,
+				E1F1022F16680D6E00087248 /* UIKit.framework in Frameworks */,
+				E1F1023116680D6E00087248 /* Foundation.framework in Frameworks */,
+				E1F1023316680D6E00087248 /* CoreGraphics.framework in Frameworks */,
+				050DA6D2475443A3BE46D495 /* libPods.a in Frameworks */,
+				E1BA46DB1668FA7000845855 /* Crashlytics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E1C618B8166936D800EAF58F /* Trains */ = {
+			isa = PBXGroup;
+			children = (
+				E1F1024616680D6E00087248 /* TrainsViewController.h */,
+				E1F1024716680D6E00087248 /* TrainsViewController.m */,
+				E1C618B9166936E000EAF58F /* Views */,
+			);
+			name = Trains;
+			sourceTree = "<group>";
+		};
+		E1C618B9166936E000EAF58F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E102D8871668D56300F1B09B /* TrainsTableViewCell.h */,
+				E102D8881668D56300F1B09B /* TrainsTableViewCell.m */,
+				E102D88A1668D59000F1B09B /* TrainsTableViewCellView.h */,
+				E102D88B1668D59000F1B09B /* TrainsTableViewCellView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		E1C618BF166937AA00EAF58F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E109E2EF1668F83000642514 /* Icon@2x.png */,
+				E109E2ED1668F80A00642514 /* Icon.png */,
+				E1F1024016680D6E00087248 /* Default.png */,
+				E1F1024216680D6E00087248 /* Default@2x.png */,
+				E1F1024416680D6E00087248 /* Default-568h@2x.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		E1F1021F16680D6E00087248 = {
+			isa = PBXGroup;
+			children = (
+				E1F1023416680D6E00087248 /* NSTimes */,
+				E1F1022D16680D6E00087248 /* Frameworks */,
+				E1F1022B16680D6E00087248 /* Products */,
+				E1F1026316680E9600087248 /* Vendor */,
+				220AE08F5E39469EBEC26401 /* Pods.xcconfig */,
+			);
+			sourceTree = "<group>";
+		};
+		E1F1022B16680D6E00087248 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E1F1022A16680D6E00087248 /* Trains.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E1F1022D16680D6E00087248 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E1BA46DA1668FA7000845855 /* Crashlytics.framework */,
+				E1F102A616680F0D00087248 /* libxml2.2.dylib */,
+				E1F102B0166812EA00087248 /* SystemConfiguration.framework */,
+				E1F1022E16680D6E00087248 /* UIKit.framework */,
+				E1F1023016680D6E00087248 /* Foundation.framework */,
+				E1F1023216680D6E00087248 /* CoreGraphics.framework */,
+				B90153A3CCB549AEB6A16635 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E1F1023416680D6E00087248 /* NSTimes */ = {
+			isa = PBXGroup;
+			children = (
+				E1F1023D16680D6E00087248 /* AppDelegate.h */,
+				E1F1023E16680D6E00087248 /* AppDelegate.m */,
+				E1C618B8166936D800EAF58F /* Trains */,
+				E1F102B71668150700087248 /* NSRail */,
+				E1F1026216680E1900087248 /* Xibs */,
+				E1C618BF166937AA00EAF58F /* Resources */,
+				E1F1023516680D6E00087248 /* Supporting Files */,
+			);
+			path = NSTimes;
+			sourceTree = "<group>";
+		};
+		E1F1023516680D6E00087248 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E1F1023616680D6E00087248 /* NSTimes-Info.plist */,
+				E1F1023716680D6E00087248 /* InfoPlist.strings */,
+				E1C618C41669388700EAF58F /* Localizable.strings */,
+				E1F1023A16680D6E00087248 /* main.m */,
+				E1F1023C16680D6E00087248 /* NSTimes-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E1F1026216680E1900087248 /* Xibs */ = {
+			isa = PBXGroup;
+			children = (
+				E1C618B51669362E00EAF58F /* TrainsViewController.xib */,
+			);
+			name = Xibs;
+			sourceTree = "<group>";
+		};
+		E1F1026316680E9600087248 /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				E1F1026416680E9600087248 /* hpple */,
+			);
+			path = Vendor;
+			sourceTree = "<group>";
+		};
+		E1F1026416680E9600087248 /* hpple */ = {
+			isa = PBXGroup;
+			children = (
+				E1F1027A16680E9600087248 /* TFHpple.h */,
+				E1F1027B16680E9600087248 /* TFHpple.m */,
+				E1F1027C16680E9600087248 /* TFHppleElement.h */,
+				E1F1027D16680E9600087248 /* TFHppleElement.m */,
+				E1F1028516680E9600087248 /* XPathQuery.h */,
+				E1F1028616680E9600087248 /* XPathQuery.m */,
+			);
+			path = hpple;
+			sourceTree = "<group>";
+		};
+		E1F102B71668150700087248 /* NSRail */ = {
+			isa = PBXGroup;
+			children = (
+				E1F1025E16680DE800087248 /* NSRailConnection.h */,
+				E1F1025F16680DE800087248 /* NSRailConnection.m */,
+				E1F102B91668152C00087248 /* Train.h */,
+				E1F102BA1668152C00087248 /* Train.m */,
+			);
+			name = NSRail;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E1F1022916680D6E00087248 /* NSTimes */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E1F1025416680D6E00087248 /* Build configuration list for PBXNativeTarget "NSTimes" */;
+			buildPhases = (
+				E1F1022616680D6E00087248 /* Sources */,
+				E1F1022716680D6E00087248 /* Frameworks */,
+				E1F1022816680D6E00087248 /* Resources */,
+				3FCEA57CB8FD4F58BE2B94F3 /* Copy Pods Resources */,
+				E1BA46D81668FA5E00845855 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NSTimes;
+			productName = NSTimes;
+			productReference = E1F1022A16680D6E00087248 /* Trains.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E1F1022116680D6E00087248 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = "Robert Dougan";
+			};
+			buildConfigurationList = E1F1022416680D6E00087248 /* Build configuration list for PBXProject "NSTimes" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				nl,
+			);
+			mainGroup = E1F1021F16680D6E00087248;
+			productRefGroup = E1F1022B16680D6E00087248 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E1F1022916680D6E00087248 /* NSTimes */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E1F1022816680D6E00087248 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E1F1023916680D6E00087248 /* InfoPlist.strings in Resources */,
+				E1F1024116680D6E00087248 /* Default.png in Resources */,
+				E1F1024316680D6E00087248 /* Default@2x.png in Resources */,
+				E1F1024516680D6E00087248 /* Default-568h@2x.png in Resources */,
+				E109E2EE1668F80A00642514 /* Icon.png in Resources */,
+				E109E2F01668F83000642514 /* Icon@2x.png in Resources */,
+				E1C618B71669362E00EAF58F /* TrainsViewController.xib in Resources */,
+				E1C618C21669388700EAF58F /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3FCEA57CB8FD4F58BE2B94F3 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+		};
+		E1BA46D81668FA5E00845855 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Crashlytics.framework/run 6ef68195318583ebfc3e0a80408adacc505f0764";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E1F1022616680D6E00087248 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E1F1023B16680D6E00087248 /* main.m in Sources */,
+				E1F1023F16680D6E00087248 /* AppDelegate.m in Sources */,
+				E1F1024816680D6E00087248 /* TrainsViewController.m in Sources */,
+				E1F1026016680DE800087248 /* NSRailConnection.m in Sources */,
+				E1F1029816680E9600087248 /* TFHpple.m in Sources */,
+				E1F1029F16680E9600087248 /* XPathQuery.m in Sources */,
+				E1F1029916680E9600087248 /* TFHppleElement.m in Sources */,
+				E1F102BB1668152C00087248 /* Train.m in Sources */,
+				E102D8891668D56300F1B09B /* TrainsTableViewCell.m in Sources */,
+				E102D88C1668D59000F1B09B /* TrainsTableViewCellView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		E1C618B51669362E00EAF58F /* TrainsViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E1C618B61669362E00EAF58F /* en */,
+				E1C618C51669389300EAF58F /* nl */,
+			);
+			name = TrainsViewController.xib;
+			sourceTree = "<group>";
+		};
+		E1C618C41669388700EAF58F /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E1C618C31669388700EAF58F /* en */,
+				E1C618C71669389300EAF58F /* nl */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		E1F1023716680D6E00087248 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E1F1023816680D6E00087248 /* en */,
+				E1C618C61669389300EAF58F /* nl */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		E1F1025216680D6E00087248 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "";
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		E1F1025316680D6E00087248 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PRODUCT_NAME = "";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E1F1025516680D6E00087248 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 220AE08F5E39469EBEC26401 /* Pods.xcconfig */;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NSTimes/NSTimes-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"${PODS_HEADERS_SEARCH_PATHS}",
+					/usr/include/libxml2,
+				);
+				INFOPLIST_FILE = "NSTimes/NSTimes-Info.plist";
+				PRODUCT_NAME = Trains;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		E1F1025616680D6E00087248 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 220AE08F5E39469EBEC26401 /* Pods.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Robert Dougan";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NSTimes/NSTimes-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"${PODS_HEADERS_SEARCH_PATHS}",
+					"$(SDKROOT)/usr/include/libxml2",
+				);
+				INFOPLIST_FILE = "NSTimes/NSTimes-Info.plist";
+				PRODUCT_NAME = Trains;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "329F0E9C-7E78-4EB6-9129-911FA0FC4D48";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E1F1022416680D6E00087248 /* Build configuration list for PBXProject "NSTimes" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E1F1025216680D6E00087248 /* Debug */,
+				E1F1025316680D6E00087248 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E1F1025416680D6E00087248 /* Build configuration list for PBXNativeTarget "NSTimes" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E1F1025516680D6E00087248 /* Debug */,
+				E1F1025616680D6E00087248 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E1F1022116680D6E00087248 /* Project object */;
+}

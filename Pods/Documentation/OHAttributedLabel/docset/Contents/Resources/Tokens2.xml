@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/OHASBasicMarkupParser.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/OHASBasicMarkupParser</TokenIdentifier>
+			<Abstract type="html">Supported tags:</Abstract>
+			<DeclaredIn>OHASBasicMarkupParser.h</DeclaredIn>
+			
+			<NodeRef refid="2"/>
+		</Token>
+		
+		
+	</File>
+</Tokens>

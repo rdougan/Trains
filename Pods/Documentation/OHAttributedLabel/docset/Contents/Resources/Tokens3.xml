@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/OHASMarkupParserBase.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/OHASMarkupParserBase</TokenIdentifier>
+			<Abstract type="html">@class OHASTagParserBase
+This is an Abstract class to be used for Tag parsers subclasses</Abstract>
+			<DeclaredIn>OHASMarkupParserBase.h</DeclaredIn>
+			
+			<NodeRef refid="3"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/OHASMarkupParserBase/processMarkupInAttributedString:</TokenIdentifier>
+			<Abstract type="html">Call this on concrete subclasses to process tags in an NSMutableAttributedString
+and apply them (by changing the corresponding attributes)</Abstract>
+			<DeclaredIn>OHASMarkupParserBase.h</DeclaredIn>			
+			
+			<Declaration>+ (void)processMarkupInAttributedString:(NSMutableAttributedString *)mutAttrString</Declaration>
+			
+			
+			<Anchor>//api/name/processMarkupInAttributedString:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/OHASMarkupParserBase/attributedStringByProcessingMarkupInAttributedString:</TokenIdentifier>
+			<Abstract type="html">Call this on concrete subclasses to get a parsed NSAttributedString with its attributes
+changed according to the tags in the original attributed string.</Abstract>
+			<DeclaredIn>OHASMarkupParserBase.h</DeclaredIn>			
+			
+			<Declaration>+ (NSMutableAttributedString *)attributedStringByProcessingMarkupInAttributedString:(NSAttributedString *)attrString</Declaration>
+			
+			
+			<Anchor>//api/name/attributedStringByProcessingMarkupInAttributedString:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/OHASMarkupParserBase/attributedStringByProcessingMarkupInString:</TokenIdentifier>
+			<Abstract type="html">Call this on concrete subclasses to get a parsed NSAttributedString with its attributes
+set according to the tags in the original string.</Abstract>
+			<DeclaredIn>OHASMarkupParserBase.h</DeclaredIn>			
+			
+			<Declaration>+ (NSMutableAttributedString *)attributedStringByProcessingMarkupInString:(NSString *)string</Declaration>
+			
+			
+			<Anchor>//api/name/attributedStringByProcessingMarkupInString:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>
