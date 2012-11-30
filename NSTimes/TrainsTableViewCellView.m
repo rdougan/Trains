@@ -10,6 +10,9 @@
 
 #import "Train.h"
 
+#import "OHAttributedLabel.h"
+#import "NSAttributedString+Attributes.h"
+
 #define CellPadding 10.0f
 
 @implementation TrainsTableViewCellView
@@ -51,11 +54,10 @@ platformLabel = _platformLabel;
         
         [self addSubview:_departureLabel];
         
-        _platformLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        _platformLabel = [[OHAttributedLabel alloc] initWithFrame:CGRectZero];
         [_platformLabel setFont:[UIFont systemFontOfSize:13.0f]];
         [_platformLabel setTextColor:[UIColor darkGrayColor]];
         [_platformLabel setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
-        [_platformLabel setTextAlignment:NSTextAlignmentRight];
         
         [self addSubview:_platformLabel];
     }
@@ -128,7 +130,10 @@ platformLabel = _platformLabel;
     [_departureLabel setText:[dateFormatter stringFromDate:[train departure]]];
     
     // Platform
-    [_platformLabel setText:[NSString stringWithFormat:@"Plaform %@", [train platform]]];
+    NSMutableAttributedString *platformText = [NSMutableAttributedString attributedStringWithString:[NSString stringWithFormat:@"Plaform %@", [train platform]]];
+    [platformText setFont:[UIFont boldSystemFontOfSize:13.0f] range:[[platformText string] rangeOfString:[train platform]]];
+    [platformText setTextAlignment:kCTRightTextAlignment lineBreakMode:NSLineBreakByClipping];
+    [_platformLabel setAttributedText:platformText];
     
     [self layoutSubviews];
 }
