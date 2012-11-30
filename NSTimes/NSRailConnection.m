@@ -10,6 +10,7 @@
 
 #import "Train.h"
 
+#import "DDXML.h"
 #import "AFNetworking.h"
 #import "TFHpple.h"
 
@@ -28,6 +29,8 @@ static NSRailConnection *sharedInstance = nil;
     
     return sharedInstance;
 }
+
+#pragma mark - NSURLRequests
 
 - (NSURLRequest *)requestWithFrom:(NSString *)from to:(NSString *)to
 {
@@ -48,6 +51,20 @@ static NSRailConnection *sharedInstance = nil;
     return request;
 }
 
+- (NSURLRequest *)requestForMoreWithFrom:(NSString *)from to:(NSString *)to
+{
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://www.ns.nl/reisplanner-v2/earlierLater.ajax"]];
+    [request setHTTPMethod:@"POST"];
+    
+    NSString *postString = @"direction=outwardTrip&type=later";
+    
+    [request setHTTPBody:[postString dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    return request;
+}
+
+#pragma mark - Fetching
+
 - (void)fetchWithSuccess:(void (^)(NSArray *trains))success
 {
     NSURLRequest *urlRequest = [self requestWithFrom:self.from to:self.to];
@@ -57,7 +74,7 @@ static NSRailConnection *sharedInstance = nil;
         TFHpple *document = [[TFHpple alloc] initWithHTMLData:responseObject];
         NSArray *elements = [document searchWithXPathQuery:@"//table[@class='time-table']/tbody/tr"];
         
-        success([self trainsWithElements:elements]);
+        success([self trainsWithHTMLElements:elements]);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"failure:\n\n%@", error);
     }];
@@ -65,7 +82,23 @@ static NSRailConnection *sharedInstance = nil;
     [requestOperation start];
 }
 
-- (NSArray *)trainsWithElements:(NSArray *)elements {
+- (void)fetchMoreWithSuccess:(void (^)(NSArray *trains))success
+{
+    NSURLRequest *urlRequest = [self requestForMoreWithFrom:self.from to:self.to];
+    
+    AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:urlRequest];
+    [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        success([self trainsWithXMLData:responseObject]);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"failure:\n\n%@", error);
+    }];
+    
+    [requestOperation start];
+}
+
+#pragma mark - Element searching
+
+- (NSArray *)trainsWithHTMLElements:(NSArray *)elements {
     NSMutableArray *trains = [NSMutableArray array];
     BOOL foundSelected = NO;
     
@@ -82,23 +115,23 @@ static NSRailConnection *sharedInstance = nil;
         }
         
         // Simple fields
-        [train setPlatform:[self normalizeString:[[element childWithClassName:@"platform"] text]]];
-        [train setTravelTime:[self normalizeString:[[element childWithClassName:@"travel-time"] text]]];
+        [train setPlatform:[self normalizeString:[[element firstChildWithClassName:@"platform"] text]]];
+        [train setTravelTime:[self normalizeString:[[element firstChildWithClassName:@"travel-time"] text]]];
         
         // Dates
-        NSString *departureString = [NSString stringWithFormat:@"%@ %@", [self normalizeString:[[element childWithClassName:@"departure-date"] text]], [self normalizeString:[[element childWithClassName:@"departure"] text]]];
-        NSString *arrivalString = [NSString stringWithFormat:@"%@ %@", [self normalizeString:[[element childWithClassName:@"arrival-date"] text]], [self normalizeString:[[element childWithClassName:@"arrival"] text]]];
+        NSString *departureString = [NSString stringWithFormat:@"%@ %@", [self normalizeString:[[element firstChildWithClassName:@"departure-date"] text]], [self normalizeString:[[element firstChildWithClassName:@"departure"] text]]];
+        NSString *arrivalString = [NSString stringWithFormat:@"%@ %@", [self normalizeString:[[element firstChildWithClassName:@"arrival-date"] text]], [self normalizeString:[[element firstChildWithClassName:@"arrival"] text]]];
         
         [train setDeparture:[self dateForString:departureString]];
         [train setArrival:[self dateForString:arrivalString]];
         
         // Delays
-        NSArray *departureDelay = [[element childWithClassName:@"departure"] childrenWithTagName:@"strong"];
+        NSArray *departureDelay = [[element firstChildWithClassName:@"departure"] childrenWithTagName:@"strong"];
         if (departureDelay && [departureDelay count] > 0) {
             [train setDepartureDelay:[[departureDelay objectAtIndex:0] text]];
         }
         
-        NSArray *arrivalDelay = [[element childWithClassName:@"arrival"] childrenWithTagName:@"strong"];
+        NSArray *arrivalDelay = [[element firstChildWithClassName:@"arrival"] childrenWithTagName:@"strong"];
         if (arrivalDelay && [arrivalDelay count] > 0) {
             [train setArrivalDelay:[[arrivalDelay objectAtIndex:0] text]];
         }
@@ -109,6 +142,46 @@ static NSRailConnection *sharedInstance = nil;
     return trains;
 }
 
+- (NSArray *)trainsWithXMLData:(NSData *)data {
+    NSMutableArray *trains = [NSMutableArray array];
+    
+    DDXMLDocument *document = [[DDXMLDocument alloc] initWithData:data options:0 error:nil];
+    NSArray *elements = [document nodesForXPath:@"//reistijden/reizen/reis" error:nil];
+    
+    for (DDXMLElement *element in elements) {
+        Train *train = [[Train alloc] init];
+    
+        // Simple fields
+        [train setPlatform:[self normalizeString:[[[element nodesForXPath:@"aankomstspoor" error:nil] objectAtIndex:0] stringValue]]];
+        [train setTravelTime:[self normalizeString:[[[element nodesForXPath:@"reistijd" error:nil] objectAtIndex:0] stringValue]]];
+
+        // Dates
+        NSString *departureString = [NSString stringWithFormat:@"%@ %@", [self normalizeString:[[[element nodesForXPath:@"vertrekdatum" error:nil] objectAtIndex:0] stringValue]], [self normalizeString:[[[element nodesForXPath:@"vertrek" error:nil] objectAtIndex:0] stringValue]]];
+        NSString *arrivalString = [NSString stringWithFormat:@"%@ %@", [self normalizeString:[[[element nodesForXPath:@"aankomstdatum" error:nil] objectAtIndex:0] stringValue]], [self normalizeString:[[[element nodesForXPath:@"aankomst" error:nil] objectAtIndex:0] stringValue]]];
+
+        NSDate *departure = [self dateForString:departureString];
+        [train setDeparture:departure];
+        [train setArrival:[self dateForString:arrivalString]];
+        
+        NSInteger diff = ([departure timeIntervalSinceReferenceDate] - [NSDate timeIntervalSinceReferenceDate]) / 60;
+        if (diff > 60) {
+            continue;
+        }
+
+        // Delays
+        NSString *arrivalDelay = [self normalizeString:[[[element nodesForXPath:@"overstap" error:nil] objectAtIndex:0] stringValue]];
+        if (arrivalDelay && ![arrivalDelay isEqualToString:@""]) {
+            [train setArrivalDelay:arrivalDelay];
+        }
+        
+        [trains addObject:train];
+    }
+    
+    return trains;
+}
+
+#pragma mark - Helpers
+
 - (NSDate *)dateForString:(NSString *)string
 {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -116,15 +189,6 @@ static NSRailConnection *sharedInstance = nil;
     [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
     
     NSDate *sourceDate = [dateFormatter dateFromString:string];
-    
-//    NSTimeZone *sourceTimeZone = [NSTimeZone timeZoneWithAbbreviation:@"GMT"];
-//    NSTimeZone *destinationTimeZone = [NSTimeZone systemTimeZone];
-    
-//    NSInteger sourceGMTOffset = [sourceTimeZone secondsFromGMTForDate:sourceDate];
-//    NSInteger destinationGMTOffset = [destinationTimeZone secondsFromGMTForDate:sourceDate];
-//    NSTimeInterval interval = destinationGMTOffset - sourceGMTOffset;
-    
-//    NSDate *destinationDate = [[NSDate alloc] initWithTimeInterval:interval sinceDate:sourceDate];
     
     return sourceDate;
 }

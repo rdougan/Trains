@@ -15,13 +15,9 @@
 
 + (NSRailConnection *)sharedInstance;
 
-- (NSURLRequest *)requestWithFrom:(NSString *)from to:(NSString *)to;
+#pragma mark - Fetching
 
 - (void)fetchWithSuccess:(void (^)(NSArray *trains))success;
-
-- (NSArray *)trainsWithElements:(NSArray *)elements;
-
-- (NSDate *)dateForString:(NSString *)string;
-- (NSString *)normalizeString:(NSString *)string;
+- (void)fetchMoreWithSuccess:(void (^)(NSArray *trains))success;
 
 @end

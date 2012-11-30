@@ -37,9 +37,6 @@
 {
     [super viewDidLoad];
     
-    // Immediately fetch the latest trains
-    [self fetchTrains:self];
-    
     // Setup the pull to refresh control
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(fetchTrains:) forControlEvents:UIControlEventValueChanged];
@@ -123,9 +120,17 @@
  */
 - (void)fetchTrains:(id)sender
 {
+    NSMutableArray *allTrains = [NSMutableArray array];
+    
     NSRailConnection *sharedInstance = [NSRailConnection sharedInstance];
     [sharedInstance fetchWithSuccess:^(NSArray *trains) {
-        [self setTrains:trains];
+        [allTrains addObjectsFromArray:trains];
+        
+        [sharedInstance fetchMoreWithSuccess:^(NSArray *moreTrains) {
+            [allTrains addObjectsFromArray:moreTrains];
+            
+            [self setTrains:allTrains];
+        }];
     }];
 }
 
@@ -136,49 +141,12 @@
 {
     [[self refreshControl] endRefreshing];
     
-    BOOL reload = NO;
-    if ([_objects count] > 0) {
-        reload = YES;
-    }
-    
-    int oldCount = [_objects count];
-    
     [_objects removeAllObjects];
+    [_objects addObjectsFromArray:trains];
     
-    NSMutableArray *reloadIndexPaths = [NSMutableArray array];
-    NSMutableArray *insertIndexPaths = [NSMutableArray array];
-    NSMutableArray *deleteIndexPaths = [NSMutableArray array];
-    
-    for (Train *train in trains) {
-        [_objects addObject:train];
-        
-        int index = [_objects indexOfObject:train];
-        
-        if (oldCount == 0 || index > oldCount) {
-            [insertIndexPaths addObject:[NSIndexPath indexPathForRow:index inSection:0]];
-        } else {
-            [reloadIndexPaths addObject:[NSIndexPath indexPathForRow:index inSection:0]];
-        }
-    }
-    
-    if (trains.count < oldCount) {
-        int deleteCount = oldCount - trains.count;
-        for (int i = 0; i > deleteCount; i++) {
-            [deleteIndexPaths addObject:[NSIndexPath indexPathForItem:oldCount-i inSection:0]];
-        }
-    }
-    
-    if (reloadIndexPaths.count > 0) {
-        [self.tableView reloadRowsAtIndexPaths:reloadIndexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
-    }
-    
-    if (insertIndexPaths.count > 0) {
-        [self.tableView insertRowsAtIndexPaths:insertIndexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
-    }
-    
-    if (deleteIndexPaths.count > 0) {
-        [self.tableView deleteRowsAtIndexPaths:deleteIndexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
-    }
+    [[self tableView] beginUpdates];
+    [[self tableView] reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [[self tableView] endUpdates];
 }
 
 #pragma mark - UITableViewDataSource
