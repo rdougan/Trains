@@ -57,7 +57,7 @@
         return;
     }
     
-    fetchTimer = [NSTimer scheduledTimerWithTimeInterval:30.0f
+    fetchTimer = [NSTimer scheduledTimerWithTimeInterval:15.0f
                                      target:trainsViewController
                                    selector:@selector(fetchTrains:)
                                    userInfo:nil
