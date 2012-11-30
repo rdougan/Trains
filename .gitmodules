@@ -1,0 +1,6 @@
+[submodule "Vendor/KissXML"]
+	path = Vendor/KissXML
+	url = git://github.com/robbiehanson/KissXML.git
+[submodule "Vendor/hpple"]
+	path = Vendor/hpple
+	url = git@github.com:rdougan/hpple.git
