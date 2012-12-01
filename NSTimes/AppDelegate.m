@@ -46,7 +46,6 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     [self startFetchTimer];
-    [trainsViewController fetchTrains:self];
 }
 
 #pragma mark - Train fetching
@@ -56,6 +55,8 @@
     if (fetchTimer) {
         return;
     }
+    
+    [trainsViewController fetchTrains:self];
     
     fetchTimer = [NSTimer scheduledTimerWithTimeInterval:15.0f
                                      target:trainsViewController
@@ -72,6 +73,7 @@
     }
     
     [fetchTimer invalidate];
+    fetchTimer = nil;
 }
 
 @end
