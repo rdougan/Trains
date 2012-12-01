@@ -130,7 +130,7 @@ platformLabel = _platformLabel;
     [_departureLabel setText:[dateFormatter stringFromDate:[train departure]]];
     
     // Platform
-    NSMutableAttributedString *platformText = [NSMutableAttributedString attributedStringWithString:[NSString stringWithFormat:@"Plaform %@", [train platform]]];
+    NSMutableAttributedString *platformText = [NSMutableAttributedString attributedStringWithString:[NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"platform", @"Platform"), [train platform]]];
     [platformText setFont:[UIFont boldSystemFontOfSize:13.0f] range:[[platformText string] rangeOfString:[train platform]]];
     [platformText setTextAlignment:kCTRightTextAlignment lineBreakMode:NSLineBreakByClipping];
     [_platformLabel setAttributedText:platformText];

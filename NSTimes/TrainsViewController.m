@@ -12,20 +12,23 @@
 #import "NSRailConnection.h"
 
 #import "TrainsTableViewCell.h"
+#import "TrainsMessageView.h"
 
 @interface TrainsViewController () {
     NSMutableArray *_objects;
     
     UILabel *titleView;
     UILabel *subtitleView;
+    
+    TrainsMessageView *messageView;
 }
 @end
 
 @implementation TrainsViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithStyle:(UITableViewStyle)style
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super initWithStyle:style];
     if (self) {
         [self initTitleView];
         _objects = [NSMutableArray array];
@@ -37,10 +40,29 @@
 {
     [super viewDidLoad];
     
+    [[self tableView] setRowHeight:64.f];
+    [self.view setAutoresizingMask:UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth];
+    
+    // Setup the message view
+    messageView = [[TrainsMessageView alloc] init];
+    [messageView setHidden:YES];
+
+    [self.view addSubview:messageView];
+    
     // Setup the pull to refresh control
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(fetchTrains:) forControlEvents:UIControlEventValueChanged];
     [self setRefreshControl:refreshControl];
+    
+    [[self refreshControl] beginRefreshing];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self.view setFrame:self.view.superview.bounds];
+    
+    CGRect viewFrame = CGRectMake(0, 0, self.view.frame.size.width, 62.0f);
+    [messageView setFrame:viewFrame];
 }
 
 /**
@@ -120,6 +142,8 @@
  */
 - (void)fetchTrains:(id)sender
 {
+    [self hideMessage];
+    
     NSMutableArray *allTrains = [NSMutableArray array];
     
     NSRailConnection *sharedInstance = [NSRailConnection sharedInstance];
@@ -147,6 +171,43 @@
     [[self tableView] beginUpdates];
     [[self tableView] reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
     [[self tableView] endUpdates];
+    
+    if ([trains count] == 0) {
+        [self showMessage:NSLocalizedString(@"no_trains_found", @"No trains found") detail:NSLocalizedString(@"no_trains_found_detail", @"No trains found detail")];
+    } else {
+        [self hideMessage];
+    }
+}
+
+#pragma mark - Message View
+
+- (void)showMessage:(NSString *)message detail:(NSString *)detail
+{
+    if (![messageView isHidden]) {
+        [messageView setText:message detail:detail];
+        return;
+    }
+    
+    [messageView setAlpha:0.0f];
+    [messageView setHidden:NO];
+    [messageView setText:message detail:detail];
+    
+    [UIView animateWithDuration:.1f animations:^{
+        [messageView setAlpha:1.0f];
+    }];
+}
+
+- (void)hideMessage
+{
+    if ([messageView isHidden]) {
+        return;
+    }
+    
+    [UIView animateWithDuration:.1f animations:^{
+        [messageView setAlpha:0.0f];
+    } completion:^(BOOL finished) {
+        [messageView setHidden:YES];
+    }];
 }
 
 #pragma mark - UITableViewDataSource

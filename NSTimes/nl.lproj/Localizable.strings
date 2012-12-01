@@ -6,4 +6,7 @@
   Copyright (c) 2012 Robert Dougan. All rights reserved.
 */
 
-"Trains" = "Trains";
+"platform" = "Spoor";
+
+"no_trains_found" = "Geen treinen gevonden";
+"no_trains_found_detail" = "Er zijn geen treinen gepland binnen een uur";

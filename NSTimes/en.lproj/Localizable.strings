@@ -6,4 +6,7 @@
   Copyright (c) 2012 Robert Dougan. All rights reserved.
 */
 
-"Trains" = "Trains";
+"platform" = "Platform";
+
+"no_trains_found" = "No trains found";
+"no_trains_found_detail" = "There are no trains scheduled within the next hour";
