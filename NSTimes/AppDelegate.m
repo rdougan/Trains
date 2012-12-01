@@ -30,8 +30,10 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
     // Trains view controller
-    trainsViewController = [[TrainsViewController alloc] initWithNibName:@"TrainsViewController" bundle:nil];
+    trainsViewController = [[TrainsViewController alloc] initWithStyle:UITableViewStylePlain];
+    
     self.navigationController = [[UINavigationController alloc] initWithRootViewController:trainsViewController];
+    
     self.window.rootViewController = self.navigationController;
     [self.window makeKeyAndVisible];
     
