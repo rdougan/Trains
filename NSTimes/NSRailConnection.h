@@ -17,7 +17,7 @@
 
 #pragma mark - Fetching
 
-- (void)fetchWithSuccess:(void (^)(NSArray *trains))success;
-- (void)fetchMoreWithSuccess:(void (^)(NSArray *trains))success;
+- (void)fetchWithSuccess:(void (^)(NSArray *trains))success failure:(void (^)(NSError *error))failure;
+- (void)fetchMoreWithSuccess:(void (^)(NSArray *trains))success failure:(void (^)(NSError *error))failure;
 
 @end

@@ -65,7 +65,7 @@ static NSRailConnection *sharedInstance = nil;
 
 #pragma mark - Fetching
 
-- (void)fetchWithSuccess:(void (^)(NSArray *trains))success
+- (void)fetchWithSuccess:(void (^)(NSArray *trains))success failure:(void (^)(NSError *error))failure
 {
     NSURLRequest *urlRequest = [self requestWithFrom:self.from to:self.to];
     
@@ -76,13 +76,15 @@ static NSRailConnection *sharedInstance = nil;
         
         success([self trainsWithHTMLElements:elements]);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"failure:\n\n%@", error);
+        if (failure) {
+            failure(error);
+        }
     }];
     
     [requestOperation start];
 }
 
-- (void)fetchMoreWithSuccess:(void (^)(NSArray *trains))success
+- (void)fetchMoreWithSuccess:(void (^)(NSArray *trains))success failure:(void (^)(NSError *error))failure
 {
     NSURLRequest *urlRequest = [self requestForMoreWithFrom:self.from to:self.to];
     
@@ -90,7 +92,9 @@ static NSRailConnection *sharedInstance = nil;
     [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         success([self trainsWithXMLData:responseObject]);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"failure:\n\n%@", error);
+        if (failure) {
+            failure(error);
+        }
     }];
     
     [requestOperation start];
@@ -134,12 +138,12 @@ static NSRailConnection *sharedInstance = nil;
         // Delays
         NSArray *departureDelay = [[element firstChildWithClassName:@"departure"] childrenWithTagName:@"strong"];
         if (departureDelay && [departureDelay count] > 0) {
-            [train setDepartureDelay:[[departureDelay objectAtIndex:0] text]];
+            [train setDepartureDelay:[self normalizeString:[[departureDelay objectAtIndex:0] text]]];
         }
         
         NSArray *arrivalDelay = [[element firstChildWithClassName:@"arrival"] childrenWithTagName:@"strong"];
         if (arrivalDelay && [arrivalDelay count] > 0) {
-            [train setArrivalDelay:[[arrivalDelay objectAtIndex:0] text]];
+            [train setArrivalDelay:[self normalizeString:[[arrivalDelay objectAtIndex:0] text]]];
         }
         
         [trains addObject:train];
@@ -160,9 +164,29 @@ static NSRailConnection *sharedInstance = nil;
         // Simple fields
         [train setPlatform:[self normalizeString:[[[element nodesForXPath:@"aankomstspoor" error:nil] objectAtIndex:0] stringValue]]];
         [train setTravelTime:[self normalizeString:[[[element nodesForXPath:@"reistijd" error:nil] objectAtIndex:0] stringValue]]];
-
-        // Dates
-        NSString *departureString = [NSString stringWithFormat:@"%@ %@", [self normalizeString:[[[element nodesForXPath:@"vertrekdatum" error:nil] objectAtIndex:0] stringValue]], [self normalizeString:[[[element nodesForXPath:@"vertrek" error:nil] objectAtIndex:0] stringValue]]];
+        
+        // Delays
+        NSString *departureDeley = @"";
+        NSString *departureTimeString = [self normalizeString:[[[element nodesForXPath:@"vertrek" error:nil] objectAtIndex:0] stringValue]];
+        TFHpple *departureElements = [[TFHpple alloc] initWithHTMLData:[departureTimeString dataUsingEncoding:NSUTF8StringEncoding]];
+        
+        if ([[train platform] isEqualToString:@"5a"]) {
+            NSArray *departureArray = [departureElements searchWithXPathQuery:@"//text()"];
+            
+            if ([departureArray count] > 0) {
+                departureTimeString = [self normalizeString:[[departureArray objectAtIndex:0] content]];
+            }
+            
+            if ([departureArray count] > 1) {
+                departureDeley = [self normalizeString:[[departureArray objectAtIndex:1] content]];
+            }
+        }
+        
+        if (departureDeley && ![departureDeley isEqualToString:@""]) {
+            [train setDepartureDelay:departureDeley];
+        }
+        
+        NSString *departureString = [NSString stringWithFormat:@"%@ %@", [self normalizeString:[[[element nodesForXPath:@"vertrekdatum" error:nil] objectAtIndex:0] stringValue]], departureTimeString];
         NSString *arrivalString = [NSString stringWithFormat:@"%@ %@", [self normalizeString:[[[element nodesForXPath:@"aankomstdatum" error:nil] objectAtIndex:0] stringValue]], [self normalizeString:[[[element nodesForXPath:@"aankomst" error:nil] objectAtIndex:0] stringValue]]];
 
         NSDate *departure = [self dateForString:departureString];
@@ -172,12 +196,6 @@ static NSRailConnection *sharedInstance = nil;
         NSInteger diff = ([departure timeIntervalSinceReferenceDate] - [NSDate timeIntervalSinceReferenceDate]) / 60;
         if (diff > 60) {
             continue;
-        }
-
-        // Delays
-        NSString *arrivalDelay = [self normalizeString:[[[element nodesForXPath:@"overstap" error:nil] objectAtIndex:0] stringValue]];
-        if (arrivalDelay && ![arrivalDelay isEqualToString:@""]) {
-            [train setArrivalDelay:arrivalDelay];
         }
         
         [trains addObject:train];
