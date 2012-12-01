@@ -146,6 +146,28 @@
     [self fetchTrains:self];
 }
 
+- (void)switchStationsIfNeeded
+{
+    NSDate *date = [NSDate date];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *components = [calendar components:(NSHourCalendarUnit) fromDate:date];
+    NSInteger hour = [components hour];
+    
+    NSRailConnection *sharedInstance = [NSRailConnection sharedInstance];
+    
+    if (hour > 13 || hour < 4) {
+        subtitleView.text = @"Amsterdam → Haarlem";
+        
+        [sharedInstance setTo:@"Haarlem"];
+        [sharedInstance setFrom:@"Amsterdam"];
+    } else {
+        subtitleView.text = @"Haarlem → Amsterdam";
+        
+        [sharedInstance setTo:@"Amsterdam"];
+        [sharedInstance setFrom:@"Haarlem"];
+    }
+}
+
 /**
  * Fetches the latest trains from NS.nl
  */

@@ -47,7 +47,9 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
+    [trainsViewController switchStationsIfNeeded];
     [trainsViewController showRefreshControl];
+    
     [self startFetchTimer];
 }
 

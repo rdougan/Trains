@@ -13,6 +13,7 @@
 - (void)showRefreshControl;
 
 #pragma mark - Trains
+- (void)switchStationsIfNeeded;
 - (void)fetchTrains:(id)sender;
 
 @end
