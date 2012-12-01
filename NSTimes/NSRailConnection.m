@@ -122,8 +122,14 @@ static NSRailConnection *sharedInstance = nil;
         NSString *departureString = [NSString stringWithFormat:@"%@ %@", [self normalizeString:[[element firstChildWithClassName:@"departure-date"] text]], [self normalizeString:[[element firstChildWithClassName:@"departure"] text]]];
         NSString *arrivalString = [NSString stringWithFormat:@"%@ %@", [self normalizeString:[[element firstChildWithClassName:@"arrival-date"] text]], [self normalizeString:[[element firstChildWithClassName:@"arrival"] text]]];
         
-        [train setDeparture:[self dateForString:departureString]];
+        NSDate *departure = [self dateForString:departureString];
+        [train setDeparture:departure];
         [train setArrival:[self dateForString:arrivalString]];
+        
+        NSInteger diff = ([departure timeIntervalSinceReferenceDate] - [NSDate timeIntervalSinceReferenceDate]) / 60;
+        if (diff > 60) {
+            continue;
+        }
         
         // Delays
         NSArray *departureDelay = [[element firstChildWithClassName:@"departure"] childrenWithTagName:@"strong"];
