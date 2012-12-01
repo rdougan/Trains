@@ -10,6 +10,8 @@
 
 @interface TrainsViewController : UITableViewController
 
+- (void)showRefreshControl;
+
 #pragma mark - Trains
 - (void)fetchTrains:(id)sender;
 

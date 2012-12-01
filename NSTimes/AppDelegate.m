@@ -47,6 +47,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
+    [trainsViewController showRefreshControl];
     [self startFetchTimer];
 }
 

@@ -113,6 +113,12 @@
     [self.navigationItem.titleView addGestureRecognizer:tapRecognizer];
 }
 
+- (void)showRefreshControl
+{
+    [[self tableView] setContentOffset:CGPointMake(0.0f, -44.0f) animated:YES];
+    [[self refreshControl] beginRefreshing];
+}
+
 #pragma mark - Trains
 
 /**
@@ -135,8 +141,7 @@
     }
     
     // Start the refresh control and scroll to it
-    [[self tableView] setContentOffset:CGPointMake(0.0f, -44.0f) animated:YES];
-    [[self refreshControl] beginRefreshing];
+    [self showRefreshControl];
     
     [self fetchTrains:self];
 }
