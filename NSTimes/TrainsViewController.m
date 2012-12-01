@@ -142,8 +142,6 @@
  */
 - (void)fetchTrains:(id)sender
 {
-    [self hideMessage];
-    
     NSMutableArray *allTrains = [NSMutableArray array];
     
     NSRailConnection *sharedInstance = [NSRailConnection sharedInstance];
