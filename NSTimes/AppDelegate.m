@@ -52,6 +52,20 @@
 
 #pragma mark - Train fetching
 
+- (void)timerWithInterval:(float)interval
+{
+    if (fetchTimer) {
+        [fetchTimer invalidate];
+        fetchTimer = nil;
+    }
+    
+    fetchTimer = [NSTimer scheduledTimerWithTimeInterval:interval
+                                            target:trainsViewController
+                                          selector:@selector(fetchTrains:)
+                                          userInfo:nil
+                                           repeats:YES];
+}
+
 - (void)startFetchTimer
 {
     if (fetchTimer) {
@@ -60,12 +74,7 @@
     
     [trainsViewController fetchTrains:self];
     
-    fetchTimer = [NSTimer scheduledTimerWithTimeInterval:15.0f
-                                     target:trainsViewController
-                                   selector:@selector(fetchTrains:)
-                                   userInfo:nil
-                                    repeats:YES];
-
+    [self timerWithInterval:60.0f];
 }
 
 - (void)stopFetchTimer

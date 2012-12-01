@@ -134,6 +134,10 @@
         [sharedInstance setFrom:@"Haarlem"];
     }
     
+    // Start the refresh control and scroll to it
+    [[self tableView] setContentOffset:CGPointMake(0.0f, -44.0f) animated:YES];
+    [[self refreshControl] beginRefreshing];
+    
     [self fetchTrains:self];
 }
 
@@ -152,7 +156,15 @@
             [allTrains addObjectsFromArray:moreTrains];
             
             [self setTrains:allTrains];
+        } failure:^(NSError *error) {
+            if ([allTrains count] == 0) {
+                [self showMessage:NSLocalizedString(@"trains_failure", @"Something went wrong")
+                           detail:NSLocalizedString(@"trains_failure_detail", @"Please try again in a few minutes")];
+            }
         }];
+    } failure:^(NSError *error) {
+        [self showMessage:NSLocalizedString(@"trains_failure", @"Something went wrong")
+                   detail:NSLocalizedString(@"trains_failure_detail", @"Please try again in a few minutes")];
     }];
 }
 
@@ -171,7 +183,8 @@
     [[self tableView] endUpdates];
     
     if ([trains count] == 0) {
-        [self showMessage:NSLocalizedString(@"no_trains_found", @"No trains found") detail:NSLocalizedString(@"no_trains_found_detail", @"No trains found detail")];
+        [self showMessage:NSLocalizedString(@"no_trains_found", @"No trains found")
+                   detail:NSLocalizedString(@"no_trains_found_detail", @"No trains found detail")];
     } else {
         [self hideMessage];
     }

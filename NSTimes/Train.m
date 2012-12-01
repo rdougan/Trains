@@ -14,7 +14,7 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"Train: (travelTime: %@, platform: %@, departure: %@, arrival: %@, departureDelay: %@, arrivalDelay: %@)", self.travelTime, self.platform, self.departure, self.arrival, self.departureDelay, self.arrivalDelay];
+    return [NSString stringWithFormat:@"Train: (travelTime: %@, platform: %@, departure: %@, departureDelay: %@)", self.travelTime, self.platform, self.departure, self.departureDelay];
 }
 
 @end

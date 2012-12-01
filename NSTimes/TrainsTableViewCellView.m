@@ -118,7 +118,7 @@ platformLabel = _platformLabel;
     
     // Depature Delay
     if ([train departureDelay]) {
-        [_departureDelayLabel setText:[train departureDelay]];
+        [_departureDelayLabel setText:[NSString stringWithFormat:@" %@", [train departureDelay]]];
     } else {
         [_departureDelayLabel setText:@""];
     }

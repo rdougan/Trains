@@ -10,3 +10,6 @@
 
 "no_trains_found" = "No trains found";
 "no_trains_found_detail" = "There are no trains scheduled within the next hour";
+
+"trains_failure" = "Something went wrong";
+"trains_failure_detail" = "Please try again in a few minutes";
