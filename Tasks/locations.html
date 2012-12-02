@@ -1,0 +1,174 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+
+        <script type="text/javascript">
+            stop = false;
+
+            window.onload = function() {
+                document.write('results');
+
+                var i = 0,
+                    ln = locations.length;
+
+                var interval = setInterval(function() {
+                    if (!stop) {
+                        if (i < ln) {
+                            getLatLong(locations[i], function(res) {
+                                if (res) {
+                                    i++;
+                                }
+                            });
+                        } else {
+                            clearInterval(interval);
+                        }
+                    }
+                }, 1000);
+            }
+
+            function getLatLong(address, callback) {
+                console.log(address);
+                var geo = new google.maps.Geocoder;
+
+                geo.geocode({'address': address}, function(results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        document.write('<div>@"' + address + '", @"' + results[0].geometry.location.$a + '", @"' + results[0].geometry.location.ab + '",</div>');
+
+                        callback(true);
+                    } else {
+                        if (status == "OVER_QUERY_LIMIT") {
+                            callback(false);
+                        } else {
+                            console.log(address, "Geocode was not successful for the following reason: " + status);
+                        }
+                    }
+                });
+            };
+
+            var locations = [
+                // "Stolberg GBF",
+                // "Stolberg Hbf",
+                // "Stolberg Mühlener Bahnhof",
+                // "Stolberg Rathaus",
+                // "Stolberg Schneidmuhle",
+                "Stuttgart Hbf",
+                "Susteren",
+                "Swalmen",
+                "Tantow",
+                "Tegelen",
+                "Terborg",
+                "Thun",
+                "Tiel",
+                "Tiel Passewaaij",
+                "Tilburg",
+                "Tilburg Reeshof",
+                "Tilburg Universiteit",
+                "Twello",
+                "Uitgeest",
+                "Uithuizen",
+                "Uithuizermeeden",
+                "Ulm Hbf",
+                "Unna",
+                "Usquert",
+                "Utrecht",
+                "Utrecht Centraal",
+                "Utrecht Lunetten",
+                "Utrecht Maliebaan",
+                "Utrecht Overvecht",
+                "Utrecht Terwijde",
+                "Utrecht Westraven",
+                "Utrecht Zuilen",
+                "Valence TGV",
+                "Valkenburg",
+                "Varsseveld",
+                "Veendam",
+                "Veenendaal Centrum",
+                "Veenendaal West",
+                "Veenendaal-De Klomp",
+                "Veenwouden",
+                "Velp",
+                "Venlo",
+                "Venray",
+                "Vierlingsbeek",
+                "Viersen",
+                "Visé",
+                "Vlaardingen Centrum",
+                "Vlaardingen Oost",
+                "Vlaardingen West",
+                "Vleuten",
+                "Vlissingen",
+                "Vlissingen Souburg",
+                "Voerendaal",
+                "Voorburg",
+                "Voorhout",
+                "Voorschoten",
+                "Voorst-Empe",
+                "Vorden",
+                "Vriezenveen",
+                "Vroomshoop",
+                "Vught",
+                "Waddinxveen",
+                "Waddinxveen Noord",
+                "Warffum",
+                "Warszawa Centralna",
+                "Warszawa Wschodnia",
+                "Weener",
+                "Weert",
+                "Weesp",
+                "Wehl",
+                "Westervoort",
+                "Wezep",
+                "Wien Westbahnhof",
+                "Wierden",
+                "Wijchen",
+                "Wijhe",
+                "Wijlre",
+                "Wildert",
+                "Winschoten",
+                "Winsum",
+                "Winterswijk",
+                "Winterswijk West",
+                "Wittem",
+                "Woerden",
+                "Wolfheze",
+                "Wolfsburg",
+                "Wolvega",
+                "Worgl",
+                "Workum",
+                "Wormerveer",
+                "Wuppertal Barmen",
+                "Wuppertal Hbf",
+                "Wuppertal Oberbarmen",
+                "Wuppertal-Vohwinkel",
+                "Wörgl",
+                "Würzburg",
+                "Zaandam",
+                "Zaandam Kogerveld",
+                "Zaltbommel",
+                "Zandvoort aan Zee",
+                "Zell am See",
+                "Zetten-Andelst",
+                "Zevenaar",
+                "Zevenbergen",
+                "Zoetermeer",
+                "Zoetermeer Oost",
+                "Zuidbroek",
+                "Zuidhorn",
+                "Zurich",
+                "Zutphen",
+                "Zwaagwesteinde",
+                "Zwijndrecht",
+                "Zwolle",
+                "Zürich HB",
+                "Ötztal"
+            ];
+
+        </script>
+
+    </head>
+
+    <body></body>
+
+</html>
