@@ -14,7 +14,7 @@
 
 #define ItemPadding 5.0f
 #define FieldHeight 25.0f
-#define ButtonWidth 35.0f
+#define ButtonWidth 28.0f
 #define StatusBarHeight 20.0f
 #define ToolbarHeight 44.0f
 #define KeyboardHeight 216.0f
@@ -63,13 +63,16 @@ to = _to;
         [self addSubview:_toField];
         
         // Buttons
-        _swapButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        [_swapButton setFrame:CGRectMake(ItemPadding, ItemPadding, ButtonWidth, FieldHeight + ItemPadding + FieldHeight)];
+        _swapButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_swapButton setAdjustsImageWhenHighlighted:NO];
+        [_swapButton setBackgroundImage:[UIImage imageNamed:@"swap_button"] forState:UIControlStateNormal];
+        [_swapButton setBackgroundImage:[UIImage imageNamed:@"swap_button_selected"] forState:UIControlStateHighlighted];
+        [_swapButton setFrame:CGRectMake(ItemPadding, (self.bounds.size.height - ButtonWidth) / 2, ButtonWidth, ButtonWidth)];
         [_swapButton addTarget:self action:@selector(swapStations) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_swapButton];
         
         // Table view
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64.0f, self.frame.size.width, 200.0f) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 65.0f, self.frame.size.width, 200.0f) style:UITableViewStylePlain];
         [_tableView setDelegate:self];
         [_tableView setDataSource:self];
         [_tableView setHidden:YES];
@@ -131,7 +134,7 @@ to = _to;
     
     // Set the height of the view to the original height
     CGRect frame = self.frame;
-    frame.size.height = 64.0f;
+    frame.size.height = 65.0f;
     [self setFrame:frame];
     
     // Hide the keyboard
@@ -214,7 +217,7 @@ to = _to;
     CGRect frame = [_tableView frame];
     CGRect screenFrame = [[UIScreen mainScreen] bounds];
     
-    frame.size.height = screenFrame.size.height - StatusBarHeight - ToolbarHeight - KeyboardHeight - 64.0f;
+    frame.size.height = screenFrame.size.height - StatusBarHeight - ToolbarHeight - KeyboardHeight - 65.0f;
     
     [_tableView setFrame:frame];
     
