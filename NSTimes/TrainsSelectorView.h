@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#import "TrainsSelectorMaskView.h"
+
 @class TrainsSelectorView;
 
 typedef enum {
@@ -20,7 +22,7 @@ typedef enum {
 - (void)trainsSelectorViewDidCancel:(TrainsSelectorView *)trainsSelectorView;
 @end
 
-@interface TrainsSelectorView : UIView <UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface TrainsSelectorView : UIView <UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, TrainsSelectorMaskViewDelegate>
 
 @property (nonatomic, retain) NSString *from;
 @property (nonatomic, retain) NSString *to;

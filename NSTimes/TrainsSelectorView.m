@@ -29,7 +29,7 @@ typedef void (^TrainsSelectorStateBlock)(TrainsSelectorViewState state);
 @property (nonatomic, retain) UIButton *swapButton;
 @property (nonatomic, retain) UITableView *tableView;
 @property (nonatomic, retain) NSArray *filteredStations;
-@property (nonatomic, retain) UIView *maskView;
+@property (nonatomic, retain) TrainsSelectorMaskView *maskView;
 
 @property (readwrite, nonatomic, assign) TrainsSelectorViewState viewState;
 @property (readwrite, nonatomic, copy) TrainsSelectorStateBlock trainsSelectorSateBlock;
@@ -59,14 +59,9 @@ to = _to;
         CGRect frame = [[UIScreen mainScreen] bounds];
         frame.origin.y = 65.0f;
         
-        _maskView = [[UIView alloc] initWithFrame:frame];
+        _maskView = [[TrainsSelectorMaskView alloc] initWithFrame:frame];
         [_maskView setAutoresizingMask:UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth];
-        
-        // Add a tap recognizer onto the mask view
-        UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(maskTap:)];
-        [_maskView setUserInteractionEnabled:YES];
-        [_maskView addGestureRecognizer:tapRecognizer];
-        
+        [_maskView setDelegate:self];
         [self addSubview:_maskView];
         
         // Background
@@ -156,7 +151,11 @@ to = _to;
     _filteredStations = [NSArray array];
     
     // Hide the tableview
-    [_tableView setHidden:YES];
+    [UIView animateWithDuration:0.2f animations:^{
+        [_tableView setAlpha:0];
+    } completion:^(BOOL finished) {
+        [_tableView setHidden:YES];
+    }];
     
     // Hide the keyboard
     [self endEditing:YES];
@@ -168,6 +167,17 @@ to = _to;
 
 - (void)cancel
 {
+    if (![_tableView isHidden]) {
+        [_fromField resignFirstResponder];
+        [_toField resignFirstResponder];
+        
+        [UIView animateWithDuration:0.2f animations:^{
+            [_tableView setAlpha:0];
+        } completion:^(BOOL finished) {
+            [_tableView setHidden:YES];
+        }];
+    }
+    
     if ([_delegate respondsToSelector:@selector(trainsSelectorViewDidCancel:)]) {
         [_delegate performSelector:@selector(trainsSelectorViewDidCancel:) withObject:self];
     }
@@ -214,7 +224,15 @@ to = _to;
     NSArray *stations = [[NSRailConnection sharedInstance] stations];
     
     if ([_tableView isHidden]) {
+        [self resizeTableView];
         [_tableView setHidden:NO];
+        [_tableView setAlpha:0];
+        
+        [UIView animateWithDuration:.2f animations:^{
+            [_tableView setAlpha:1.0];
+        } completion:^(BOOL finished) {
+            [self resizeTableView];
+        }];
     }
     
     _filteredStations = [stations objectsAtIndexes:[stations indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
@@ -236,7 +254,6 @@ to = _to;
     }]];
     
     [_tableView reloadData];
-    [self resizeTableView];
 }
 
 - (void)resizeTableView
@@ -245,13 +262,14 @@ to = _to;
     CGRect frame = [_tableView frame];
     CGRect screenFrame = [[UIScreen mainScreen] bounds];
     
-    frame.size.height = screenFrame.size.height - StatusBarHeight - ToolbarHeight - KeyboardHeight - 65.0f;
+    frame.size.height = screenFrame.size.height;
     
     [_tableView setFrame:frame];
     
     // Set the correct size for this view
     frame = self.frame;
     frame.size.height = frame.size.height + _tableView.frame.size.height;
+    
     [self setFrame:frame];
 }
 
@@ -329,6 +347,12 @@ to = _to;
             [self submit];
         }
     }
+}
+
+#pragma mark - TrainsSelectorMaskViewDelegate
+- (void)trainsMaskViewTouchesBegan:(TrainsSelectorMaskView *)maskView
+{
+    [self cancel];
 }
 
 @end
