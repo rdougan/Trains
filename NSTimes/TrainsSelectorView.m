@@ -112,8 +112,16 @@ to = _to;
 
 - (void)submit
 {
-    _from = [_fromField text];
-    _to = [_toField text];
+    // Find the propercase version of the station
+    NSArray *stations = [[NSRailConnection sharedInstance] stations];
+    
+    _from = [stations objectAtIndex:[stations indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+        return ([[(NSString *)obj lowercaseString] isEqualToString:[[_fromField text] lowercaseString]]) ? YES : NO;
+    }]];
+    
+    _to = [stations objectAtIndex:[stations indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+        return ([[(NSString *)obj lowercaseString] isEqualToString:[[_toField text] lowercaseString]]) ? YES : NO;
+    }]];
     
     // Reset the filtered stations
     _filteredStations = [NSArray array];
@@ -172,17 +180,24 @@ to = _to;
 
 - (void)searchForStation:(NSString *)station
 {
+    NSArray *stations = [[NSRailConnection sharedInstance] stations];
+    
     if ([_tableView isHidden]) {
         [_tableView setHidden:NO];
     }
     
-    NSArray *stations = [[NSRailConnection sharedInstance] stations];
     _filteredStations = [stations objectsAtIndexes:[stations indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
-        NSRange range = [[(NSString *)obj lowercaseString] rangeOfString:[station lowercaseString]];
-        BOOL found = (range.length > 0) ? YES : NO;
+        BOOL found = NO;
+        
+        if (![station isEqualToString:@""]) {
+            NSRange range = [[(NSString *)obj lowercaseString] rangeOfString:[station lowercaseString]];
+            found = (range.length > 0) ? YES : NO;
+        } else {
+            found = YES;
+        }
         
         // Do not show any stations currently typed
-        if ([(NSString *)obj isEqualToString:[_fromField text]] || [(NSString *)obj isEqualToString:[_toField text]]) {
+        if ([[(NSString *)obj lowercaseString] isEqualToString:[[_fromField text] lowercaseString]] || [[(NSString *)obj lowercaseString] isEqualToString:[[_toField text] lowercaseString]]) {
             found = NO;
         }
         
