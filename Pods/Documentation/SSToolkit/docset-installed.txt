@@ -1,0 +1,4 @@
+Documentation set was installed to Xcode!
+
+Path: /Users/Robert/Library/Developer/Shared/Documentation/DocSets/org.cocoapods.SSToolkit-1.0.2.docset
+Time: 2012-12-02 00:16:14 +0000

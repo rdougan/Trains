@@ -2,13 +2,16 @@
 PODS:
 - AFNetworking (1.0.1)
 - OHAttributedLabel (3.2.1)
+- SSToolkit (1.0.2)
 
 DEPENDENCIES:
 - AFNetworking (= 1.0.1)
 - OHAttributedLabel (= 3.2.1)
+- SSToolkit (= 1.0.2)
 
 SPEC CHECKSUMS:
   AFNetworking: 4c11f857c9a18d65f4257c90a1e74ac49f0ac422
   OHAttributedLabel: 544eb3d413392a8a3f5fac2ca5b191bad4a8d6a5
+  SSToolkit: 852044205c6a15586431e90f46b2ef01f693285a
 
 COCOAPODS: 0.15.2
