@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TrainsViewController : UITableViewController
+#import "TrainsSelectorView.h"
+
+@interface TrainsViewController : UITableViewController <TrainsSelectorViewDelegate>
 
 - (void)showRefreshControl;
 

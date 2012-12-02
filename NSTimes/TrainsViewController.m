@@ -21,6 +21,9 @@
     UILabel *subtitleView;
     
     TrainsMessageView *messageView;
+    TrainsSelectorView *selectionView;
+    
+    UIBarButtonItem *routeButton;
 }
 @end
 
@@ -55,6 +58,11 @@
     [self setRefreshControl:refreshControl];
     
     [[self refreshControl] beginRefreshing];
+    
+    // Add a tap recognizer onto the table view
+    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideStationSelectionView:)];
+    [tapRecognizer setNumberOfTapsRequired:1];
+    [[self tableView] addGestureRecognizer:tapRecognizer];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -70,6 +78,8 @@
  */
 - (void)initTitleView
 {
+    NSRailConnection *sharedInstance = [NSRailConnection sharedInstance];
+    
     CGRect headerTitleSubtitleFrame = CGRectMake(0, 0, 200, 44);
     UIView *_headerTitleSubtitleView = [[UILabel alloc] initWithFrame:headerTitleSubtitleFrame];
     _headerTitleSubtitleView.backgroundColor = [UIColor clearColor];
@@ -95,7 +105,7 @@
     subtitleView.textColor = [UIColor colorWithWhite:1 alpha:.8];
     subtitleView.shadowColor = [UIColor colorWithWhite:0 alpha:.3];
     subtitleView.shadowOffset = CGSizeMake(0, -1);
-    subtitleView.text = @"Haarlem → Amsterdam";
+    subtitleView.text = [NSString stringWithFormat:@"%@ → %@", [sharedInstance from], [sharedInstance to]];
     subtitleView.adjustsFontSizeToFitWidth = YES;
     [_headerTitleSubtitleView addSubview:subtitleView];
     
@@ -111,12 +121,38 @@
     
     [self.navigationItem.titleView setUserInteractionEnabled:YES];
     [self.navigationItem.titleView addGestureRecognizer:tapRecognizer];
+    
+    routeButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Route", @"Route") style:UIBarButtonItemStyleDone target:self action:@selector(route:)];
+    [routeButton setEnabled:NO];
 }
 
 - (void)showRefreshControl
 {
     [[self tableView] setContentOffset:CGPointMake(0.0f, -44.0f) animated:YES];
     [[self refreshControl] beginRefreshing];
+}
+
+#pragma mark - Station Selector
+
+- (void)route:(id)sender
+{
+    [selectionView submit];
+}
+
+- (void)hideStationSelectionView:(id)sender
+{
+    if (!selectionView || [selectionView isHidden]) {
+        return;
+    }
+    
+    [self.navigationItem setRightBarButtonItem:nil animated:YES];
+    
+    [UIView animateWithDuration:0.25f animations:^{
+        [[self tableView] setContentOffset:CGPointMake(0, 0)];
+    } completion:^(BOOL finished) {
+        [[self tableView] setScrollEnabled:YES];
+        [selectionView setHidden:YES];
+    }];
 }
 
 #pragma mark - Trains
@@ -128,41 +164,48 @@
 {
     NSRailConnection *sharedInstance = [NSRailConnection sharedInstance];
     
-    if ([subtitleView.text isEqualToString:@"Haarlem → Amsterdam"]) {
-        subtitleView.text = @"Amsterdam → Haarlem";
-        
-        [sharedInstance setTo:@"Haarlem"];
-        [sharedInstance setFrom:@"Amsterdam"];
-    } else {
-        subtitleView.text = @"Haarlem → Amsterdam";
-        
-        [sharedInstance setTo:@"Amsterdam"];
-        [sharedInstance setFrom:@"Haarlem"];
+    if (!selectionView) {
+        selectionView = [[TrainsSelectorView alloc] initWithFrame:CGRectMake(0, -64.0f, self.view.bounds.size.width, 64.0f)];
+        [selectionView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleBottomMargin];
+        [selectionView setDelegate:self];
+        [[self tableView] addSubview:selectionView];
     }
     
-    // Start the refresh control and scroll to it
-    [self showRefreshControl];
+    [selectionView setStateChangeBlock:^(TrainsSelectorViewState state) {
+        if (state == TrainsSelectorViewStateValid) {
+            [routeButton setEnabled:YES];
+        } else {
+            [routeButton setEnabled:NO];
+        }
+    }];
     
-    [self fetchTrains:self];
+    [self.navigationItem setRightBarButtonItem:routeButton animated:YES];
+    
+    [selectionView setHidden:NO];
+    [selectionView setFrom:[sharedInstance from]];
+    [selectionView setTo:[sharedInstance to]];
+    
+    [[self tableView] setScrollEnabled:NO];
+    [[self tableView] setContentOffset:CGPointMake(0, -64.0f) animated:YES];
 }
 
 - (void)switchStationsIfNeeded
 {
+    NSRailConnection *sharedInstance = [NSRailConnection sharedInstance];
+    
+    if (!([[sharedInstance from] isEqualToString:@"Amsterdam"] || [[sharedInstance from] isEqualToString:@"Haarlem"]) || !([[sharedInstance to] isEqualToString:@"Amsterdam"] || [[sharedInstance to] isEqualToString:@"Haarlem"])) {
+        return;
+    }
+    
     NSDate *date = [NSDate date];
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *components = [calendar components:(NSHourCalendarUnit) fromDate:date];
     NSInteger hour = [components hour];
     
-    NSRailConnection *sharedInstance = [NSRailConnection sharedInstance];
-    
     if (hour > 13 || hour < 4) {
-        subtitleView.text = @"Amsterdam → Haarlem";
-        
         [sharedInstance setTo:@"Haarlem"];
         [sharedInstance setFrom:@"Amsterdam"];
     } else {
-        subtitleView.text = @"Haarlem → Amsterdam";
-        
         [sharedInstance setTo:@"Amsterdam"];
         [sharedInstance setFrom:@"Haarlem"];
     }
@@ -176,6 +219,9 @@
     NSMutableArray *allTrains = [NSMutableArray array];
     
     NSRailConnection *sharedInstance = [NSRailConnection sharedInstance];
+    
+    subtitleView.text = [NSString stringWithFormat:@"%@ → %@", [sharedInstance from], [sharedInstance to]];
+    
     [sharedInstance fetchWithSuccess:^(NSArray *trains) {
         [allTrains addObjectsFromArray:trains];
         
@@ -282,7 +328,27 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 64.f;
+    return 64.0f;
+}
+
+#pragma mark - TrainsSelectorViewDelegate
+
+- (void)trainsSelectorView:(TrainsSelectorView *)trainsSelectorView didCompleteSearchWithFrom:(NSString *)from to:(NSString *)to
+{
+    [[self tableView] setScrollEnabled:YES];
+    [self.navigationItem setRightBarButtonItem:nil animated:YES];
+    
+    NSRailConnection *sharedInstance = [NSRailConnection sharedInstance];
+    [sharedInstance setFrom:from];
+    [sharedInstance setTo:to];
+    
+    [UIView animateWithDuration:0.25f animations:^{
+        [[self tableView] setContentOffset:CGPointMake(0, 0)];
+    } completion:^(BOOL finished) {
+        [selectionView setHidden:YES];
+        [self showRefreshControl];
+        [self fetchTrains:self];
+    }];
 }
 
 @end
