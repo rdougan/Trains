@@ -25,9 +25,11 @@ typedef void (^TrainsSelectorStateBlock)(TrainsSelectorViewState state);
 
 @property (nonatomic, retain) TrainsSelectorTextField *fromField;
 @property (nonatomic, retain) TrainsSelectorTextField *toField;
+@property (nonatomic, retain) UIView *backgroundView;
 @property (nonatomic, retain) UIButton *swapButton;
 @property (nonatomic, retain) UITableView *tableView;
 @property (nonatomic, retain) NSArray *filteredStations;
+@property (nonatomic, retain) UIView *maskView;
 
 @property (readwrite, nonatomic, assign) TrainsSelectorViewState viewState;
 @property (readwrite, nonatomic, copy) TrainsSelectorStateBlock trainsSelectorSateBlock;
@@ -38,9 +40,11 @@ typedef void (^TrainsSelectorStateBlock)(TrainsSelectorViewState state);
 
 @synthesize fromField = _fromField,
 toField = _toField,
+backgroundView = _backgroundView,
 swapButton = _swapButton,
 tableView = _tableView,
-filteredStations = _filteredStations;
+filteredStations = _filteredStations,
+maskView = _maskView;
 
 @synthesize from = _from,
 to = _to;
@@ -51,6 +55,26 @@ to = _to;
 {
     self = [super initWithFrame:frame];
     if (self) {
+        // Mask
+        CGRect frame = [[UIScreen mainScreen] bounds];
+        frame.origin.y = 65.0f;
+        
+        _maskView = [[UIView alloc] initWithFrame:frame];
+        [_maskView setAutoresizingMask:UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth];
+        
+        // Add a tap recognizer onto the mask view
+        UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(maskTap:)];
+        [_maskView setUserInteractionEnabled:YES];
+        [_maskView addGestureRecognizer:tapRecognizer];
+        
+        [self addSubview:_maskView];
+        
+        // Background
+        _backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 65.0f)];
+        [_backgroundView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleBottomMargin];
+        [_backgroundView setBackgroundColor:[[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"selector_bg.png"]]];
+        [self addSubview:_backgroundView];
+        
         // Fields
         _fromField = [[TrainsSelectorTextField alloc] initWithFrame:CGRectMake(ItemPadding + ButtonWidth + ItemPadding, ItemPadding, self.frame.size.width - (ItemPadding * 3) - ButtonWidth, FieldHeight) withLabel:NSLocalizedString(@"From", @"From")];
         [_fromField setDelegate:self];
@@ -67,7 +91,7 @@ to = _to;
         [_swapButton setAdjustsImageWhenHighlighted:NO];
         [_swapButton setBackgroundImage:[UIImage imageNamed:@"swap_button"] forState:UIControlStateNormal];
         [_swapButton setBackgroundImage:[UIImage imageNamed:@"swap_button_selected"] forState:UIControlStateHighlighted];
-        [_swapButton setFrame:CGRectMake(ItemPadding, (self.bounds.size.height - ButtonWidth) / 2, ButtonWidth, ButtonWidth)];
+        [_swapButton setFrame:CGRectMake(ItemPadding, 17.0f, ButtonWidth, ButtonWidth)];
         [_swapButton addTarget:self action:@selector(swapStations) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_swapButton];
         
@@ -77,9 +101,6 @@ to = _to;
         [_tableView setDataSource:self];
         [_tableView setHidden:YES];
         [self addSubview:_tableView];
-        
-        // Background
-        [self setBackgroundColor:[[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"selector_bg.png"]]];
         
         _filteredStations = [NSArray array];
     }
@@ -113,6 +134,11 @@ to = _to;
     [_toField setText:from];
 }
 
+- (void)maskTap:(UITapGestureRecognizer *)tapGesture
+{
+    [self cancel];
+}
+
 - (void)submit
 {
     // Find the propercase version of the station
@@ -132,16 +158,18 @@ to = _to;
     // Hide the tableview
     [_tableView setHidden:YES];
     
-    // Set the height of the view to the original height
-    CGRect frame = self.frame;
-    frame.size.height = 65.0f;
-    [self setFrame:frame];
-    
     // Hide the keyboard
     [self endEditing:YES];
     
     if ([_delegate respondsToSelector:@selector(trainsSelectorView:didCompleteSearchWithFrom:to:)]) {
         objc_msgSend(_delegate, @selector(trainsSelectorView:didCompleteSearchWithFrom:to:), self, _from, _to);
+    }
+}
+
+- (void)cancel
+{
+    if ([_delegate respondsToSelector:@selector(trainsSelectorViewDidCancel:)]) {
+        [_delegate performSelector:@selector(trainsSelectorViewDidCancel:) withObject:self];
     }
 }
 

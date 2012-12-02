@@ -58,11 +58,6 @@
     [self setRefreshControl:refreshControl];
     
     [[self refreshControl] beginRefreshing];
-    
-    // Add a tap recognizer onto the table view
-    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideStationSelectionView:)];
-    [tapRecognizer setNumberOfTapsRequired:1];
-    [[self tableView] addGestureRecognizer:tapRecognizer];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -80,12 +75,13 @@
 {
     NSRailConnection *sharedInstance = [NSRailConnection sharedInstance];
     
-    CGRect headerTitleSubtitleFrame = CGRectMake(0, 0, 200, 44);
-    UIView *_headerTitleSubtitleView = [[UILabel alloc] initWithFrame:headerTitleSubtitleFrame];
-    _headerTitleSubtitleView.backgroundColor = [UIColor clearColor];
-    _headerTitleSubtitleView.autoresizesSubviews = YES;
+    CGRect headerTitleSubtitleFrame = CGRectMake(0, 0, 185, 44);
+    UIView *headerTitleSubtitleView = [[UILabel alloc] initWithFrame:headerTitleSubtitleFrame];
+    [headerTitleSubtitleView setBackgroundColor:[UIColor clearColor]];
+    [headerTitleSubtitleView setAutoresizesSubviews:YES];
     
-    CGRect titleFrame = CGRectMake(0, 4, 200, 24);
+    // Title
+    CGRect titleFrame = CGRectMake(0, 4, 185, 24);
     titleView = [[UILabel alloc] initWithFrame:titleFrame];
     titleView.backgroundColor = [UIColor clearColor];
     titleView.font = [UIFont boldSystemFontOfSize:20];
@@ -95,9 +91,10 @@
     titleView.shadowOffset = CGSizeMake(0, -1);
     titleView.text = NSLocalizedString(@"Trains", @"Trains");
     titleView.adjustsFontSizeToFitWidth = YES;
-    [_headerTitleSubtitleView addSubview:titleView];
+    [headerTitleSubtitleView addSubview:titleView];
     
-    CGRect subtitleFrame = CGRectMake(0, 22, 200, 44-24);
+    // Subtitle
+    CGRect subtitleFrame = CGRectMake(0, 22, 185, 44-24);
     subtitleView = [[UILabel alloc] initWithFrame:subtitleFrame];
     subtitleView.backgroundColor = [UIColor clearColor];
     subtitleView.font = [UIFont systemFontOfSize:13];
@@ -107,22 +104,19 @@
     subtitleView.shadowOffset = CGSizeMake(0, -1);
     subtitleView.text = [NSString stringWithFormat:@"%@ → %@", [sharedInstance from], [sharedInstance to]];
     subtitleView.adjustsFontSizeToFitWidth = YES;
-    [_headerTitleSubtitleView addSubview:subtitleView];
+    [headerTitleSubtitleView addSubview:subtitleView];
     
-    _headerTitleSubtitleView.autoresizingMask = (UIViewAutoresizingFlexibleLeftMargin |
-                                                 UIViewAutoresizingFlexibleRightMargin |
-                                                 UIViewAutoresizingFlexibleTopMargin |
-                                                 UIViewAutoresizingFlexibleBottomMargin);
+    [headerTitleSubtitleView setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleBottomMargin];
     
-    self.navigationItem.titleView = _headerTitleSubtitleView;
+    self.navigationItem.titleView = headerTitleSubtitleView;
     
     // Tap recognizer for navigation title
     UIGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(switchStations)];
-    
     [self.navigationItem.titleView setUserInteractionEnabled:YES];
     [self.navigationItem.titleView addGestureRecognizer:tapRecognizer];
     
-    routeButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Route", @"Route") style:UIBarButtonItemStyleDone target:self action:@selector(route:)];
+    // Route button
+    routeButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Route", @"Route") style:UIBarButtonItemStylePlain target:self action:@selector(route:)];
     [routeButton setEnabled:NO];
 }
 
@@ -139,22 +133,6 @@
     [selectionView submit];
 }
 
-- (void)hideStationSelectionView:(id)sender
-{
-    if (!selectionView || [selectionView isHidden]) {
-        return;
-    }
-    
-    [self.navigationItem setRightBarButtonItem:nil animated:YES];
-    
-    [UIView animateWithDuration:0.25f animations:^{
-        [[self tableView] setContentOffset:CGPointMake(0, 0)];
-    } completion:^(BOOL finished) {
-        [[self tableView] setScrollEnabled:YES];
-        [selectionView setHidden:YES];
-    }];
-}
-
 #pragma mark - Trains
 
 /**
@@ -162,10 +140,15 @@
  */
 - (void)switchStations
 {
+    if (selectionView && ![selectionView isHidden]) {
+        [selectionView cancel];
+        return;
+    }
+    
     NSRailConnection *sharedInstance = [NSRailConnection sharedInstance];
     
     if (!selectionView) {
-        selectionView = [[TrainsSelectorView alloc] initWithFrame:CGRectMake(0, -64.0f, self.view.bounds.size.width, 64.0f)];
+        selectionView = [[TrainsSelectorView alloc] initWithFrame:CGRectMake(0, -65.0f, self.view.bounds.size.width, self.view.bounds.size.height)];
         [selectionView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleBottomMargin];
         [selectionView setDelegate:self];
         [[self tableView] addSubview:selectionView];
@@ -186,7 +169,7 @@
     [selectionView setTo:[sharedInstance to]];
     
     [[self tableView] setScrollEnabled:NO];
-    [[self tableView] setContentOffset:CGPointMake(0, -64.0f) animated:YES];
+    [[self tableView] setContentOffset:CGPointMake(0, -65.0f) animated:YES];
 }
 
 - (void)switchStationsIfNeeded
@@ -216,6 +199,10 @@
  */
 - (void)fetchTrains:(id)sender
 {
+    if (selectionView && ![selectionView isHidden]) {
+        return;
+    }
+    
     NSMutableArray *allTrains = [NSMutableArray array];
     
     NSRailConnection *sharedInstance = [NSRailConnection sharedInstance];
@@ -348,6 +335,22 @@
         [selectionView setHidden:YES];
         [self showRefreshControl];
         [self fetchTrains:self];
+    }];
+}
+
+- (void)trainsSelectorViewDidCancel:(TrainsSelectorView *)trainsSelectorView
+{
+    if (!selectionView || [selectionView isHidden]) {
+        return;
+    }
+    
+    [self.navigationItem setRightBarButtonItem:nil animated:YES];
+    
+    [UIView animateWithDuration:0.25f animations:^{
+        [[self tableView] setContentOffset:CGPointMake(0, 0)];
+    } completion:^(BOOL finished) {
+        [[self tableView] setScrollEnabled:YES];
+        [selectionView setHidden:YES];
     }];
 }
 

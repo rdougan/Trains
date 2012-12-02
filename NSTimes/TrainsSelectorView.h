@@ -17,6 +17,7 @@ typedef enum {
 
 @protocol TrainsSelectorViewDelegate <NSObject>
 - (void)trainsSelectorView:(TrainsSelectorView *)trainsSelectorView didCompleteSearchWithFrom:(NSString *)from to:(NSString *)to;
+- (void)trainsSelectorViewDidCancel:(TrainsSelectorView *)trainsSelectorView;
 @end
 
 @interface TrainsSelectorView : UIView <UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate>
@@ -27,6 +28,7 @@ typedef enum {
 @property (nonatomic, assign) id <TrainsSelectorViewDelegate> delegate;
 
 - (void)submit;
+- (void)cancel;
 - (void)setStateChangeBlock:(void (^)(TrainsSelectorViewState state))block;
 
 @end
