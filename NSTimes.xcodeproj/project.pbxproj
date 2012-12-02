@@ -12,9 +12,22 @@
 		E102D88C1668D59000F1B09B /* TrainsTableViewCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = E102D88B1668D59000F1B09B /* TrainsTableViewCellView.m */; };
 		E109E2EE1668F80A00642514 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = E109E2ED1668F80A00642514 /* Icon.png */; };
 		E109E2F01668F83000642514 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E109E2EF1668F83000642514 /* Icon@2x.png */; };
+		E1148FEB16694EFD00728474 /* DDXMLElementAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = E1148FDE16694EFD00728474 /* DDXMLElementAdditions.m */; };
+		E1148FEC16694EFD00728474 /* NSString+DDXML.m in Sources */ = {isa = PBXBuildFile; fileRef = E1148FE116694EFD00728474 /* NSString+DDXML.m */; };
+		E1148FED16694EFD00728474 /* DDXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = E1148FE416694EFD00728474 /* DDXMLDocument.m */; };
+		E1148FEE16694EFD00728474 /* DDXMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = E1148FE616694EFD00728474 /* DDXMLElement.m */; };
+		E1148FEF16694EFD00728474 /* DDXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = E1148FE816694EFD00728474 /* DDXMLNode.m */; };
+		E1148FF316698B6A00728474 /* TrainsMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1148FF216698B6A00728474 /* TrainsMessageView.m */; };
+		E117896A166ADD3A00A472B6 /* selector_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = E1178968166ADD3A00A472B6 /* selector_bg.png */; };
+		E117896B166ADD3A00A472B6 /* selector_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E1178969166ADD3A00A472B6 /* selector_bg@2x.png */; };
+		E1A960BA166AB3AD006E9E83 /* TrainsSelectorView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A960B9166AB3AD006E9E83 /* TrainsSelectorView.m */; };
+		E1A960BE166AD48A006E9E83 /* TrainsSelectorTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A960BD166AD48A006E9E83 /* TrainsSelectorTextField.m */; };
 		E1BA46DB1668FA7000845855 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1BA46DA1668FA7000845855 /* Crashlytics.framework */; };
-		E1C618B71669362E00EAF58F /* TrainsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1C618B51669362E00EAF58F /* TrainsViewController.xib */; };
 		E1C618C21669388700EAF58F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1C618C41669388700EAF58F /* Localizable.strings */; };
+		E1DFB358166992630074D5E8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1DFB357166992630074D5E8 /* QuartzCore.framework */; };
+		E1F0ECEC166AE07800BED126 /* selector_textfield_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E1F0ECEB166AE07800BED126 /* selector_textfield_bg@2x.png */; };
+		E1F0ECF0166AF16900BED126 /* swap_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E1F0ECEF166AF16900BED126 /* swap_button@2x.png */; };
+		E1F0ECF2166AF1EB00BED126 /* swap_button_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E1F0ECF1166AF1EB00BED126 /* swap_button_selected@2x.png */; };
 		E1F1022F16680D6E00087248 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1F1022E16680D6E00087248 /* UIKit.framework */; };
 		E1F1023116680D6E00087248 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1F1023016680D6E00087248 /* Foundation.framework */; };
 		E1F1023316680D6E00087248 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1F1023216680D6E00087248 /* CoreGraphics.framework */; };
@@ -43,12 +56,34 @@
 		E102D88B1668D59000F1B09B /* TrainsTableViewCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainsTableViewCellView.m; sourceTree = "<group>"; };
 		E109E2ED1668F80A00642514 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = ../Icon.png; sourceTree = "<group>"; };
 		E109E2EF1668F83000642514 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "../Icon@2x.png"; sourceTree = "<group>"; };
+		E1148FDD16694EFD00728474 /* DDXMLElementAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLElementAdditions.h; sourceTree = "<group>"; };
+		E1148FDE16694EFD00728474 /* DDXMLElementAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLElementAdditions.m; sourceTree = "<group>"; };
+		E1148FE016694EFD00728474 /* NSString+DDXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+DDXML.h"; sourceTree = "<group>"; };
+		E1148FE116694EFD00728474 /* NSString+DDXML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+DDXML.m"; sourceTree = "<group>"; };
+		E1148FE216694EFD00728474 /* DDXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXML.h; sourceTree = "<group>"; };
+		E1148FE316694EFD00728474 /* DDXMLDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLDocument.h; sourceTree = "<group>"; };
+		E1148FE416694EFD00728474 /* DDXMLDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLDocument.m; sourceTree = "<group>"; };
+		E1148FE516694EFD00728474 /* DDXMLElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLElement.h; sourceTree = "<group>"; };
+		E1148FE616694EFD00728474 /* DDXMLElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLElement.m; sourceTree = "<group>"; };
+		E1148FE716694EFD00728474 /* DDXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLNode.h; sourceTree = "<group>"; };
+		E1148FE816694EFD00728474 /* DDXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLNode.m; sourceTree = "<group>"; };
+		E1148FEA16694EFD00728474 /* DDXMLPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLPrivate.h; sourceTree = "<group>"; };
+		E1148FF116698B6A00728474 /* TrainsMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrainsMessageView.h; sourceTree = "<group>"; };
+		E1148FF216698B6A00728474 /* TrainsMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainsMessageView.m; sourceTree = "<group>"; };
+		E1178968166ADD3A00A472B6 /* selector_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = selector_bg.png; sourceTree = "<group>"; };
+		E1178969166ADD3A00A472B6 /* selector_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "selector_bg@2x.png"; sourceTree = "<group>"; };
+		E1A960B8166AB3AD006E9E83 /* TrainsSelectorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrainsSelectorView.h; sourceTree = "<group>"; };
+		E1A960B9166AB3AD006E9E83 /* TrainsSelectorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainsSelectorView.m; sourceTree = "<group>"; };
+		E1A960BC166AD48A006E9E83 /* TrainsSelectorTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrainsSelectorTextField.h; sourceTree = "<group>"; };
+		E1A960BD166AD48A006E9E83 /* TrainsSelectorTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainsSelectorTextField.m; sourceTree = "<group>"; };
 		E1BA46DA1668FA7000845855 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
-		E1C618B61669362E00EAF58F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/TrainsViewController.xib; sourceTree = "<group>"; };
 		E1C618C31669388700EAF58F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		E1C618C51669389300EAF58F /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/TrainsViewController.xib; sourceTree = "<group>"; };
 		E1C618C61669389300EAF58F /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E1C618C71669389300EAF58F /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E1DFB357166992630074D5E8 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		E1F0ECEB166AE07800BED126 /* selector_textfield_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "selector_textfield_bg@2x.png"; sourceTree = "<group>"; };
+		E1F0ECEF166AF16900BED126 /* swap_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "swap_button@2x.png"; sourceTree = "<group>"; };
+		E1F0ECF1166AF1EB00BED126 /* swap_button_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "swap_button_selected@2x.png"; sourceTree = "<group>"; };
 		E1F1022A16680D6E00087248 /* Trains.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Trains.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1F1022E16680D6E00087248 /* UIKit.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E1F1023016680D6E00087248 /* Foundation.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -83,6 +118,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1DFB358166992630074D5E8 /* QuartzCore.framework in Frameworks */,
 				E1F102B1166812EA00087248 /* SystemConfiguration.framework in Frameworks */,
 				E1F102A716680F0D00087248 /* libxml2.2.dylib in Frameworks */,
 				E1F1022F16680D6E00087248 /* UIKit.framework in Frameworks */,
@@ -96,6 +132,50 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E1148FDB16694EFD00728474 /* KissXML */ = {
+			isa = PBXGroup;
+			children = (
+				E1148FDC16694EFD00728474 /* Additions */,
+				E1148FDF16694EFD00728474 /* Categories */,
+				E1148FE216694EFD00728474 /* DDXML.h */,
+				E1148FE316694EFD00728474 /* DDXMLDocument.h */,
+				E1148FE416694EFD00728474 /* DDXMLDocument.m */,
+				E1148FE516694EFD00728474 /* DDXMLElement.h */,
+				E1148FE616694EFD00728474 /* DDXMLElement.m */,
+				E1148FE716694EFD00728474 /* DDXMLNode.h */,
+				E1148FE816694EFD00728474 /* DDXMLNode.m */,
+				E1148FE916694EFD00728474 /* Private */,
+			);
+			name = KissXML;
+			path = KissXML/KissXML;
+			sourceTree = "<group>";
+		};
+		E1148FDC16694EFD00728474 /* Additions */ = {
+			isa = PBXGroup;
+			children = (
+				E1148FDD16694EFD00728474 /* DDXMLElementAdditions.h */,
+				E1148FDE16694EFD00728474 /* DDXMLElementAdditions.m */,
+			);
+			path = Additions;
+			sourceTree = "<group>";
+		};
+		E1148FDF16694EFD00728474 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				E1148FE016694EFD00728474 /* NSString+DDXML.h */,
+				E1148FE116694EFD00728474 /* NSString+DDXML.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		E1148FE916694EFD00728474 /* Private */ = {
+			isa = PBXGroup;
+			children = (
+				E1148FEA16694EFD00728474 /* DDXMLPrivate.h */,
+			);
+			path = Private;
+			sourceTree = "<group>";
+		};
 		E1C618B8166936D800EAF58F /* Trains */ = {
 			isa = PBXGroup;
 			children = (
@@ -113,6 +193,12 @@
 				E102D8881668D56300F1B09B /* TrainsTableViewCell.m */,
 				E102D88A1668D59000F1B09B /* TrainsTableViewCellView.h */,
 				E102D88B1668D59000F1B09B /* TrainsTableViewCellView.m */,
+				E1148FF116698B6A00728474 /* TrainsMessageView.h */,
+				E1148FF216698B6A00728474 /* TrainsMessageView.m */,
+				E1A960B8166AB3AD006E9E83 /* TrainsSelectorView.h */,
+				E1A960B9166AB3AD006E9E83 /* TrainsSelectorView.m */,
+				E1A960BC166AD48A006E9E83 /* TrainsSelectorTextField.h */,
+				E1A960BD166AD48A006E9E83 /* TrainsSelectorTextField.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -120,6 +206,11 @@
 		E1C618BF166937AA00EAF58F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E1178968166ADD3A00A472B6 /* selector_bg.png */,
+				E1178969166ADD3A00A472B6 /* selector_bg@2x.png */,
+				E1F0ECEB166AE07800BED126 /* selector_textfield_bg@2x.png */,
+				E1F0ECEF166AF16900BED126 /* swap_button@2x.png */,
+				E1F0ECF1166AF1EB00BED126 /* swap_button_selected@2x.png */,
 				E109E2EF1668F83000642514 /* Icon@2x.png */,
 				E109E2ED1668F80A00642514 /* Icon.png */,
 				E1F1024016680D6E00087248 /* Default.png */,
@@ -151,6 +242,7 @@
 		E1F1022D16680D6E00087248 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E1DFB357166992630074D5E8 /* QuartzCore.framework */,
 				E1BA46DA1668FA7000845855 /* Crashlytics.framework */,
 				E1F102A616680F0D00087248 /* libxml2.2.dylib */,
 				E1F102B0166812EA00087248 /* SystemConfiguration.framework */,
@@ -169,7 +261,6 @@
 				E1F1023E16680D6E00087248 /* AppDelegate.m */,
 				E1C618B8166936D800EAF58F /* Trains */,
 				E1F102B71668150700087248 /* NSRail */,
-				E1F1026216680E1900087248 /* Xibs */,
 				E1C618BF166937AA00EAF58F /* Resources */,
 				E1F1023516680D6E00087248 /* Supporting Files */,
 			);
@@ -188,17 +279,10 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		E1F1026216680E1900087248 /* Xibs */ = {
-			isa = PBXGroup;
-			children = (
-				E1C618B51669362E00EAF58F /* TrainsViewController.xib */,
-			);
-			name = Xibs;
-			sourceTree = "<group>";
-		};
 		E1F1026316680E9600087248 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				E1148FDB16694EFD00728474 /* KissXML */,
 				E1F1026416680E9600087248 /* hpple */,
 			);
 			path = Vendor;
@@ -288,8 +372,12 @@
 				E1F1024516680D6E00087248 /* Default-568h@2x.png in Resources */,
 				E109E2EE1668F80A00642514 /* Icon.png in Resources */,
 				E109E2F01668F83000642514 /* Icon@2x.png in Resources */,
-				E1C618B71669362E00EAF58F /* TrainsViewController.xib in Resources */,
 				E1C618C21669388700EAF58F /* Localizable.strings in Resources */,
+				E117896A166ADD3A00A472B6 /* selector_bg.png in Resources */,
+				E117896B166ADD3A00A472B6 /* selector_bg@2x.png in Resources */,
+				E1F0ECEC166AE07800BED126 /* selector_textfield_bg@2x.png in Resources */,
+				E1F0ECF0166AF16900BED126 /* swap_button@2x.png in Resources */,
+				E1F0ECF2166AF1EB00BED126 /* swap_button_selected@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,21 +428,20 @@
 				E1F102BB1668152C00087248 /* Train.m in Sources */,
 				E102D8891668D56300F1B09B /* TrainsTableViewCell.m in Sources */,
 				E102D88C1668D59000F1B09B /* TrainsTableViewCellView.m in Sources */,
+				E1148FEB16694EFD00728474 /* DDXMLElementAdditions.m in Sources */,
+				E1148FEC16694EFD00728474 /* NSString+DDXML.m in Sources */,
+				E1148FED16694EFD00728474 /* DDXMLDocument.m in Sources */,
+				E1148FEE16694EFD00728474 /* DDXMLElement.m in Sources */,
+				E1148FEF16694EFD00728474 /* DDXMLNode.m in Sources */,
+				E1148FF316698B6A00728474 /* TrainsMessageView.m in Sources */,
+				E1A960BA166AB3AD006E9E83 /* TrainsSelectorView.m in Sources */,
+				E1A960BE166AD48A006E9E83 /* TrainsSelectorTextField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		E1C618B51669362E00EAF58F /* TrainsViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E1C618B61669362E00EAF58F /* en */,
-				E1C618C51669389300EAF58F /* nl */,
-			);
-			name = TrainsViewController.xib;
-			sourceTree = "<group>";
-		};
 		E1C618C41669388700EAF58F /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -400,6 +487,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "";
 				SDKROOT = iphoneos;
 			};
@@ -422,6 +510,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -443,6 +532,16 @@
 					/usr/include/libxml2,
 				);
 				INFOPLIST_FILE = "NSTimes/NSTimes-Info.plist";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-framework",
+					CoreText,
+					"-framework",
+					MobileCoreServices,
+					"-framework",
+					SystemConfiguration,
+					"-lxml2",
+				);
 				PRODUCT_NAME = Trains;
 				WRAPPER_EXTENSION = app;
 			};
@@ -464,6 +563,16 @@
 					"$(SDKROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = "NSTimes/NSTimes-Info.plist";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-framework",
+					CoreText,
+					"-framework",
+					MobileCoreServices,
+					"-framework",
+					SystemConfiguration,
+					"-lxml2",
+				);
 				PRODUCT_NAME = Trains;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "329F0E9C-7E78-4EB6-9129-911FA0FC4D48";
 				WRAPPER_EXTENSION = app;
