@@ -41,20 +41,4 @@
     return self;
 }
 
-//- (BOOL)becomeFirstResponder {
-//    BOOL outcome = [super becomeFirstResponder];
-//    if (outcome) {
-//        [backgroundView setImage:[[UIImage imageNamed:@"selector_textfield_focused_bg"] stretchableImageWithLeftCapWidth:10.0f topCapHeight:10.0f]];
-//    }
-//    return outcome;
-//}
-//
-//- (BOOL)resignFirstResponder {
-//    BOOL outcome = [super resignFirstResponder];
-//    if (outcome) {
-//        [backgroundView setImage:[[UIImage imageNamed:@"selector_textfield_bg"] stretchableImageWithLeftCapWidth:10.0f topCapHeight:10.0f]];
-//    }
-//    return outcome;
-//}
-
 @end
