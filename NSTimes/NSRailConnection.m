@@ -16,15 +16,24 @@
 
 @implementation NSRailConnection
 
-@synthesize from = _from, to = _to;
+@synthesize from = _from,
+to = _to;
+
+@synthesize stations = _stations;
 
 static NSRailConnection *sharedInstance = nil;
 
 + (NSRailConnection *)sharedInstance {
     if (!sharedInstance) {
         sharedInstance = [[NSRailConnection alloc] init];
-        [sharedInstance setFrom:@"Haarlem"];
         [sharedInstance setTo:@"Amsterdam"];
+        [sharedInstance setFrom:@"Haarlem"];
+        
+        [sharedInstance setStations:@[
+            @"Amsterdam",
+            @"Haarlem",
+            @"Haarlem Spaarnwoude"
+        ]];
     }
     
     return sharedInstance;

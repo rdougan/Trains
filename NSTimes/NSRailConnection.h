@@ -13,6 +13,8 @@
 @property (nonatomic, assign) NSString *from;
 @property (nonatomic, assign) NSString *to;
 
+@property (nonatomic, retain) NSArray *stations;
+
 + (NSRailConnection *)sharedInstance;
 
 #pragma mark - Fetching
