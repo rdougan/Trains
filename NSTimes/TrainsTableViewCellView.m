@@ -15,6 +15,16 @@
 
 #define CellPadding 10.0f
 
+@interface TrainsTableViewCellView ()
+
+@property (nonatomic, retain) UILabel *minutesLabel;
+@property (nonatomic, retain) UILabel *departureLabel;
+@property (nonatomic, retain) UILabel *departureDelayLabel;
+@property (nonatomic, retain) UILabel *durationLabel;
+@property (nonatomic, retain) UILabel *platformLabel;
+
+@end
+
 @implementation TrainsTableViewCellView
 
 @synthesize cell = _cell;
@@ -22,6 +32,7 @@
 @synthesize minutesLabel = _minutesLabel,
 departureLabel = _departureLabel,
 departureDelayLabel = _departureDelayLabel,
+durationLabel = _durationLabel,
 platformLabel = _platformLabel;
 
 - (id)initWithFrame:(CGRect)frame cell:(UITableViewCell *)cell
@@ -36,14 +47,12 @@ platformLabel = _platformLabel;
         [_minutesLabel setFont:[UIFont boldSystemFontOfSize:40.0f]];
         [_minutesLabel setTextColor:[UIColor blackColor]];
         [_minutesLabel setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
-        
         [self addSubview:_minutesLabel];
         
         _departureDelayLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         [_departureDelayLabel setFont:[UIFont systemFontOfSize:15.0f]];
         [_departureDelayLabel setTextColor:[UIColor redColor]];
         [_departureDelayLabel setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin];
-        
         [self addSubview:_departureDelayLabel];
         
         _departureLabel = [[UILabel alloc] initWithFrame:CGRectZero];
@@ -51,14 +60,19 @@ platformLabel = _platformLabel;
         [_departureLabel setTextColor:[UIColor lightGrayColor]];
         [_departureLabel setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin];
         [_departureLabel setTextAlignment:NSTextAlignmentRight];
-        
         [self addSubview:_departureLabel];
+        
+        _durationLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        [_durationLabel setFont:[UIFont systemFontOfSize:13.0f]];
+        [_durationLabel setTextColor:[UIColor colorWithRed:0.482 green:0.569 blue:0.686 alpha:0.5f]];
+        [_durationLabel setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin];
+        [_durationLabel setTextAlignment:NSTextAlignmentRight];
+        [self addSubview:_durationLabel];
         
         _platformLabel = [[OHAttributedLabel alloc] initWithFrame:CGRectZero];
         [_platformLabel setFont:[UIFont systemFontOfSize:13.0f]];
         [_platformLabel setTextColor:[UIColor darkGrayColor]];
         [_platformLabel setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
-        
         [self addSubview:_platformLabel];
     }
     return self;
@@ -69,6 +83,7 @@ platformLabel = _platformLabel;
     [_minutesLabel sizeToFit];
     [_departureDelayLabel sizeToFit];
     [_departureLabel sizeToFit];
+    [_durationLabel sizeToFit];
     [_platformLabel sizeToFit];
     
     CGRect minutesLabelFrame = _minutesLabel.frame;
@@ -86,13 +101,17 @@ platformLabel = _platformLabel;
     departureLabelFrame.origin.y = 14.0f;
 
     CGRect platformLabelFrame = _platformLabel.frame;
-    platformLabelFrame.size.width = 100.0f;
     platformLabelFrame.origin.x = self.bounds.size.width - CellPadding - platformLabelFrame.size.width;
     platformLabelFrame.origin.y = departureLabelFrame.origin.y + departureLabelFrame.size.height - 1.0f;
+    
+    CGRect durationLabelFrame = _durationLabel.frame;
+    durationLabelFrame.origin.x = platformLabelFrame.origin.x - durationLabelFrame.size.width - 2.0f;
+    durationLabelFrame.origin.y = platformLabelFrame.origin.y + 0.5f;
     
     _minutesLabel.frame = minutesLabelFrame;
     _departureDelayLabel.frame = departureDelayLabelFrame;
     _departureLabel.frame = departureLabelFrame;
+    _durationLabel.frame = durationLabelFrame;
     _platformLabel.frame = platformLabelFrame;
 }
 
@@ -128,6 +147,9 @@ platformLabel = _platformLabel;
     [dateFormatter setDateFormat:@"HH:mm"];
     
     [_departureLabel setText:[dateFormatter stringFromDate:[train departure]]];
+    
+    // Duration
+    [_durationLabel setText:[NSString stringWithFormat:@"%@m", [train travelTime]]];
     
     // Platform
     NSMutableAttributedString *platformText = [NSMutableAttributedString attributedStringWithString:[NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"platform", @"Platform"), [train platform]]];

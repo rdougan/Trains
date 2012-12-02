@@ -129,7 +129,7 @@ static NSRailConnection *sharedInstance = nil;
         
         // Simple fields
         [train setPlatform:[self normalizeString:[[element firstChildWithClassName:@"platform"] text]]];
-        [train setTravelTime:[self normalizeString:[[element firstChildWithClassName:@"travel-time"] text]]];
+        [train setTravelTime:[[self normalizeString:[[element firstChildWithClassName:@"travel-time"] text]] stringByReplacingOccurrencesOfString:@"0:" withString:@""]];
         
         // Dates
         NSString *departureString = [NSString stringWithFormat:@"%@ %@", [self normalizeString:[[element firstChildWithClassName:@"departure-date"] text]], [self normalizeString:[[element firstChildWithClassName:@"departure"] text]]];
@@ -172,7 +172,7 @@ static NSRailConnection *sharedInstance = nil;
     
         // Simple fields
         [train setPlatform:[self normalizeString:[[[element nodesForXPath:@"aankomstspoor" error:nil] objectAtIndex:0] stringValue]]];
-        [train setTravelTime:[self normalizeString:[[[element nodesForXPath:@"reistijd" error:nil] objectAtIndex:0] stringValue]]];
+        [train setTravelTime:[[self normalizeString:[[[element nodesForXPath:@"reistijd" error:nil] objectAtIndex:0] stringValue]] stringByReplacingOccurrencesOfString:@"0:" withString:@""]];
         
         // Delays
         NSString *departureDeley = @"";
