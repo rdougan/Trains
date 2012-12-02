@@ -12,6 +12,7 @@
 
 #import "TrainsSelectorTextField.h"
 
+#define TrainsSelectorViewHeight 64.0f
 #define ItemPadding 5.0f
 #define FieldHeight 25.0f
 #define ButtonWidth 28.0f
@@ -57,7 +58,7 @@ to = _to;
     if (self) {
         // Mask
         CGRect frame = [[UIScreen mainScreen] bounds];
-        frame.origin.y = 65.0f;
+        frame.origin.y = TrainsSelectorViewHeight;
         
         _maskView = [[TrainsSelectorMaskView alloc] initWithFrame:frame];
         [_maskView setAutoresizingMask:UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth];
@@ -65,7 +66,7 @@ to = _to;
         [self addSubview:_maskView];
         
         // Background
-        _backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 65.0f)];
+        _backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, TrainsSelectorViewHeight)];
         [_backgroundView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleBottomMargin];
         [_backgroundView setBackgroundColor:[[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"selector_bg.png"]]];
         [self addSubview:_backgroundView];
@@ -91,7 +92,7 @@ to = _to;
         [self addSubview:_swapButton];
         
         // Table view
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 65.0f, self.frame.size.width, 200.0f) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, TrainsSelectorViewHeight, self.frame.size.width, 200.0f) style:UITableViewStylePlain];
         [_tableView setDelegate:self];
         [_tableView setDataSource:self];
         [_tableView setHidden:YES];
@@ -139,13 +140,17 @@ to = _to;
     // Find the propercase version of the station
     NSArray *stations = [[NSRailConnection sharedInstance] stations];
     
-    _from = [stations objectAtIndex:[stations indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
-        return ([[(NSString *)obj lowercaseString] isEqualToString:[[_fromField text] lowercaseString]]) ? YES : NO;
-    }]];
+    _from = [[stations objectAtIndex:[stations indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+        NSString *stationName = [(NSArray *)obj objectAtIndex:0];
+
+        return ([[stationName lowercaseString] isEqualToString:[[_fromField text] lowercaseString]]) ? YES : NO;
+    }]] objectAtIndex:0];
     
-    _to = [stations objectAtIndex:[stations indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
-        return ([[(NSString *)obj lowercaseString] isEqualToString:[[_toField text] lowercaseString]]) ? YES : NO;
-    }]];
+    _to = [[stations objectAtIndex:[stations indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+        NSString *stationName = [(NSArray *)obj objectAtIndex:0];
+        
+        return ([[stationName lowercaseString] isEqualToString:[[_toField text] lowercaseString]]) ? YES : NO;
+    }]] objectAtIndex:0];
     
     // Reset the filtered stations
     _filteredStations = [NSArray array];
@@ -238,20 +243,23 @@ to = _to;
     _filteredStations = [stations objectsAtIndexes:[stations indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
         BOOL found = NO;
         
+        NSString *stationName = [(NSArray *)obj objectAtIndex:0];
+        
         if (![station isEqualToString:@""]) {
-            NSRange range = [[(NSString *)obj lowercaseString] rangeOfString:[station lowercaseString]];
+            NSRange range = [[stationName lowercaseString] rangeOfString:[station lowercaseString]];
             found = (range.length > 0) ? YES : NO;
         } else {
             found = YES;
         }
         
-        // Do not show any stations currently typed
-        if ([[(NSString *)obj lowercaseString] isEqualToString:[[_fromField text] lowercaseString]] || [[(NSString *)obj lowercaseString] isEqualToString:[[_toField text] lowercaseString]]) {
-            found = NO;
-        }
-        
         return found;
     }]];
+    
+    _filteredStations = [_filteredStations sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        NSString *first = [(NSArray *)obj1 objectAtIndex:0];
+        NSString *second = [(NSArray *)obj2 objectAtIndex:0];
+        return [first compare:second];
+    }];
     
     [_tableView reloadData];
 }
@@ -262,7 +270,7 @@ to = _to;
     CGRect frame = [_tableView frame];
     CGRect screenFrame = [[UIScreen mainScreen] bounds];
     
-    frame.size.height = screenFrame.size.height;
+    frame.size.height = screenFrame.size.height - StatusBarHeight - ToolbarHeight - KeyboardHeight - TrainsSelectorViewHeight;
     
     [_tableView setFrame:frame];
     
@@ -319,7 +327,10 @@ to = _to;
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    [cell.textLabel setText:[_filteredStations objectAtIndex:[indexPath row]]];
+    NSArray *station = [_filteredStations objectAtIndex:[indexPath row]];
+    NSString *stationName = [station objectAtIndex:0];
+    
+    [cell.textLabel setText:stationName];
     
     return cell;
 }
@@ -328,10 +339,11 @@ to = _to;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *station = [_filteredStations objectAtIndex:[indexPath row]];
+    NSArray *station = [_filteredStations objectAtIndex:[indexPath row]];
+    NSString *stationName = [station objectAtIndex:0];
     
     if ([_fromField isFirstResponder]) {
-        [_fromField setText:station];
+        [_fromField setText:stationName];
         
         if ([[_toField text] isEqualToString:@""]) {
             [_toField becomeFirstResponder];
@@ -339,7 +351,7 @@ to = _to;
             [self submit];
         }
     } else if ([_toField isFirstResponder]) {
-        [_toField setText:station];
+        [_toField setText:stationName];
         
         if ([[_fromField text] isEqualToString:@""]) {
             [_fromField becomeFirstResponder];

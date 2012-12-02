@@ -75,33 +75,33 @@
 {
     NSRailConnection *sharedInstance = [NSRailConnection sharedInstance];
     
-    CGRect headerTitleSubtitleFrame = CGRectMake(0, 0, 185, 44);
+    CGRect headerTitleSubtitleFrame = CGRectMake(0, 0, 185.0f, 44.0f);
     UIView *headerTitleSubtitleView = [[UILabel alloc] initWithFrame:headerTitleSubtitleFrame];
     [headerTitleSubtitleView setBackgroundColor:[UIColor clearColor]];
     [headerTitleSubtitleView setAutoresizesSubviews:YES];
     
     // Title
-    CGRect titleFrame = CGRectMake(0, 4, 185, 24);
+    CGRect titleFrame = CGRectMake(0, 4.0f, 185.0f, 24.0f);
     titleView = [[UILabel alloc] initWithFrame:titleFrame];
     titleView.backgroundColor = [UIColor clearColor];
-    titleView.font = [UIFont boldSystemFontOfSize:20];
+    titleView.font = [UIFont boldSystemFontOfSize:20.0f];
     titleView.textAlignment = NSTextAlignmentCenter;
     titleView.textColor = [UIColor whiteColor];
-    titleView.shadowColor = [UIColor colorWithWhite:0 alpha:.4];
-    titleView.shadowOffset = CGSizeMake(0, -1);
+    titleView.shadowColor = [UIColor colorWithWhite:0 alpha:.4f];
+    titleView.shadowOffset = CGSizeMake(0, -1.0f);
     titleView.text = NSLocalizedString(@"Trains", @"Trains");
     titleView.adjustsFontSizeToFitWidth = YES;
     [headerTitleSubtitleView addSubview:titleView];
     
     // Subtitle
-    CGRect subtitleFrame = CGRectMake(0, 22, 185, 44-24);
+    CGRect subtitleFrame = CGRectMake(0, 22.0f, 185.0f, 20.0f);
     subtitleView = [[UILabel alloc] initWithFrame:subtitleFrame];
     subtitleView.backgroundColor = [UIColor clearColor];
-    subtitleView.font = [UIFont systemFontOfSize:13];
+    subtitleView.font = [UIFont systemFontOfSize:13.0f];
     subtitleView.textAlignment = NSTextAlignmentCenter;
-    subtitleView.textColor = [UIColor colorWithWhite:1 alpha:.8];
-    subtitleView.shadowColor = [UIColor colorWithWhite:0 alpha:.3];
-    subtitleView.shadowOffset = CGSizeMake(0, -1);
+    subtitleView.textColor = [UIColor colorWithWhite:1.0f alpha:.8f];
+    subtitleView.shadowColor = [UIColor colorWithWhite:0 alpha:.3f];
+    subtitleView.shadowOffset = CGSizeMake(0, -1.0f);
     subtitleView.text = [NSString stringWithFormat:@"%@ → %@", [sharedInstance from], [sharedInstance to]];
     subtitleView.adjustsFontSizeToFitWidth = YES;
     [headerTitleSubtitleView addSubview:subtitleView];
@@ -148,7 +148,7 @@
     NSRailConnection *sharedInstance = [NSRailConnection sharedInstance];
     
     if (!selectionView) {
-        selectionView = [[TrainsSelectorView alloc] initWithFrame:CGRectMake(0, -65.0f, self.view.bounds.size.width, self.view.bounds.size.height)];
+        selectionView = [[TrainsSelectorView alloc] initWithFrame:CGRectMake(0, -64.0f, self.view.bounds.size.width, self.view.bounds.size.height)];
         [selectionView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleBottomMargin];
         [selectionView setDelegate:self];
         [[self tableView] addSubview:selectionView];
@@ -169,7 +169,7 @@
     [selectionView setTo:[sharedInstance to]];
     
     [[self tableView] setScrollEnabled:NO];
-    [[self tableView] setContentOffset:CGPointMake(0, -65.0f) animated:YES];
+    [[self tableView] setContentOffset:CGPointMake(0, -64.0f) animated:YES];
 }
 
 - (void)switchStationsIfNeeded
@@ -233,13 +233,16 @@
  */
 - (void)setTrains:(NSArray *)trains
 {
-    [[self refreshControl] endRefreshing];
+    if (!selectionView || [selectionView isHidden]) {
+        [[self refreshControl] endRefreshing];
+    }
     
     [_objects removeAllObjects];
     [_objects addObjectsFromArray:trains];
     
     [[self tableView] beginUpdates];
     [[self tableView] reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [[self tableView] setContentOffset:CGPointMake(0, -64.0f)];
     [[self tableView] endUpdates];
     
     if ([trains count] == 0) {
