@@ -34,11 +34,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "NSTimes/TrainsViewController.m"
-         timestampString = "376109355.871472"
+         timestampString = "376185593.587891"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "257"
-         endingLineNumber = "257"
+         startingLineNumber = "268"
+         endingLineNumber = "268"
          landmarkName = "-showMessage:detail:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -47,11 +47,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "NSTimes/TrainsSelectorView.m"
-         timestampString = "376109309.487918"
+         timestampString = "376185886.517308"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "270"
-         endingLineNumber = "270"
+         startingLineNumber = "331"
+         endingLineNumber = "331"
          landmarkName = "-textFieldShouldReturn:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -60,11 +60,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "NSTimes/TrainsViewController.m"
-         timestampString = "376109355.871472"
+         timestampString = "376185593.587891"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "328"
-         endingLineNumber = "328"
+         startingLineNumber = "339"
+         endingLineNumber = "339"
          landmarkName = "-trainsSelectorView:didCompleteSearchWithFrom:to:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -73,11 +73,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "NSTimes/TrainsSelectorView.m"
-         timestampString = "376109309.487918"
+         timestampString = "376185886.517308"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "163"
-         endingLineNumber = "163"
+         startingLineNumber = "186"
+         endingLineNumber = "186"
          landmarkName = "-submit"
          landmarkType = "5">
       </FileBreakpoint>
@@ -86,12 +86,38 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "NSTimes/TrainsViewController.m"
-         timestampString = "376109355.871472"
+         timestampString = "376182688.729355"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "148"
-         endingLineNumber = "148"
+         startingLineNumber = "153"
+         endingLineNumber = "153"
          landmarkName = "-switchStations"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "NSTimes/TrainsSelectorView.m"
+         timestampString = "376185886.517308"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "423"
+         endingLineNumber = "423"
+         landmarkName = "-tableView:didSelectRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "NSTimes/TrainsSelectorView.m"
+         timestampString = "376185886.517308"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "163"
+         endingLineNumber = "163"
+         landmarkName = "-submit"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

@@ -20,8 +20,11 @@
 		E1148FF316698B6A00728474 /* TrainsMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1148FF216698B6A00728474 /* TrainsMessageView.m */; };
 		E117896A166ADD3A00A472B6 /* selector_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = E1178968166ADD3A00A472B6 /* selector_bg.png */; };
 		E117896B166ADD3A00A472B6 /* selector_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E1178969166ADD3A00A472B6 /* selector_bg@2x.png */; };
+		E16759AB166BBDD100A8E206 /* TrainsSelectorMaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = E16759AA166BBDD100A8E206 /* TrainsSelectorMaskView.m */; };
 		E1A960BA166AB3AD006E9E83 /* TrainsSelectorView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A960B9166AB3AD006E9E83 /* TrainsSelectorView.m */; };
 		E1A960BE166AD48A006E9E83 /* TrainsSelectorTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A960BD166AD48A006E9E83 /* TrainsSelectorTextField.m */; };
+		E1A9E509166C05E600CC2484 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1A9E508166C05E600CC2484 /* CoreLocation.framework */; };
+		E1A9E50D166C096000CC2484 /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A9E50C166C096000CC2484 /* LocationManager.m */; };
 		E1BA46DB1668FA7000845855 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1BA46DA1668FA7000845855 /* Crashlytics.framework */; };
 		E1C618C21669388700EAF58F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1C618C41669388700EAF58F /* Localizable.strings */; };
 		E1DFB358166992630074D5E8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1DFB357166992630074D5E8 /* QuartzCore.framework */; };
@@ -72,10 +75,15 @@
 		E1148FF216698B6A00728474 /* TrainsMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainsMessageView.m; sourceTree = "<group>"; };
 		E1178968166ADD3A00A472B6 /* selector_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = selector_bg.png; sourceTree = "<group>"; };
 		E1178969166ADD3A00A472B6 /* selector_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "selector_bg@2x.png"; sourceTree = "<group>"; };
+		E16759A9166BBDD100A8E206 /* TrainsSelectorMaskView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrainsSelectorMaskView.h; sourceTree = "<group>"; };
+		E16759AA166BBDD100A8E206 /* TrainsSelectorMaskView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainsSelectorMaskView.m; sourceTree = "<group>"; };
 		E1A960B8166AB3AD006E9E83 /* TrainsSelectorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrainsSelectorView.h; sourceTree = "<group>"; };
 		E1A960B9166AB3AD006E9E83 /* TrainsSelectorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainsSelectorView.m; sourceTree = "<group>"; };
 		E1A960BC166AD48A006E9E83 /* TrainsSelectorTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrainsSelectorTextField.h; sourceTree = "<group>"; };
 		E1A960BD166AD48A006E9E83 /* TrainsSelectorTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainsSelectorTextField.m; sourceTree = "<group>"; };
+		E1A9E508166C05E600CC2484 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		E1A9E50B166C096000CC2484 /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
+		E1A9E50C166C096000CC2484 /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
 		E1BA46DA1668FA7000845855 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		E1C618C31669388700EAF58F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E1C618C61669389300EAF58F /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -118,6 +126,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1A9E509166C05E600CC2484 /* CoreLocation.framework in Frameworks */,
 				E1DFB358166992630074D5E8 /* QuartzCore.framework in Frameworks */,
 				E1F102B1166812EA00087248 /* SystemConfiguration.framework in Frameworks */,
 				E1F102A716680F0D00087248 /* libxml2.2.dylib in Frameworks */,
@@ -176,6 +185,15 @@
 			path = Private;
 			sourceTree = "<group>";
 		};
+		E1A9E50E166C096500CC2484 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				E1A9E50B166C096000CC2484 /* LocationManager.h */,
+				E1A9E50C166C096000CC2484 /* LocationManager.m */,
+			);
+			name = Location;
+			sourceTree = "<group>";
+		};
 		E1C618B8166936D800EAF58F /* Trains */ = {
 			isa = PBXGroup;
 			children = (
@@ -197,6 +215,8 @@
 				E1148FF216698B6A00728474 /* TrainsMessageView.m */,
 				E1A960B8166AB3AD006E9E83 /* TrainsSelectorView.h */,
 				E1A960B9166AB3AD006E9E83 /* TrainsSelectorView.m */,
+				E16759A9166BBDD100A8E206 /* TrainsSelectorMaskView.h */,
+				E16759AA166BBDD100A8E206 /* TrainsSelectorMaskView.m */,
 				E1A960BC166AD48A006E9E83 /* TrainsSelectorTextField.h */,
 				E1A960BD166AD48A006E9E83 /* TrainsSelectorTextField.m */,
 			);
@@ -242,6 +262,7 @@
 		E1F1022D16680D6E00087248 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E1A9E508166C05E600CC2484 /* CoreLocation.framework */,
 				E1DFB357166992630074D5E8 /* QuartzCore.framework */,
 				E1BA46DA1668FA7000845855 /* Crashlytics.framework */,
 				E1F102A616680F0D00087248 /* libxml2.2.dylib */,
@@ -260,6 +281,7 @@
 				E1F1023D16680D6E00087248 /* AppDelegate.h */,
 				E1F1023E16680D6E00087248 /* AppDelegate.m */,
 				E1C618B8166936D800EAF58F /* Trains */,
+				E1A9E50E166C096500CC2484 /* Location */,
 				E1F102B71668150700087248 /* NSRail */,
 				E1C618BF166937AA00EAF58F /* Resources */,
 				E1F1023516680D6E00087248 /* Supporting Files */,
@@ -436,6 +458,8 @@
 				E1148FF316698B6A00728474 /* TrainsMessageView.m in Sources */,
 				E1A960BA166AB3AD006E9E83 /* TrainsSelectorView.m in Sources */,
 				E1A960BE166AD48A006E9E83 /* TrainsSelectorTextField.m in Sources */,
+				E16759AB166BBDD100A8E206 /* TrainsSelectorMaskView.m in Sources */,
+				E1A9E50D166C096000CC2484 /* LocationManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
