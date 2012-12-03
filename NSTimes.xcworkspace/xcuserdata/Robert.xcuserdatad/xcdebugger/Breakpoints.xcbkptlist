@@ -34,11 +34,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "NSTimes/TrainsViewController.m"
-         timestampString = "376185593.587891"
+         timestampString = "376221266.048703"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "268"
-         endingLineNumber = "268"
+         startingLineNumber = "267"
+         endingLineNumber = "267"
          landmarkName = "-showMessage:detail:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -46,25 +46,12 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "NSTimes/TrainsSelectorView.m"
-         timestampString = "376185886.517308"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "331"
-         endingLineNumber = "331"
-         landmarkName = "-textFieldShouldReturn:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "NSTimes/TrainsViewController.m"
-         timestampString = "376185593.587891"
+         timestampString = "376221266.048703"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "339"
-         endingLineNumber = "339"
+         startingLineNumber = "338"
+         endingLineNumber = "338"
          landmarkName = "-trainsSelectorView:didCompleteSearchWithFrom:to:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -73,11 +60,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "NSTimes/TrainsSelectorView.m"
-         timestampString = "376185886.517308"
+         timestampString = "376223848.068286"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "186"
-         endingLineNumber = "186"
+         startingLineNumber = "191"
+         endingLineNumber = "191"
          landmarkName = "-submit"
          landmarkType = "5">
       </FileBreakpoint>
@@ -86,11 +73,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "NSTimes/TrainsViewController.m"
-         timestampString = "376182688.729355"
+         timestampString = "376221125.66026"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "153"
-         endingLineNumber = "153"
+         startingLineNumber = "158"
+         endingLineNumber = "158"
          landmarkName = "-switchStations"
          landmarkType = "5">
       </FileBreakpoint>
@@ -99,11 +86,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "NSTimes/TrainsSelectorView.m"
-         timestampString = "376185886.517308"
+         timestampString = "376223848.068286"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "423"
-         endingLineNumber = "423"
+         startingLineNumber = "432"
+         endingLineNumber = "432"
          landmarkName = "-tableView:didSelectRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -112,11 +99,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "NSTimes/TrainsSelectorView.m"
-         timestampString = "376185886.517308"
+         timestampString = "376223848.068286"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "163"
-         endingLineNumber = "163"
+         startingLineNumber = "168"
+         endingLineNumber = "168"
          landmarkName = "-submit"
          landmarkType = "5">
       </FileBreakpoint>
