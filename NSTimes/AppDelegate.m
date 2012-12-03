@@ -8,8 +8,6 @@
 
 #import "AppDelegate.h"
 
-#import <Crashlytics/Crashlytics.h>
-
 #import "AFNetworkActivityIndicatorManager.h"
 #import "TrainsViewController.h"
 
@@ -37,6 +35,8 @@
     self.window.rootViewController = self.navigationController;
     [self.window makeKeyAndVisible];
     
+    [trainsViewController performSelector:@selector(showRefreshControlAndFetch) withObject:nil afterDelay:.1f];
+    
     return YES;
 }
 
@@ -45,12 +45,10 @@
     [self stopFetchTimer];
 }
 
-- (void)applicationDidBecomeActive:(UIApplication *)application
+- (void)applicationWillEnterForeground:(UIApplication *)application
 {
     [trainsViewController switchStationsIfNeeded];
-    [trainsViewController showRefreshControl];
-    
-    [self startFetchTimer];
+    [trainsViewController performSelector:@selector(showRefreshControlAndFetch) withObject:nil afterDelay:.5f];
 }
 
 #pragma mark - Train fetching
@@ -77,7 +75,7 @@
     
     [trainsViewController fetchTrains:self];
     
-    [self timerWithInterval:60.0f];
+    [self timerWithInterval:3.0f];
 }
 
 - (void)stopFetchTimer
