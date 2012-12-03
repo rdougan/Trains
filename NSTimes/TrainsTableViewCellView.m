@@ -92,20 +92,29 @@ platformLabel = _platformLabel;
     minutesLabelFrame.size.height = self.bounds.size.height - (CellPadding * 2);
     minutesLabelFrame.size.width = self.bounds.size.width - (CellPadding * 2);
     
+    float firstRowOffset = 14.0f;
+    if ([[_durationLabel text] isEqualToString:@""] && [[_platformLabel text] isEqualToString:@""]) {
+        firstRowOffset = 23.0f;
+    }
+    
     CGRect departureDelayLabelFrame = _departureDelayLabel.frame;
     departureDelayLabelFrame.origin.x = self.bounds.size.width - CellPadding - departureDelayLabelFrame.size.width;
-    departureDelayLabelFrame.origin.y = 14.0f;
+    departureDelayLabelFrame.origin.y = firstRowOffset;
     
     CGRect departureLabelFrame = _departureLabel.frame;
     departureLabelFrame.origin.x = self.bounds.size.width - 8.0f - departureDelayLabelFrame.size.width - departureLabelFrame.size.width;
-    departureLabelFrame.origin.y = 14.0f;
+    departureLabelFrame.origin.y = firstRowOffset;
 
     CGRect platformLabelFrame = _platformLabel.frame;
     platformLabelFrame.origin.x = self.bounds.size.width - CellPadding - platformLabelFrame.size.width;
     platformLabelFrame.origin.y = departureLabelFrame.origin.y + departureLabelFrame.size.height - 1.0f;
     
     CGRect durationLabelFrame = _durationLabel.frame;
-    durationLabelFrame.origin.x = platformLabelFrame.origin.x - durationLabelFrame.size.width - 2.0f;
+    if ([[_platformLabel text] isEqualToString:@""]) {
+        durationLabelFrame.origin.x = self.bounds.size.width - CellPadding - durationLabelFrame.size.width + 1.0f;
+    } else {
+        durationLabelFrame.origin.x = platformLabelFrame.origin.x - durationLabelFrame.size.width - 2.0f;
+    }
     durationLabelFrame.origin.y = platformLabelFrame.origin.y + 0.5f;
     
     _minutesLabel.frame = minutesLabelFrame;
@@ -149,13 +158,21 @@ platformLabel = _platformLabel;
     [_departureLabel setText:[dateFormatter stringFromDate:[train departure]]];
     
     // Duration
-    [_durationLabel setText:[NSString stringWithFormat:@"%@m", [train travelTime]]];
+    if ([train travelTime] && ![[train travelTime] isEqualToString:@""]) {
+        [_durationLabel setText:[NSString stringWithFormat:@"%@m", [train travelTime]]];
+    } else {
+        [_durationLabel setText:@""];
+    }
     
     // Platform
-    NSMutableAttributedString *platformText = [NSMutableAttributedString attributedStringWithString:[NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"platform", @"Platform"), [train platform]]];
-    [platformText setFont:[UIFont boldSystemFontOfSize:13.0f] range:[[platformText string] rangeOfString:[train platform]]];
-    [platformText setTextAlignment:kCTRightTextAlignment lineBreakMode:NSLineBreakByClipping];
-    [_platformLabel setAttributedText:platformText];
+    if ([train platform] && ![[train platform] isEqualToString:@""]) {
+        NSMutableAttributedString *platformText = [NSMutableAttributedString attributedStringWithString:[NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"platform", @"Platform"), [train platform]]];
+        [platformText setFont:[UIFont boldSystemFontOfSize:13.0f] range:[[platformText string] rangeOfString:[train platform]]];
+        [platformText setTextAlignment:kCTRightTextAlignment lineBreakMode:NSLineBreakByClipping];
+        [_platformLabel setAttributedText:platformText];
+    } else {
+        [_platformLabel setText:@""];
+    }
     
     [self layoutSubviews];
 }
