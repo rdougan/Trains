@@ -28,8 +28,23 @@ static NSRailConnection *sharedInstance = nil;
 + (NSRailConnection *)sharedInstance {
     if (!sharedInstance) {
         sharedInstance = [[NSRailConnection alloc] init];
-        [sharedInstance setTo:@"Amsterdam Centraal"];
-        [sharedInstance setFrom:@"Haarlem"];
+        
+        // Grab from userdefaults
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        NSString *defaultsTo = [userDefaults objectForKey:@"to"];
+        NSString *defaultsFrom = [userDefaults objectForKey:@"from"];
+        
+        if (defaultsTo) {
+            [sharedInstance setTo:defaultsTo];
+        } else {
+            [sharedInstance setTo:@"Amsterdam Centraal"];
+        }
+        
+        if (defaultsFrom) {
+            [sharedInstance setFrom:defaultsFrom];
+        } else {
+            [sharedInstance setFrom:@"Haarlem"];
+        }
         
         [sharedInstance setStations:@[
             @[ @"Zwolle", @"52.5167747", @"6.083021899999949" ],
@@ -336,8 +351,8 @@ static NSRailConnection *sharedInstance = nil;
             @[ @"Den Dolder", @"52.1390592", @"5.242827900000066" ],
             @[ @"Delfzijl West", @"53.331643", @"6.9069979999999305" ],
             @[ @"Delfzijl", @"53.331643", @"6.9069979999999305" ],
-            @[ @"Delft Zuid", @"51.99083330000001", @"4.3647223000000395" ],
-            @[ @"Delft", @"52.009507", @"4.360514999999964" ],
+            @[ @"Delft Zuid", @"51.9908333", @"4.3647223" ],
+            @[ @"Delft", @"52.0066681", @"4.356389" ],
             @[ @"Delden", @"52.25999789999999", @"6.709210900000016" ],
             @[ @"Deinum", @"53.1918429", @"5.724977800000033" ],
             @[ @"De Vink", @"52.1472206", @"4.456388999999945" ],
@@ -423,6 +438,24 @@ static NSRailConnection *sharedInstance = nil;
     }
     
     return sharedInstance;
+}
+
+#pragma mark - Setters
+
+- (void)setFrom:(NSString *)from
+{
+    _from = from;
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:_from forKey:@"from"];
+}
+
+- (void)setTo:(NSString *)to
+{
+    _to = to;
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:_to forKey:@"to"];
 }
 
 #pragma mark - NSURLRequests
@@ -541,6 +574,12 @@ static NSRailConnection *sharedInstance = nil;
             [train setArrivalDelay:[self normalizeString:[[arrivalDelay objectAtIndex:0] text]]];
         }
         
+        // Error Logging
+        if (![train departure]) {
+            CLS_LOG(@"NSRailConnection: train has no departure.\n\n%@", element);
+            continue;
+        }
+        
         [trains addObject:train];
     }
     
@@ -565,16 +604,14 @@ static NSRailConnection *sharedInstance = nil;
         NSString *departureTimeString = [self normalizeString:[[[element nodesForXPath:@"vertrek" error:nil] objectAtIndex:0] stringValue]];
         TFHpple *departureElements = [[TFHpple alloc] initWithHTMLData:[departureTimeString dataUsingEncoding:NSUTF8StringEncoding]];
         
-        if ([[train platform] isEqualToString:@"5a"]) {
-            NSArray *departureArray = [departureElements searchWithXPathQuery:@"//text()"];
-            
-            if ([departureArray count] > 0) {
-                departureTimeString = [self normalizeString:[[departureArray objectAtIndex:0] content]];
-            }
-            
-            if ([departureArray count] > 1) {
-                departureDeley = [self normalizeString:[[departureArray objectAtIndex:1] content]];
-            }
+        NSArray *departureArray = [departureElements searchWithXPathQuery:@"//text()"];
+        
+        if ([departureArray count] > 0) {
+            departureTimeString = [self normalizeString:[[departureArray objectAtIndex:0] content]];
+        }
+        
+        if ([departureArray count] > 1) {
+            departureDeley = [self normalizeString:[[departureArray objectAtIndex:1] content]];
         }
         
         if (departureDeley && ![departureDeley isEqualToString:@""]) {
@@ -588,8 +625,14 @@ static NSRailConnection *sharedInstance = nil;
         [train setDeparture:departure];
         [train setArrival:[self dateForString:arrivalString]];
         
+        // Error Logging
+        if (![train departure]) {
+            CLS_LOG(@"NSRailConnection: train has no departure.\n\n%@", element);
+            continue;
+        }
+        
         NSInteger diff = ([departure timeIntervalSinceReferenceDate] - [NSDate timeIntervalSinceReferenceDate]) / 60;
-        if (diff > 60) {
+        if (diff > 59) {
             continue;
         }
         
