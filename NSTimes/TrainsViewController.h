@@ -13,7 +13,7 @@
 
 @interface TrainsViewController : UITableViewController <TrainsSelectorViewDelegate, LocationManagerDelegate>
 
-- (void)showRefreshControl;
+- (void)showRefreshControlAndFetch;
 
 #pragma mark - Trains
 - (void)switchStationsIfNeeded;

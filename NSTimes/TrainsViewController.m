@@ -22,8 +22,6 @@
     
     TrainsMessageView *messageView;
     TrainsSelectorView *selectionView;
-    
-    UIBarButtonItem *routeButton;
 }
 @end
 
@@ -119,16 +117,23 @@
     UIGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(switchStations)];
     [self.navigationItem.titleView setUserInteractionEnabled:YES];
     [self.navigationItem.titleView addGestureRecognizer:tapRecognizer];
-    
-    // Route button
-    routeButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Route", @"Route") style:UIBarButtonItemStylePlain target:self action:@selector(route:)];
-    [routeButton setEnabled:NO];
 }
 
-- (void)showRefreshControl
+- (void)showRefreshControlAndFetch
 {
-    [[self tableView] setContentOffset:CGPointMake(0.0f, -44.0f) animated:YES];
     [[self refreshControl] beginRefreshing];
+    
+    if ([[self tableView] contentOffset].y != -44.0f) {
+        [[self tableView] setContentOffset:CGPointMake(0, 0)];
+        
+        [UIView animateWithDuration:.3f animations:^{
+            [[self tableView] setContentOffset:CGPointMake(0, -44.0)];
+        } completion:^(BOOL finished) {
+            [self fetchTrains:self];
+        }];
+    } else {
+        [self fetchTrains:self];
+    }
 }
 
 #pragma mark - Station Selector
@@ -157,20 +162,10 @@
         [selectionView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleBottomMargin];
         [selectionView setDelegate:self];
         [[self tableView] addSubview:selectionView];
-        
-        //    [selectionView setStateChangeBlock:^(TrainsSelectorViewState state) {
-        //        if (state == TrainsSelectorViewStateValid) {
-        //            [routeButton setEnabled:YES];
-        //        } else {
-        //            [routeButton setEnabled:NO];
-        //        }
-        //    }];
     }
     
     LocationManager *locationManager = [LocationManager sharedInstance];
     [locationManager updateLocation];
-    
-//    [self.navigationItem setRightBarButtonItem:routeButton animated:YES];
     
     [selectionView setHidden:NO];
     [selectionView setFrom:[sharedInstance from]];
@@ -249,8 +244,12 @@
     [_objects addObjectsFromArray:trains];
     
     [[self tableView] beginUpdates];
+    // This causes the view to jump back to 0/-refreshControlHeight when selectionView is not hidden
     [[self tableView] reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
-    [[self tableView] setContentOffset:CGPointMake(0, -64.0f)];
+    
+    if (selectionView && ![selectionView isHidden]) {
+        [[self tableView] setContentOffset:CGPointMake(0, -64.0f)];
+    }
     [[self tableView] endUpdates];
     
     if ([trains count] == 0) {
@@ -344,7 +343,6 @@
         [[self tableView] setContentOffset:CGPointMake(0, 0)];
     } completion:^(BOOL finished) {
         [selectionView setHidden:YES];
-        [self showRefreshControl];
         [self fetchTrains:self];
     }];
 }
