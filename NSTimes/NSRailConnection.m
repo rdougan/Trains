@@ -6,6 +6,8 @@
 //  Copyright (c) 2012 Robert Dougan. All rights reserved.
 //
 
+#import <CoreLocation/CoreLocation.h>
+
 #import "NSRailConnection.h"
 
 #import "Train.h"
@@ -159,7 +161,7 @@ static NSRailConnection *sharedInstance = nil;
             @[ @"Purmerend Weidevenne", @"52.49666620000001", @"4.927730600000018" ],
             @[ @"Purmerend Overwhere", @"52.514788", @"4.964871899999935" ],
             @[ @"Purmerend", @"52.5143815", @"4.964061099999981" ],
-            @[ @"Overveen", @"52.39216949999999", @"4.610959900000012" ],
+            @[ @"Overveen", @"52.3911095", @"4.606111" ],
             @[ @"Oudenbosch", @"51.5832716", @"4.5275943000000325" ],
             @[ @"Oss West", @"51.7580566", @"5.50555559999998" ],
             @[ @"Oss", @"51.764377", @"5.514620000000036" ],
@@ -259,7 +261,7 @@ static NSRailConnection *sharedInstance = nil;
             @[ @"Heerhugowaard", @"52.665051", @"4.830087999999932" ],
             @[ @"Heerenveen IJsstadion", @"52.9402737", @"5.942320300000006" ],
             @[ @"Heerenveen", @"52.9605613", @"5.920521699999995" ],
-            @[ @"Heemstede-Aerdenhout", @"52.36458890000001", @"4.596510899999998" ],
+            @[ @"Heemstede-Aerdenhout", @"52.3591652", @"4.6066666" ],
             @[ @"Heemskerk", @"52.512383", @"4.674996999999962" ],
             @[ @"Harlingen Haven", @"53.1805087", @"5.414073400000007" ],
             @[ @"Harlingen", @"26.1906306", @"-97.69610260000002" ],
@@ -268,8 +270,8 @@ static NSRailConnection *sharedInstance = nil;
             @[ @"Hardinxveld Blauwe Zoom", @"51.82944", @"4.815560000000005" ],
             @[ @"Harderwijk", @"52.3422025", @"5.636742300000037" ],
             @[ @"Hardenberg", @"52.5754084", @"6.616694700000039" ],
-            @[ @"Haarlem Spaarnwoude", @"52.383626", @"4.635955999999965" ],
-            @[ @"Haarlem", @"52.383626", @"4.635955999999965" ],
+            @[ @"Haarlem Spaarnwoude", @"52.382636", @"4.6721528" ],
+            @[ @"Haarlem", @"52.3880336", @"4.6385848" ],
             @[ @"Grou-Jirnsum", @"53.0888901", @"5.822500200000036" ],
             @[ @"Groningen Noord", @"53.23014689999999", @"6.556317199999967" ],
             @[ @"Groningen Europapark", @"53.2060326", @"6.582827599999973" ],
@@ -360,7 +362,7 @@ static NSRailConnection *sharedInstance = nil;
             @[ @"Boskoop", @"52.0742845", @"4.6584761999999955" ],
             @[ @"Borne", @"52.3002366", @"6.753725799999984" ],
             @[ @"Bodegraven", @"52.085793", @"4.74975500000005" ],
-            @[ @"Bloemendaal", @"52.4049474", @"4.620185200000037" ],
+            @[ @"Bloemendaal", @"52.4043117", @"4.6273518" ],
             @[ @"Blerick", @"51.3690094", @"6.148376999999982" ],
             @[ @"Bilthoven", @"52.1365344", @"5.210380600000008" ],
             @[ @"Beverwijk", @"52.4853691", @"4.6688894999999775" ],
@@ -388,13 +390,13 @@ static NSRailConnection *sharedInstance = nil;
             @[ @"Apeldoorn", @"52.21115700000001", @"5.96992309999996" ],
             @[ @"Anna Paulowna", @"52.8616158", @"4.823809100000062" ],
             @[ @"Amsterdam Zuid", @"52.3463889", @"4.858611099999962" ],
-            @[ @"Amsterdam Sloterdijk", @"52.3867847", @"4.846801899999946" ],
+            @[ @"Amsterdam Sloterdijk", @"52.3889445", @"4.8375603" ],
             @[ @"Amsterdam Science Park", @"52.3544521", @"4.9541977999999744" ],
             @[ @"Amsterdam RAI", @"52.3372231", @"4.890277900000001" ],
             @[ @"Amsterdam Muiderpoort", @"52.3636372", @"4.919502100000045" ],
             @[ @"Amsterdam Lelylaan", @"52.3577766", @"4.833888999999999" ],
             @[ @"Amsterdam Holendrecht", @"52.2995922", @"4.96557949999999" ],
-            @[ @"Amsterdam Centraal", @"52.37918999999999", @"4.89943100000005" ],
+            @[ @"Amsterdam Centraal", @"52.3788872", @"4.9002776" ],
             @[ @"Amsterdam Bijlmer ArenA", @"52.3122215", @"4.946944199999962" ],
             @[ @"Amsterdam Arena", @"20.5404381", @"-100.39461900000003" ],
             @[ @"Amsterdam Amstel", @"52.2870776", @"4.82644920000007" ],
@@ -595,6 +597,28 @@ static NSRailConnection *sharedInstance = nil;
     }
     
     return trains;
+}
+
+#pragma mark - Stations
+
+- (void)setStations:(NSArray *)stations
+{
+    // update all locations to CLLocations
+    NSMutableArray *newStations = [NSMutableArray array];
+    
+    [stations enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSArray *station = (NSArray *)obj;
+        
+        // get the location of the station
+        CLLocation *stationLocation = [[CLLocation alloc] initWithLatitude:[[station objectAtIndex:1] doubleValue] longitude:[[station objectAtIndex:2] doubleValue]];
+        
+        [newStations addObject:@[
+            [station objectAtIndex:0],
+            stationLocation
+        ]];
+    }];
+    
+    _stations = newStations;
 }
 
 #pragma mark - Helpers

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 
 #import "TrainsSelectorMaskView.h"
 
@@ -26,6 +27,8 @@ typedef enum {
 
 @property (nonatomic, retain) NSString *from;
 @property (nonatomic, retain) NSString *to;
+
+@property (nonatomic, retain) CLLocation *currentLocation;
 
 @property (nonatomic, assign) id <TrainsSelectorViewDelegate> delegate;
 

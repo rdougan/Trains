@@ -19,6 +19,7 @@
 #define StatusBarHeight 20.0f
 #define ToolbarHeight 44.0f
 #define KeyboardHeight 216.0f
+#define NearbyDistance 1500.0f
 
 typedef void (^TrainsSelectorStateBlock)(TrainsSelectorViewState state);
 
@@ -37,7 +38,10 @@ typedef void (^TrainsSelectorStateBlock)(TrainsSelectorViewState state);
 
 @end
 
-@implementation TrainsSelectorView
+@implementation TrainsSelectorView {
+    NSString *currentSearch;
+    int nearbyStations;
+}
 
 @synthesize fromField = _fromField,
 toField = _toField,
@@ -48,7 +52,8 @@ filteredStations = _filteredStations,
 maskView = _maskView;
 
 @synthesize from = _from,
-to = _to;
+to = _to,
+currentLocation = _currentLocation;
 
 @synthesize delegate = _delegate;
 
@@ -99,9 +104,12 @@ to = _to;
         [self addSubview:_tableView];
         
         _filteredStations = [NSArray array];
+        nearbyStations = 0;
     }
     return self;
 }
+
+#pragma mark - Setters
 
 - (void)setHidden:(BOOL)hidden
 {
@@ -122,21 +130,31 @@ to = _to;
     [_toField setText:to];
 }
 
+- (void)setCurrentLocation:(CLLocation *)currentLocation
+{
+    _currentLocation = currentLocation;
+    
+    if (currentSearch) {
+        [self searchForStation:currentSearch];
+    }
+}
+
+#pragma mark - Submission
+
 - (void)swapStations
 {
     NSString *from = [_fromField text];
     
     [_fromField setText:[_toField text]];
     [_toField setText:from];
-}
-
-- (void)maskTap:(UITapGestureRecognizer *)tapGesture
-{
-    [self cancel];
+    
+    [self submit];
 }
 
 - (void)submit
 {
+    currentSearch = nil;
+    
     // Find the propercase version of the station
     NSArray *stations = [[NSRailConnection sharedInstance] stations];
     
@@ -172,6 +190,8 @@ to = _to;
 
 - (void)cancel
 {
+    currentSearch = nil;
+    
     if (![_tableView isHidden]) {
         [_fromField resignFirstResponder];
         [_toField resignFirstResponder];
@@ -226,6 +246,9 @@ to = _to;
 
 - (void)searchForStation:(NSString *)station
 {
+    currentSearch = station;
+    nearbyStations = 0;
+    
     NSArray *stations = [[NSRailConnection sharedInstance] stations];
     
     if ([_tableView isHidden]) {
@@ -240,10 +263,13 @@ to = _to;
         }];
     }
     
-    _filteredStations = [stations objectsAtIndexes:[stations indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+    NSMutableArray *newStations = [NSMutableArray array];
+    
+    [stations enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         BOOL found = NO;
         
         NSString *stationName = [(NSArray *)obj objectAtIndex:0];
+        CLLocation *stationLocation = [(NSArray *)obj objectAtIndex:1];
         
         if (![station isEqualToString:@""]) {
             NSRange range = [[stationName lowercaseString] rangeOfString:[station lowercaseString]];
@@ -252,12 +278,20 @@ to = _to;
             found = YES;
         }
         
-        return found;
-    }]];
+        if (found) {
+            CLLocationDistance distance = [stationLocation distanceFromLocation:_currentLocation];
+            
+            if (distance < NearbyDistance) {
+                nearbyStations = nearbyStations + 1;
+            }
+            
+            [newStations addObject:@[stationName, stationLocation, [NSNumber numberWithDouble:distance]]];
+        }
+    }];
     
-    _filteredStations = [_filteredStations sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-        NSString *first = [(NSArray *)obj1 objectAtIndex:0];
-        NSString *second = [(NSArray *)obj2 objectAtIndex:0];
+    _filteredStations = [newStations sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        NSString *first = [(NSArray *)obj1 objectAtIndex:2];
+        NSString *second = [(NSArray *)obj2 objectAtIndex:2];
         return [first compare:second];
     }];
     
@@ -313,8 +347,34 @@ to = _to;
 
 #pragma mark - UITableViewDataSource
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    if (nearbyStations > 0 && section == 0) {
+        return NSLocalizedString(@"Nearby Stations", @"Nearby Stations");
+    } else if (nearbyStations > 0) {
+        return NSLocalizedString(@"More Stations", @"Other Stations");
+    }
+    
+    return nil;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    if (nearbyStations > 0 && [_filteredStations count] > nearbyStations) {
+        return 2;
+    } else {
+        return 1;
+    }
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (nearbyStations > 0 && section == 0) {
+        return nearbyStations;
+    } else if (nearbyStations > 0) {
+        return [_filteredStations count] - nearbyStations;
+    }
+    
     return [_filteredStations count];
 }
 
@@ -326,8 +386,18 @@ to = _to;
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
+
+    int index = 0;
     
-    NSArray *station = [_filteredStations objectAtIndex:[indexPath row]];
+    if (nearbyStations > 0 && [indexPath section] == 0) {
+        index = [indexPath row];
+    } else if (nearbyStations > 0) {
+        index = [indexPath row] + nearbyStations;
+    } else {
+        index = [indexPath row];
+    }
+    
+    NSArray *station = [_filteredStations objectAtIndex:index];
     NSString *stationName = [station objectAtIndex:0];
     
     [cell.textLabel setText:stationName];
@@ -339,7 +409,17 @@ to = _to;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSArray *station = [_filteredStations objectAtIndex:[indexPath row]];
+    int index = 0;
+    
+    if (nearbyStations > 0 && [indexPath section] == 0) {
+        index = [indexPath row];
+    } else if (nearbyStations > 0) {
+        index = [indexPath row] + nearbyStations;
+    } else {
+        index = [indexPath row];
+    }
+    
+    NSArray *station = [_filteredStations objectAtIndex:index];
     NSString *stationName = [station objectAtIndex:0];
     
     if ([_fromField isFirstResponder]) {

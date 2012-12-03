@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 
 #import "TrainsSelectorView.h"
+#import "LocationManager.h"
 
-@interface TrainsViewController : UITableViewController <TrainsSelectorViewDelegate>
+@interface TrainsViewController : UITableViewController <TrainsSelectorViewDelegate, LocationManagerDelegate>
 
 - (void)showRefreshControl;
 

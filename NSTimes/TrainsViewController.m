@@ -43,6 +43,11 @@
 {
     [super viewDidLoad];
     
+    // Location Manager
+    LocationManager *locationManager = [LocationManager sharedInstance];
+    [locationManager setDelegate:self];
+    [locationManager updateLocation];
+    
     [[self tableView] setRowHeight:64.f];
     [self.view setAutoresizingMask:UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth];
     
@@ -75,13 +80,13 @@
 {
     NSRailConnection *sharedInstance = [NSRailConnection sharedInstance];
     
-    CGRect headerTitleSubtitleFrame = CGRectMake(0, 0, 185.0f, 44.0f);
+    CGRect headerTitleSubtitleFrame = CGRectMake(0, 0, self.view.bounds.size.width, 44.0f);
     UIView *headerTitleSubtitleView = [[UILabel alloc] initWithFrame:headerTitleSubtitleFrame];
     [headerTitleSubtitleView setBackgroundColor:[UIColor clearColor]];
     [headerTitleSubtitleView setAutoresizesSubviews:YES];
     
     // Title
-    CGRect titleFrame = CGRectMake(0, 4.0f, 185.0f, 24.0f);
+    CGRect titleFrame = CGRectMake(0, 4.0f, headerTitleSubtitleFrame.size.width, 24.0f);
     titleView = [[UILabel alloc] initWithFrame:titleFrame];
     titleView.backgroundColor = [UIColor clearColor];
     titleView.font = [UIFont boldSystemFontOfSize:20.0f];
@@ -94,7 +99,7 @@
     [headerTitleSubtitleView addSubview:titleView];
     
     // Subtitle
-    CGRect subtitleFrame = CGRectMake(0, 22.0f, 185.0f, 20.0f);
+    CGRect subtitleFrame = CGRectMake(0, 22.0f, headerTitleSubtitleFrame.size.width, 20.0f);
     subtitleView = [[UILabel alloc] initWithFrame:subtitleFrame];
     subtitleView.backgroundColor = [UIColor clearColor];
     subtitleView.font = [UIFont systemFontOfSize:13.0f];
@@ -152,17 +157,20 @@
         [selectionView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleBottomMargin];
         [selectionView setDelegate:self];
         [[self tableView] addSubview:selectionView];
+        
+        //    [selectionView setStateChangeBlock:^(TrainsSelectorViewState state) {
+        //        if (state == TrainsSelectorViewStateValid) {
+        //            [routeButton setEnabled:YES];
+        //        } else {
+        //            [routeButton setEnabled:NO];
+        //        }
+        //    }];
     }
     
-    [selectionView setStateChangeBlock:^(TrainsSelectorViewState state) {
-        if (state == TrainsSelectorViewStateValid) {
-            [routeButton setEnabled:YES];
-        } else {
-            [routeButton setEnabled:NO];
-        }
-    }];
+    LocationManager *locationManager = [LocationManager sharedInstance];
+    [locationManager updateLocation];
     
-    [self.navigationItem setRightBarButtonItem:routeButton animated:YES];
+//    [self.navigationItem setRightBarButtonItem:routeButton animated:YES];
     
     [selectionView setHidden:NO];
     [selectionView setFrom:[sharedInstance from]];
@@ -355,6 +363,15 @@
         [[self tableView] setScrollEnabled:YES];
         [selectionView setHidden:YES];
     }];
+}
+
+#pragma mark - LocationManagerDelegate
+
+- (void)locationManager:(LocationManager *)locationManager didUpdateToLocation:(CLLocation *)location
+{
+    if (selectionView) {
+        [selectionView setCurrentLocation:location];
+    }
 }
 
 @end
