@@ -80,11 +80,15 @@ currentLocation = _currentLocation;
         _fromField = [[TrainsSelectorTextField alloc] initWithFrame:CGRectMake(ItemPadding + ButtonWidth + ItemPadding, ItemPadding, self.frame.size.width - (ItemPadding * 3) - ButtonWidth, FieldHeight) withLabel:NSLocalizedString(@"From", @"From")];
         [_fromField setDelegate:self];
         [_fromField addTarget:self action:@selector(fromFieldChanged:) forControlEvents:UIControlEventEditingChanged];
+        [_fromField setReturnKeyType:UIReturnKeySearch];
+        [_fromField setEnablesReturnKeyAutomatically:YES];
         [self addSubview:_fromField];
         
         _toField = [[TrainsSelectorTextField alloc] initWithFrame:CGRectMake(ItemPadding + ButtonWidth + ItemPadding, ItemPadding + FieldHeight + ItemPadding, _fromField.frame.size.width, FieldHeight) withLabel:NSLocalizedString(@"To", @"To")];
         [_toField setDelegate:self];
         [_toField addTarget:self action:@selector(toFieldChanged:) forControlEvents:UIControlEventEditingChanged];
+        [_toField setReturnKeyType:UIReturnKeySearch];
+        [_toField setEnablesReturnKeyAutomatically:YES];
         [self addSubview:_toField];
         
         // Buttons
@@ -148,7 +152,9 @@ currentLocation = _currentLocation;
     [_fromField setText:[_toField text]];
     [_toField setText:from];
     
-    [self submit];
+    if (![[_fromField text] isEqualToString:@""] && ![[_toField text] isEqualToString:@""]) {
+        [self submit];
+    }
 }
 
 - (void)submit
@@ -329,20 +335,24 @@ currentLocation = _currentLocation;
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     if (_fromField == textField) {
-        if ([[_toField text] isEqualToString:@""]) {
+        if ([[_fromField text] isEqualToString:@""]) {
+            return NO;
+        } else if ([[_toField text] isEqualToString:@""]) {
             [_toField becomeFirstResponder];
         } else {
             [self submit];
         }
     } else if (_toField == textField) {
-        if ([[_fromField text] isEqualToString:@""]) {
+        if ([[_toField text] isEqualToString:@""]) {
+            return NO;
+        } else if ([[_fromField text] isEqualToString:@""]) {
             [_fromField becomeFirstResponder];
         } else {
             [self submit];
         }
     }
     
-    return YES;
+    return NO;
 }
 
 #pragma mark - UITableViewDataSource
