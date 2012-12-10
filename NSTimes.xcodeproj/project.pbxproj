@@ -86,6 +86,7 @@
 		E1A9E50C166C096000CC2484 /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
 		E1BE09EA167634450021CAC8 /* NSNLDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNLDataSource.h; sourceTree = "<group>"; };
 		E1BE09EB167634450021CAC8 /* NSNLDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSNLDataSource.m; sourceTree = "<group>"; };
+		E1BE09F516763F5B0021CAC8 /* NSRailConnectionDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSRailConnectionDataSource.h; sourceTree = "<group>"; };
 		E1C618C31669388700EAF58F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E1C618C61669389300EAF58F /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E1C618C71669389300EAF58F /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -334,6 +335,7 @@
 		E1F102B71668150700087248 /* NSRail */ = {
 			isa = PBXGroup;
 			children = (
+				E1BE09F516763F5B0021CAC8 /* NSRailConnectionDataSource.h */,
 				E1F1025E16680DE800087248 /* NSRailConnection.h */,
 				E1F1025F16680DE800087248 /* NSRailConnection.m */,
 				E1F102B91668152C00087248 /* Train.h */,
