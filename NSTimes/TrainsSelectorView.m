@@ -448,7 +448,7 @@ currentLocation = _currentLocation;
     if ([_fromField isFirstResponder]) {
         [_fromField setText:stationName];
         
-        if ([[_toField text] isEqualToString:@""]) {
+        if ([[_toField text] isEqualToString:@""] || [_toField text] == nil) {
             [_toField becomeFirstResponder];
         } else {
             [self submit];
@@ -456,7 +456,7 @@ currentLocation = _currentLocation;
     } else if ([_toField isFirstResponder]) {
         [_toField setText:stationName];
         
-        if ([[_fromField text] isEqualToString:@""]) {
+        if ([[_fromField text] isEqualToString:@""] || [_fromField text] == nil) {
             [_fromField becomeFirstResponder];
         } else {
             [self submit];
