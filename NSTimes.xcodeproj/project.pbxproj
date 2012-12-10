@@ -25,7 +25,6 @@
 		E1A960BE166AD48A006E9E83 /* TrainsSelectorTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A960BD166AD48A006E9E83 /* TrainsSelectorTextField.m */; };
 		E1A9E509166C05E600CC2484 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1A9E508166C05E600CC2484 /* CoreLocation.framework */; };
 		E1A9E50D166C096000CC2484 /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A9E50C166C096000CC2484 /* LocationManager.m */; };
-		E1BA46DB1668FA7000845855 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1BA46DA1668FA7000845855 /* Crashlytics.framework */; };
 		E1C618C21669388700EAF58F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1C618C41669388700EAF58F /* Localizable.strings */; };
 		E1DFB358166992630074D5E8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1DFB357166992630074D5E8 /* QuartzCore.framework */; };
 		E1F0ECEC166AE07800BED126 /* selector_textfield_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E1F0ECEB166AE07800BED126 /* selector_textfield_bg@2x.png */; };
@@ -84,7 +83,6 @@
 		E1A9E508166C05E600CC2484 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		E1A9E50B166C096000CC2484 /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
 		E1A9E50C166C096000CC2484 /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
-		E1BA46DA1668FA7000845855 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		E1C618C31669388700EAF58F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E1C618C61669389300EAF58F /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E1C618C71669389300EAF58F /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -134,7 +132,6 @@
 				E1F1023116680D6E00087248 /* Foundation.framework in Frameworks */,
 				E1F1023316680D6E00087248 /* CoreGraphics.framework in Frameworks */,
 				050DA6D2475443A3BE46D495 /* libPods.a in Frameworks */,
-				E1BA46DB1668FA7000845855 /* Crashlytics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,7 +261,6 @@
 			children = (
 				E1A9E508166C05E600CC2484 /* CoreLocation.framework */,
 				E1DFB357166992630074D5E8 /* QuartzCore.framework */,
-				E1BA46DA1668FA7000845855 /* Crashlytics.framework */,
 				E1F102A616680F0D00087248 /* libxml2.2.dylib */,
 				E1F102B0166812EA00087248 /* SystemConfiguration.framework */,
 				E1F1022E16680D6E00087248 /* UIKit.framework */,
@@ -345,7 +341,6 @@
 				E1F1022716680D6E00087248 /* Frameworks */,
 				E1F1022816680D6E00087248 /* Resources */,
 				3FCEA57CB8FD4F58BE2B94F3 /* Copy Pods Resources */,
-				E1BA46D81668FA5E00845855 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -419,19 +414,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
-		};
-		E1BA46D81668FA5E00845855 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "./Crashlytics.framework/run 6ef68195318583ebfc3e0a80408adacc505f0764";
 		};
 /* End PBXShellScriptBuildPhase section */
 

@@ -18,9 +18,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Crashlytics
-    [Crashlytics startWithAPIKey:@"6ef68195318583ebfc3e0a80408adacc505f0764"];
-    
     // Enable Activity Indicator
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
     

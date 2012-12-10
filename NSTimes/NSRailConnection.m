@@ -576,7 +576,7 @@ static NSRailConnection *sharedInstance = nil;
         
         // Error Logging
         if (![train departure]) {
-            CLS_LOG(@"NSRailConnection: train has no departure.\n\n%@", element);
+            NSLog(@"NSRailConnection: train has no departure.\n\n%@", element);
             continue;
         }
         
@@ -627,7 +627,7 @@ static NSRailConnection *sharedInstance = nil;
         
         // Error Logging
         if (![train departure]) {
-            CLS_LOG(@"NSRailConnection: train has no departure.\n\n%@", element);
+            NSLog(@"NSRailConnection: train has no departure.\n\n%@", element);
             continue;
         }
         
