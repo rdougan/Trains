@@ -236,9 +236,7 @@
  */
 - (void)setTrains:(NSArray *)trains
 {
-    if (!selectionView || [selectionView isHidden]) {
-        [[self refreshControl] endRefreshing];
-    }
+    [[self refreshControl] endRefreshing];
     
     [_objects removeAllObjects];
     [_objects addObjectsFromArray:trains];
