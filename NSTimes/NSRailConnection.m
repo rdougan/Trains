@@ -104,7 +104,19 @@ static NSRailConnection *sharedInstance = nil;
         TFHpple *document = [[TFHpple alloc] initWithHTMLData:responseObject];
         NSArray *elements = [document searchWithXPathQuery:[self.dataSource XPathQueryForTrains]];
         
-        success([self trainsWithHTMLElements:elements]);
+        __block NSMutableArray *allTrains = [NSMutableArray arrayWithArray:[self trainsWithHTMLElements:elements]];
+        
+        if ([self.dataSource respondsToSelector:@selector(requestForMoreWithFrom:to:)]) {
+            [self fetchMoreWithSuccess:^(NSArray *trains) {
+                [allTrains addObjectsFromArray:trains];
+                
+                success(allTrains);
+            } failure:^(NSError *error) {
+                failure(error);
+            }];
+        } else {
+            success(allTrains);
+        }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (failure) {
             failure(error);

@@ -206,25 +206,12 @@
         return;
     }
     
-    NSMutableArray *allTrains = [NSMutableArray array];
-    
     NSRailConnection *sharedInstance = [NSRailConnection sharedInstance];
     
     subtitleView.text = [NSString stringWithFormat:@"%@ → %@", [sharedInstance from], [sharedInstance to]];
     
     [sharedInstance fetchWithSuccess:^(NSArray *trains) {
-        [allTrains addObjectsFromArray:trains];
-        
-        [sharedInstance fetchMoreWithSuccess:^(NSArray *moreTrains) {
-            [allTrains addObjectsFromArray:moreTrains];
-            
-            [self setTrains:allTrains];
-        } failure:^(NSError *error) {
-            if ([allTrains count] == 0) {
-                [self showMessage:NSLocalizedString(@"trains_failure", @"Something went wrong")
-                           detail:NSLocalizedString(@"trains_failure_detail", @"Please try again in a few minutes")];
-            }
-        }];
+        [self setTrains:trains];
     } failure:^(NSError *error) {
         [self showMessage:NSLocalizedString(@"trains_failure", @"Something went wrong")
                    detail:NSLocalizedString(@"trains_failure_detail", @"Please try again in a few minutes")];
