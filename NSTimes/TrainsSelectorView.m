@@ -277,6 +277,7 @@ currentLocation = _currentLocation;
         NSString *stationName = [(NSArray *)obj objectAtIndex:0];
         CLLocation *stationLocation = [(NSArray *)obj objectAtIndex:1];
         
+        // Finding stations
         if (![station isEqualToString:@""]) {
             NSRange range = [[stationName lowercaseString] rangeOfString:[station lowercaseString]];
             found = (range.length > 0) ? YES : NO;
@@ -284,7 +285,8 @@ currentLocation = _currentLocation;
             found = YES;
         }
         
-        if (found) {
+        // Nearby stations
+        if (found && stationLocation && [stationLocation isKindOfClass:[CLLocation class]]) {
             CLLocationDistance distance = [stationLocation distanceFromLocation:_currentLocation];
             
             if (distance < NearbyDistance) {
@@ -292,12 +294,23 @@ currentLocation = _currentLocation;
             }
             
             [newStations addObject:@[stationName, stationLocation, [NSNumber numberWithDouble:distance]]];
+        } else if (found) {
+            [newStations addObject:@[stationName]];
         }
     }];
     
     _filteredStations = [newStations sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-        NSString *first = [(NSArray *)obj1 objectAtIndex:2];
-        NSString *second = [(NSArray *)obj2 objectAtIndex:2];
+        NSString *first;
+        NSString *second;
+        
+        if ([obj1 count] > 1 && [obj2 count] > 1) {
+            first = [(NSArray *)obj1 objectAtIndex:2];
+            second = [(NSArray *)obj2 objectAtIndex:2];
+        } else {
+            first = [(NSArray *)obj1 objectAtIndex:0];
+            second = [(NSArray *)obj2 objectAtIndex:0];
+        }
+        
         return [first compare:second];
     }];
     

@@ -25,6 +25,7 @@
 		E1A960BE166AD48A006E9E83 /* TrainsSelectorTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A960BD166AD48A006E9E83 /* TrainsSelectorTextField.m */; };
 		E1A9E509166C05E600CC2484 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1A9E508166C05E600CC2484 /* CoreLocation.framework */; };
 		E1A9E50D166C096000CC2484 /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A9E50C166C096000CC2484 /* LocationManager.m */; };
+		E1BE09EC167634450021CAC8 /* NSNLDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = E1BE09EB167634450021CAC8 /* NSNLDataSource.m */; };
 		E1C618C21669388700EAF58F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1C618C41669388700EAF58F /* Localizable.strings */; };
 		E1DFB358166992630074D5E8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1DFB357166992630074D5E8 /* QuartzCore.framework */; };
 		E1F0ECEC166AE07800BED126 /* selector_textfield_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E1F0ECEB166AE07800BED126 /* selector_textfield_bg@2x.png */; };
@@ -83,6 +84,8 @@
 		E1A9E508166C05E600CC2484 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		E1A9E50B166C096000CC2484 /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
 		E1A9E50C166C096000CC2484 /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
+		E1BE09EA167634450021CAC8 /* NSNLDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNLDataSource.h; sourceTree = "<group>"; };
+		E1BE09EB167634450021CAC8 /* NSNLDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSNLDataSource.m; sourceTree = "<group>"; };
 		E1C618C31669388700EAF58F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E1C618C61669389300EAF58F /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E1C618C71669389300EAF58F /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -189,6 +192,15 @@
 				E1A9E50C166C096000CC2484 /* LocationManager.m */,
 			);
 			name = Location;
+			sourceTree = "<group>";
+		};
+		E1BE09E9167634320021CAC8 /* DataSources */ = {
+			isa = PBXGroup;
+			children = (
+				E1BE09EA167634450021CAC8 /* NSNLDataSource.h */,
+				E1BE09EB167634450021CAC8 /* NSNLDataSource.m */,
+			);
+			name = DataSources;
 			sourceTree = "<group>";
 		};
 		E1C618B8166936D800EAF58F /* Trains */ = {
@@ -326,6 +338,7 @@
 				E1F1025F16680DE800087248 /* NSRailConnection.m */,
 				E1F102B91668152C00087248 /* Train.h */,
 				E1F102BA1668152C00087248 /* Train.m */,
+				E1BE09E9167634320021CAC8 /* DataSources */,
 			);
 			name = NSRail;
 			sourceTree = "<group>";
@@ -442,6 +455,7 @@
 				E1A960BE166AD48A006E9E83 /* TrainsSelectorTextField.m in Sources */,
 				E16759AB166BBDD100A8E206 /* TrainsSelectorMaskView.m in Sources */,
 				E1A9E50D166C096000CC2484 /* LocationManager.m in Sources */,
+				E1BE09EC167634450021CAC8 /* NSNLDataSource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
