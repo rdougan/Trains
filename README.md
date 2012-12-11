@@ -12,6 +12,14 @@ You can select any train station in The Netherlands by tapping the header and ty
 
 ## Installation
 
-1. Clone the repo
-2. Open the Xcode project
-3. Run
+1. Clone the repository:
+    
+        git clone git@github.com:rdougan/Trains.git
+        
+2. Initialize and checkout the Git submodules:
+
+		git submodule init
+		git submodule update
+
+3. Open the Xcode project (**NSTimes.xcworkspace**)
+4. Run the application
