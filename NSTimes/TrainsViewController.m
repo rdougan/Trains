@@ -213,8 +213,19 @@
     [sharedInstance fetchWithSuccess:^(NSArray *trains) {
         [self setTrains:trains];
     } failure:^(NSError *error) {
-        [self showMessage:NSLocalizedString(@"trains_failure", @"Something went wrong")
-                   detail:NSLocalizedString(@"trains_failure_detail", @"Please try again in a few minutes")];
+        [self.refreshControl endRefreshing];
+        
+        // Empty the schedule
+        _objects = [NSArray array];
+        [[self tableView] reloadData];
+        
+        if ([error code] == -1009) {
+            [self showMessage:NSLocalizedString(@"no_connection", @"Something went wrong")
+                       detail:NSLocalizedString(@"no_connection_detail", @"Please try again in a few minutes")];
+        } else {
+            [self showMessage:NSLocalizedString(@"trains_failure", @"Something went wrong")
+                       detail:NSLocalizedString(@"trains_failure_detail", @"Please try again in a few minutes")];
+        }
     }];
 }
 
@@ -224,6 +235,8 @@
 - (void)setTrains:(NSArray *)trains
 {
     [[self refreshControl] endRefreshing];
+    
+    _objects = [_objects mutableCopy];
     
     [_objects removeAllObjects];
     [_objects addObjectsFromArray:trains];

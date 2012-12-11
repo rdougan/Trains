@@ -13,3 +13,6 @@
 
 "trains_failure" = "Something went wrong";
 "trains_failure_detail" = "Please try again in a few minutes";
+
+"no_connection" = "No Network Connection";
+"no_connection_detail" = "There is currently no internet connection";

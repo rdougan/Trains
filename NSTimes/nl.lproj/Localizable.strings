@@ -10,3 +10,9 @@
 
 "no_trains_found" = "Geen treinen gevonden";
 "no_trains_found_detail" = "Er zijn geen treinen gepland binnen een uur";
+
+"trains_failure" = "Er ging iets mis";
+"trains_failure_detail" = "Probeer het over een paar minuten";
+
+"no_connection" = "Geen netwerkverbinding";
+"no_connection_detail" = "Er is momenteel geen internet verbinding";
