@@ -12,8 +12,8 @@
 
 @interface NSRailConnection : NSObject
 
-@property (nonatomic, assign) NSString *from;
-@property (nonatomic, assign) NSString *to;
+@property (nonatomic, strong) Station *from;
+@property (nonatomic, strong) Station *to;
 
 @property (nonatomic, strong) id <NSRailConnectionDataSource> dataSource;
 

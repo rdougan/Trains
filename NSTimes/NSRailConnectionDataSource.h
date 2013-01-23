@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class Train, TFHppleElement;
+@class Train;
 
 @protocol NSRailConnectionDataSource <NSObject>
 
@@ -16,22 +16,10 @@
 - (NSString *)defaultDepartureStation;
 - (NSString *)defaultArrivalStation;
 
-@optional
-
-- (NSURLRequest *)requestWithFrom:(NSString *)from to:(NSString *)to;
-- (NSURLRequest *)requestForMoreWithFrom:(NSString *)from to:(NSString *)to;
-
-- (NSString *)XPathQueryForTrains;
-
-- (NSDate *)train:(Train *)train departureDateFromElement:(TFHppleElement *)element;
-- (NSDate *)train:(Train *)train arrivalDateFromElement:(TFHppleElement *)element;
-- (NSString *)train:(Train *)train platformFromElement:(TFHppleElement *)element;
-- (NSString *)train:(Train *)train travelTimeFromElement:(TFHppleElement *)element;
-- (NSString *)train:(Train *)train departureDelayFromElement:(TFHppleElement *)element;
-- (NSString *)train:(Train *)train arrivalDelayFromElement:(TFHppleElement *)element;
+- (AFHTTPRequestOperation *)requestOperationWithFrom:(NSString *)from to:(NSString *)to;
+- (NSString *)dateFormat;
 - (BOOL)shouldDisplayTrain:(Train *)train;
 
-// Implement this if you want to provide your own parsing implementation
 - (NSArray *)trainsWithData:(NSData *)data;
 
 @end

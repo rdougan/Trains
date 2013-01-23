@@ -19,14 +19,14 @@ typedef enum {
 } TrainsSelectorViewState;
 
 @protocol TrainsSelectorViewDelegate <NSObject>
-- (void)trainsSelectorView:(TrainsSelectorView *)trainsSelectorView didCompleteSearchWithFrom:(NSString *)from to:(NSString *)to;
+- (void)trainsSelectorView:(TrainsSelectorView *)trainsSelectorView didCompleteSearchWithFrom:(Station *)from to:(Station *)to;
 - (void)trainsSelectorViewDidCancel:(TrainsSelectorView *)trainsSelectorView;
 @end
 
 @interface TrainsSelectorView : UIView <UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, TrainsSelectorMaskViewDelegate>
 
-@property (nonatomic, retain) NSString *from;
-@property (nonatomic, retain) NSString *to;
+@property (nonatomic, retain) Station *from;
+@property (nonatomic, retain) Station *to;
 
 @property (nonatomic, retain) CLLocation *currentLocation;
 

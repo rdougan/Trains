@@ -12,4 +12,10 @@
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
+    #import <CoreLocation/CoreLocation.h>
+
+    #import "AFNetworking.h"
+
+    #import "Train.h"
+    #import "Station.h"
 #endif

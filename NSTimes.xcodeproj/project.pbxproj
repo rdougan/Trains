@@ -48,6 +48,8 @@
 		E1F102A716680F0D00087248 /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E1F102A616680F0D00087248 /* libxml2.2.dylib */; };
 		E1F102B1166812EA00087248 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1F102B0166812EA00087248 /* SystemConfiguration.framework */; };
 		E1F102BB1668152C00087248 /* Train.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F102BA1668152C00087248 /* Train.m */; };
+		E1F60C7516B09B7A0033DFE2 /* ns.xml in Resources */ = {isa = PBXBuildFile; fileRef = E1F60C7416B09B7A0033DFE2 /* ns.xml */; };
+		E1F60C7916B09E490033DFE2 /* Station.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F60C7816B09E490033DFE2 /* Station.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -121,6 +123,9 @@
 		E1F102B0166812EA00087248 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		E1F102B91668152C00087248 /* Train.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Train.h; sourceTree = "<group>"; };
 		E1F102BA1668152C00087248 /* Train.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Train.m; sourceTree = "<group>"; };
+		E1F60C7416B09B7A0033DFE2 /* ns.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ns.xml; sourceTree = "<group>"; };
+		E1F60C7716B09E490033DFE2 /* Station.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Station.h; sourceTree = "<group>"; };
+		E1F60C7816B09E490033DFE2 /* Station.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Station.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +205,7 @@
 			children = (
 				E1BE09EA167634450021CAC8 /* NSNLDataSource.h */,
 				E1BE09EB167634450021CAC8 /* NSNLDataSource.m */,
+				E1F60C7416B09B7A0033DFE2 /* ns.xml */,
 			);
 			name = DataSources;
 			sourceTree = "<group>";
@@ -340,6 +346,8 @@
 				E1F1025F16680DE800087248 /* NSRailConnection.m */,
 				E1F102B91668152C00087248 /* Train.h */,
 				E1F102BA1668152C00087248 /* Train.m */,
+				E1F60C7716B09E490033DFE2 /* Station.h */,
+				E1F60C7816B09E490033DFE2 /* Station.m */,
 				E1BE09E9167634320021CAC8 /* DataSources */,
 			);
 			name = NSRail;
@@ -410,6 +418,7 @@
 				E1F0ECEC166AE07800BED126 /* selector_textfield_bg@2x.png in Resources */,
 				E1F0ECF0166AF16900BED126 /* swap_button@2x.png in Resources */,
 				E1F0ECF2166AF1EB00BED126 /* swap_button_selected@2x.png in Resources */,
+				E1F60C7516B09B7A0033DFE2 /* ns.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -458,6 +467,7 @@
 				E16759AB166BBDD100A8E206 /* TrainsSelectorMaskView.m in Sources */,
 				E1A9E50D166C096000CC2484 /* LocationManager.m in Sources */,
 				E1BE09EC167634450021CAC8 /* NSNLDataSource.m in Sources */,
+				E1F60C7916B09E490033DFE2 /* Station.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

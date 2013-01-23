@@ -127,22 +127,10 @@ platformLabel = _platformLabel;
 - (void)setTrain:(Train *)train
 {
     // Minutes
-    NSNumber *delayInMinutes = [NSNumber numberWithInt:0];
-    if ([train departureDelay]) {
-        NSNumberFormatter *delayFormattor = [[NSNumberFormatter alloc] init];
-        [delayFormattor setNumberStyle:NSNumberFormatterDecimalStyle];
-        delayInMinutes = [delayFormattor numberFromString:[[train departureDelay] stringByReplacingOccurrencesOfString:@"+" withString:@""]];
-    }
-    
     NSDate *now = [NSDate date];
     NSTimeInterval diff = [[train departure] timeIntervalSinceDate:now];
-    long minutes = lround(floor(diff / 60.)) % 60 + [delayInMinutes longValue];
     
-    if (minutes < 0) {
-        minutes = 0;
-    }
-    
-    [_minutesLabel setText:[NSString stringWithFormat:@"%02lim", minutes]];
+    [_minutesLabel setText:[NSString stringWithFormat:@"%im", [[NSNumber numberWithFloat:diff / 60.0f] intValue]]];
     
     // Depature Delay
     if ([train departureDelay]) {

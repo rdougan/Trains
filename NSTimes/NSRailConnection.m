@@ -44,15 +44,15 @@ static NSRailConnection *sharedInstance = nil;
     NSString *defaultsFrom = [userDefaults objectForKey:@"from"];
     
     if (defaultsTo) {
-        [self setTo:defaultsTo];
+        [self setTo:[self stationForName:defaultsTo]];
     } else {
-        [self setTo:[self.dataSource defaultArrivalStation]];
+        [self setTo:[self stationForName:[self.dataSource defaultArrivalStation]]];
     }
-    
+
     if (defaultsFrom) {
-        [self setFrom:defaultsFrom];
+        [self setFrom:[self stationForName:defaultsFrom]];
     } else {
-        [self setFrom:[self.dataSource defaultDepartureStation]];
+        [self setFrom:[self stationForName:[self.dataSource defaultDepartureStation]]];
     }
 }
 
@@ -65,20 +65,20 @@ static NSRailConnection *sharedInstance = nil;
     [self initUserDefaults];
 }
 
-- (void)setFrom:(NSString *)from
+- (void)setFrom:(Station *)from
 {
     _from = from;
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setObject:_from forKey:@"from"];
+    [userDefaults setObject:[_from name] forKey:@"from"];
 }
 
-- (void)setTo:(NSString *)to
+- (void)setTo:(Station *)to
 {
     _to = to;
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setObject:_to forKey:@"to"];
+    [userDefaults setObject:[_to name] forKey:@"to"];
 }
 
 #pragma mark - Getters
@@ -92,26 +92,11 @@ static NSRailConnection *sharedInstance = nil;
 
 - (void)fetchWithSuccess:(void (^)(NSArray *trains))success failure:(void (^)(NSError *error))failure
 {
-    NSURLRequest *urlRequest = [self.dataSource requestWithFrom:self.from to:self.to];
+    AFHTTPRequestOperation *requestOperation = [self.dataSource requestOperationWithFrom:[self.from code] to:[self.to code]];
     
-    AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:urlRequest];
     [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        TFHpple *document = [[TFHpple alloc] initWithHTMLData:responseObject];
-        NSArray *elements = [document searchWithXPathQuery:[self.dataSource XPathQueryForTrains]];
-        
-        __block NSMutableArray *allTrains = [NSMutableArray arrayWithArray:[self trainsWithHTMLElements:elements]];
-        
-        if ([self.dataSource respondsToSelector:@selector(requestForMoreWithFrom:to:)]) {
-            [self fetchMoreWithSuccess:^(NSArray *trains) {
-                [allTrains addObjectsFromArray:trains];
-                
-                success(allTrains);
-            } failure:^(NSError *error) {
-                failure(error);
-            }];
-        } else {
-            success(allTrains);
-        }
+        NSArray *trains = [self.dataSource trainsWithData:responseObject];
+        success(trains);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (failure) {
             failure(error);
@@ -119,72 +104,34 @@ static NSRailConnection *sharedInstance = nil;
     }];
     
     [requestOperation start];
-}
-
-- (void)fetchMoreWithSuccess:(void (^)(NSArray *trains))success failure:(void (^)(NSError *error))failure
-{
-    NSURLRequest *urlRequest = [self.dataSource requestForMoreWithFrom:self.from to:self.to];
-    
-    AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:urlRequest];
-    [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        success([self trainsWithXMLData:responseObject]);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        if (failure) {
-            failure(error);
-        }
-    }];
-    
-    [requestOperation start];
-}
-
-#pragma mark - Element searching
-
-- (NSArray *)trainsWithHTMLElements:(NSArray *)elements {
-    NSMutableArray *trains = [NSMutableArray array];
-    BOOL foundSelected = NO;
-    
-    for (TFHppleElement *element in elements) {
-        Train *train = [[Train alloc] init];
-        
-        // Check if something has been selected
-        if (!foundSelected) {
-            if ([[element objectForKey:@"class"] isEqualToString:@"selected"]) {
-                foundSelected = YES;
-            } else {
-                continue;
-            }
-        }
-        
-        // Simple fields
-        [train setPlatform:[self.dataSource train:train platformFromElement:element]];
-        [train setTravelTime:[self.dataSource train:train travelTimeFromElement:element]];
-        
-        // Delays
-        [train setDepartureDelay:[self.dataSource train:train departureDelayFromElement:element]];
-        [train setArrivalDelay:[self.dataSource train:train arrivalDelayFromElement:element]];
-        
-        // Times
-        [train setDeparture:[self.dataSource train:train departureDateFromElement:element]];
-        [train setArrival:[self.dataSource train:train arrivalDateFromElement:element]];
-        
-        if ([self.dataSource shouldDisplayTrain:train]) {
-            [trains addObject:train];
-        }
-    }
-    
-    return trains;
-}
-
-- (NSArray *)trainsWithXMLData:(NSData *)data {
-    return [self.dataSource trainsWithData:data];
 }
 
 #pragma mark - Helpers
 
+- (Station *)stationForName:(NSString *)name
+{
+    NSArray *stations = [self.dataSource stations];
+
+    int index = [stations indexOfObjectPassingTest:^BOOL(id station, NSUInteger idx, BOOL *stop) {
+        NSString *stationName = [(Station *)station name];
+        return ([[stationName lowercaseString] isEqualToString:[name lowercaseString]]) ? YES : NO;
+    }];
+    
+    return [stations objectAtIndex:index];
+}
+
 - (NSDate *)dateForString:(NSString *)string
 {
+    NSString *dateFormat = [self.dataSource dateFormat];
+    
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+    
+    if (dateFormat) {
+        [dateFormatter setDateFormat:dateFormat];
+    } else {
+        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+    }
+    
     [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
     
     NSDate *sourceDate = [dateFormatter dateFromString:string];

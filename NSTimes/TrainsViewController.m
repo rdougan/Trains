@@ -105,7 +105,7 @@
     subtitleView.textColor = [UIColor colorWithWhite:1.0f alpha:.8f];
     subtitleView.shadowColor = [UIColor colorWithWhite:0 alpha:.3f];
     subtitleView.shadowOffset = CGSizeMake(0, -1.0f);
-    subtitleView.text = [NSString stringWithFormat:@"%@ → %@", [sharedInstance from], [sharedInstance to]];
+    subtitleView.text = [NSString stringWithFormat:@"%@ → %@", [[sharedInstance from] name], [[sharedInstance to] name]];
     subtitleView.adjustsFontSizeToFitWidth = YES;
     [headerTitleSubtitleView addSubview:subtitleView];
     
@@ -177,24 +177,24 @@
 
 - (void)switchStationsIfNeeded
 {
-    NSRailConnection *sharedInstance = [NSRailConnection sharedInstance];
-    
-    if (!([[sharedInstance from] isEqualToString:@"Amsterdam"] || [[sharedInstance from] isEqualToString:@"Haarlem"]) || !([[sharedInstance to] isEqualToString:@"Amsterdam"] || [[sharedInstance to] isEqualToString:@"Haarlem"])) {
-        return;
-    }
-    
-    NSDate *date = [NSDate date];
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDateComponents *components = [calendar components:(NSHourCalendarUnit) fromDate:date];
-    NSInteger hour = [components hour];
-    
-    if (hour > 13 || hour < 4) {
-        [sharedInstance setTo:@"Haarlem"];
-        [sharedInstance setFrom:@"Amsterdam"];
-    } else {
-        [sharedInstance setTo:@"Amsterdam"];
-        [sharedInstance setFrom:@"Haarlem"];
-    }
+//    NSRailConnection *sharedInstance = [NSRailConnection sharedInstance];
+//    
+//    if (!([[sharedInstance from] isEqualToString:@"Amsterdam"] || [[sharedInstance from] isEqualToString:@"Haarlem"]) || !([[sharedInstance to] isEqualToString:@"Amsterdam"] || [[sharedInstance to] isEqualToString:@"Haarlem"])) {
+//        return;
+//    }
+//    
+//    NSDate *date = [NSDate date];
+//    NSCalendar *calendar = [NSCalendar currentCalendar];
+//    NSDateComponents *components = [calendar components:(NSHourCalendarUnit) fromDate:date];
+//    NSInteger hour = [components hour];
+//    
+//    if (hour > 13 || hour < 4) {
+//        [sharedInstance setTo:@"Haarlem"];
+//        [sharedInstance setFrom:@"Amsterdam"];
+//    } else {
+//        [sharedInstance setTo:@"Amsterdam"];
+//        [sharedInstance setFrom:@"Haarlem"];
+//    }
 }
 
 /**
@@ -208,7 +208,9 @@
     
     NSRailConnection *sharedInstance = [NSRailConnection sharedInstance];
     
-    subtitleView.text = [NSString stringWithFormat:@"%@ → %@", [sharedInstance from], [sharedInstance to]];
+    if ([sharedInstance from] && [sharedInstance to]) {
+        subtitleView.text = [NSString stringWithFormat:@"%@ → %@", [[sharedInstance from] name], [[sharedInstance to] name]];
+    }
     
     [sharedInstance fetchWithSuccess:^(NSArray *trains) {
         [self setTrains:trains];
@@ -328,7 +330,7 @@
 
 #pragma mark - TrainsSelectorViewDelegate
 
-- (void)trainsSelectorView:(TrainsSelectorView *)trainsSelectorView didCompleteSearchWithFrom:(NSString *)from to:(NSString *)to
+- (void)trainsSelectorView:(TrainsSelectorView *)trainsSelectorView didCompleteSearchWithFrom:(Station *)from to:(Station *)to
 {
     [[self tableView] setScrollEnabled:YES];
     [self.navigationItem setRightBarButtonItem:nil animated:YES];

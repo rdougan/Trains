@@ -19,7 +19,7 @@
 #define StatusBarHeight 20.0f
 #define ToolbarHeight 44.0f
 #define KeyboardHeight 216.0f
-#define NearbyDistance 1500.0f
+#define NearbyDistance 2500.0f
 
 typedef void (^TrainsSelectorStateBlock)(TrainsSelectorViewState state);
 
@@ -122,16 +122,16 @@ currentLocation = _currentLocation;
     [self didChangeState];
 }
 
-- (void)setFrom:(NSString *)from
+- (void)setFrom:(Station *)from
 {
     _from = from;
-    [_fromField setText:from];
+    [_fromField setText:[from name]];
 }
 
-- (void)setTo:(NSString *)to
+- (void)setTo:(Station *)to
 {
     _to = to;
-    [_toField setText:to];
+    [_toField setText:[to name]];
 }
 
 - (void)setCurrentLocation:(CLLocation *)currentLocation
@@ -164,17 +164,17 @@ currentLocation = _currentLocation;
     // Find the propercase version of the station
     NSArray *stations = [[NSRailConnection sharedInstance] stations];
     
-    _from = [[stations objectAtIndex:[stations indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
-        NSString *stationName = [(NSArray *)obj objectAtIndex:0];
+    _from = [stations objectAtIndex:[stations indexOfObjectPassingTest:^BOOL(id station, NSUInteger idx, BOOL *stop) {
+        NSString *stationName = [(Station *)station name];
 
         return ([[stationName lowercaseString] isEqualToString:[[_fromField text] lowercaseString]]) ? YES : NO;
-    }]] objectAtIndex:0];
+    }]];
     
-    _to = [[stations objectAtIndex:[stations indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
-        NSString *stationName = [(NSArray *)obj objectAtIndex:0];
+    _to = [stations objectAtIndex:[stations indexOfObjectPassingTest:^BOOL(id station, NSUInteger idx, BOOL *stop) {
+        NSString *stationName = [(Station *)station name];
         
         return ([[stationName lowercaseString] isEqualToString:[[_toField text] lowercaseString]]) ? YES : NO;
-    }]] objectAtIndex:0];
+    }]];
     
     // Reset the filtered stations
     _filteredStations = [NSArray array];
@@ -274,8 +274,8 @@ currentLocation = _currentLocation;
     [stations enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         BOOL found = NO;
         
-        NSString *stationName = [(NSArray *)obj objectAtIndex:0];
-        CLLocation *stationLocation = [(NSArray *)obj objectAtIndex:1];
+        NSString *stationName = [(Station *)obj name];
+        CLLocation *stationLocation = [(Station *)obj location];
         
         // Finding stations
         if (![station isEqualToString:@""]) {
