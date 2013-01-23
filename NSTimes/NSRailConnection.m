@@ -34,18 +34,6 @@ static NSRailConnection *sharedInstance = nil;
     return sharedInstance;
 }
 
-#pragma mark - Initialization
-
-- (id)init
-{
-    self = [super init];
-    if (self) {
-        // UserDefaults
-        [self initUserDefaults];
-    }
-    return self;
-}
-
 #pragma mark - NSUserDefaults
 
 - (void)initUserDefaults
@@ -69,6 +57,13 @@ static NSRailConnection *sharedInstance = nil;
 }
 
 #pragma mark - Setters
+
+- (void)setDataSource:(id<NSRailConnectionDataSource>)dataSource
+{
+    _dataSource = dataSource;
+    
+    [self initUserDefaults];
+}
 
 - (void)setFrom:(NSString *)from
 {
